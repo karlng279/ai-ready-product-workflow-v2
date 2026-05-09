@@ -34,24 +34,24 @@ Tracks implementation progress of the restructure plan defined in [restructure-p
 
 | # | Task | Status |
 |---|------|--------|
-| 1.1 | `pm-framework/product-strategy/rules.md` | ⬜ Not Started |
-| 1.2 | `pm-framework/product-strategy/templates/` (strategy-canvas, okr-template, competitive-analysis) | ⬜ Not Started |
-| 1.3 | `pm-framework/product-strategy/examples/` (1 worked example) | ⬜ Not Started |
-| 1.4 | `pm-framework/product-discovery/rules.md` | ⬜ Not Started |
-| 1.5 | `pm-framework/product-discovery/templates/` (opportunity-solution-tree, customer-interview-guide, assumption-map) | ⬜ Not Started |
-| 1.6 | `pm-framework/product-discovery/examples/` | ⬜ Not Started |
-| 1.7 | `pm-framework/market-research/rules.md` | ⬜ Not Started |
-| 1.8 | `pm-framework/market-research/templates/` (persona-template, tam-sam-som, journey-map) | ⬜ Not Started |
-| 1.9 | `pm-framework/market-research/examples/` | ⬜ Not Started |
-| 1.10 | `pm-framework/data-analytics/rules.md` | ⬜ Not Started |
-| 1.11 | `pm-framework/data-analytics/templates/` (north-star-metric, ab-test-design, funnel-analysis) | ⬜ Not Started |
-| 1.12 | `pm-framework/data-analytics/examples/` | ⬜ Not Started |
-| 1.13 | `pm-framework/marketing-growth/rules.md` | ⬜ Not Started |
-| 1.14 | `pm-framework/marketing-growth/templates/` (value-proposition-canvas, positioning-statement, growth-loop-design) | ⬜ Not Started |
-| 1.15 | `pm-framework/marketing-growth/examples/` | ⬜ Not Started |
-| 1.16 | `pm-framework/go-to-market/rules.md` | ⬜ Not Started |
-| 1.17 | `pm-framework/go-to-market/templates/` (icp-template, launch-plan, battlecard) | ⬜ Not Started |
-| 1.18 | `pm-framework/go-to-market/examples/` | ⬜ Not Started |
+| 1.1 | `pm-framework/product-strategy/rules.md` | ✅ Done |
+| 1.2 | `pm-framework/product-strategy/templates/` (strategy-canvas, okr-template, competitive-analysis) | ✅ Done |
+| 1.3 | `pm-framework/product-strategy/examples/` (example-strategy-canvas) | ✅ Done |
+| 1.4 | `pm-framework/product-discovery/rules.md` | ✅ Done |
+| 1.5 | `pm-framework/product-discovery/templates/` (opportunity-solution-tree, customer-interview-guide, assumption-map) | ✅ Done |
+| 1.6 | `pm-framework/product-discovery/examples/` (example-ost) | ✅ Done |
+| 1.7 | `pm-framework/market-research/rules.md` | ✅ Done |
+| 1.8 | `pm-framework/market-research/templates/` (persona-template, tam-sam-som, journey-map) | ✅ Done |
+| 1.9 | `pm-framework/market-research/examples/` (example-persona) | ✅ Done |
+| 1.10 | `pm-framework/data-analytics/rules.md` | ✅ Done |
+| 1.11 | `pm-framework/data-analytics/templates/` (north-star-metric, ab-test-design, funnel-analysis) | ✅ Done |
+| 1.12 | `pm-framework/data-analytics/examples/` (example-north-star) | ✅ Done |
+| 1.13 | `pm-framework/marketing-growth/rules.md` | ✅ Done |
+| 1.14 | `pm-framework/marketing-growth/templates/` (value-proposition-canvas, positioning-statement, growth-loop-design) | ✅ Done |
+| 1.15 | `pm-framework/marketing-growth/examples/` (example-growth-loop) | ✅ Done |
+| 1.16 | `pm-framework/go-to-market/rules.md` | ✅ Done |
+| 1.17 | `pm-framework/go-to-market/templates/` (icp-template, launch-plan, battlecard) | ✅ Done |
+| 1.18 | `pm-framework/go-to-market/examples/` (example-gtm-plan) | ✅ Done |
 
 ---
 
@@ -179,7 +179,7 @@ Tracks implementation progress of the restructure plan defined in [restructure-p
 | Phase | Description | Status |
 |-------|-------------|--------|
 | 0 | Foundation (CLAUDE.md, skills/, agent indexes, pm-framework scaffold) | ✅ Done |
-| 1 | PM Framework knowledge base (rules, templates, examples) | ⬜ Not Started |
+| 1 | PM Framework knowledge base (rules, templates, examples) | ✅ Done |
 | 2 | PM Skills (6 SKILL.md files) | ⬜ Not Started |
 | 3 | PO Automation Skills (7 SKILL.md files) | ⬜ Not Started |
 | 4 | Design Skills (2 SKILL.md files) | ⬜ Not Started |
