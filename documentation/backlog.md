@@ -62,13 +62,13 @@ Tracks implementation progress of the restructure plan defined in [restructure-p
 
 | # | Task | Status |
 |---|------|--------|
-| 2.1 | `skills/pm-product-strategy/SKILL.md` | ⬜ Not Started |
-| 2.2 | `skills/pm-product-discovery/SKILL.md` | ⬜ Not Started |
-| 2.3 | `skills/pm-market-research/SKILL.md` | ⬜ Not Started |
-| 2.4 | `skills/pm-data-analytics/SKILL.md` | ⬜ Not Started |
-| 2.5 | `skills/pm-marketing-growth/SKILL.md` | ⬜ Not Started |
-| 2.6 | `skills/pm-go-to-market/SKILL.md` | ⬜ Not Started |
-| 2.7 | Create `.agent/skills/` symlinks for all 6 PM skills | ⬜ Not Started |
+| 2.1 | `skills/pm-product-strategy/SKILL.md` | ✅ Done |
+| 2.2 | `skills/pm-product-discovery/SKILL.md` | ✅ Done |
+| 2.3 | `skills/pm-market-research/SKILL.md` | ✅ Done |
+| 2.4 | `skills/pm-data-analytics/SKILL.md` | ✅ Done |
+| 2.5 | `skills/pm-marketing-growth/SKILL.md` | ✅ Done |
+| 2.6 | `skills/pm-go-to-market/SKILL.md` | ✅ Done |
+| 2.7 | Create `.agent/skills/` symlinks for all 6 PM skills | ✅ Done |
 
 ---
 
@@ -180,7 +180,7 @@ Tracks implementation progress of the restructure plan defined in [restructure-p
 |-------|-------------|--------|
 | 0 | Foundation (CLAUDE.md, skills/, agent indexes, pm-framework scaffold) | ✅ Done |
 | 1 | PM Framework knowledge base (rules, templates, examples) | ✅ Done |
-| 2 | PM Skills (6 SKILL.md files) | ⬜ Not Started |
+| 2 | PM Skills (6 SKILL.md files) | ✅ Done |
 | 3 | PO Automation Skills (7 SKILL.md files) | ⬜ Not Started |
 | 4 | Design Skills (2 SKILL.md files) | ⬜ Not Started |
 | 5 | Slash Commands (5 pipeline commands) | ⬜ Not Started |
