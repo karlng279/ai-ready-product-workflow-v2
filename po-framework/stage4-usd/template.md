@@ -1,3 +1,13 @@
+---
+artifact: USD
+feature: feature-name
+version: 0.1
+status: draft
+generated-by: po-usl-to-usd
+upstream: usl.md
+downstream: uat/ST-XXX.md
+---
+
 # ST-XXX: Acceptance Criteria
 
 **Story:** [Story Summary from USL]

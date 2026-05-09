@@ -1,3 +1,13 @@
+---
+artifact: UAT
+feature: feature-name
+version: 0.1
+status: draft
+generated-by: po-usd-to-uat
+upstream: usd/ST-XXX.md
+downstream: ~
+---
+
 # ST-XXX: Test Cases
 
 **Story:** [Story Summary from USL]
