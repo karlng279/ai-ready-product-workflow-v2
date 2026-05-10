@@ -79,14 +79,14 @@ Tracks implementation progress of the restructure plan defined in [restructure-p
 
 | # | Task | Status |
 |---|------|--------|
-| 3.1 | `skills/po-brief-to-prd/SKILL.md` | ⬜ Not Started |
-| 3.2 | `skills/po-prd-to-usm/SKILL.md` | ⬜ Not Started |
-| 3.3 | `skills/po-usm-to-usl/SKILL.md` | ⬜ Not Started |
-| 3.4 | `skills/po-usl-to-usd/SKILL.md` | ⬜ Not Started |
-| 3.5 | `skills/po-usd-to-uat/SKILL.md` | ⬜ Not Started |
-| 3.6 | `skills/validate-prd/SKILL.md` | ⬜ Not Started |
-| 3.7 | `skills/validate-usd/SKILL.md` | ⬜ Not Started |
-| 3.8 | Create `.agent/skills/` symlinks for all 7 PO skills | ⬜ Not Started |
+| 3.1 | `skills/po-brief-to-prd/SKILL.md` | ✅ Done |
+| 3.2 | `skills/po-prd-to-usm/SKILL.md` | ✅ Done |
+| 3.3 | `skills/po-usm-to-usl/SKILL.md` | ✅ Done |
+| 3.4 | `skills/po-usl-to-usd/SKILL.md` | ✅ Done |
+| 3.5 | `skills/po-usd-to-uat/SKILL.md` | ✅ Done |
+| 3.6 | `skills/validate-prd/SKILL.md` | ✅ Done |
+| 3.7 | `skills/validate-usd/SKILL.md` | ✅ Done |
+| 3.8 | Create `.agent/skills/` symlinks for all 7 PO skills | ✅ Done |
 
 ---
 
@@ -132,45 +132,20 @@ Tracks implementation progress of the restructure plan defined in [restructure-p
 
 ---
 
-## Phase 7 — Delete Obsolete Files
-
-**Goal:** Remove v1 and v2-Node.js-plan docs that are superseded by CLAUDE.md and this repo.
-**Commit:** `chore: phase 7 - delete obsolete docs`
-
-| # | Task | Status |
-|---|------|--------|
-| 7.1 | Delete `ai_ready_workflow_v2_prd.md` (if present) | ⬜ Not Started |
-| 7.2 | Delete `ai_ready_workflow_v2_implementation_plan.md` (if present) | ⬜ Not Started |
-| 7.3 | Delete `ai_ready_workflow_v2_technical_architecture.md` (if present) | ⬜ Not Started |
-| 7.4 | Delete `codebase-framework/FRAMEWORK_INTEGRATION.md` (if present) | ⬜ Not Started |
-
----
-
-## Phase 8 — Update All README Files
+## Phase 7 — Update All README Files
 
 **Goal:** Ensure all framework READMEs reflect the new structure and skill references.
 **Commit:** `docs: phase 8 - update all README files`
 
 | # | Task | Status |
 |---|------|--------|
-| 8.1 | Root `README.md` — full framework overview, skill/command reference, install instructions | ⬜ Not Started |
-| 8.2 | `GETTING_STARTED.md` — add PM framework as 6th learning path | ⬜ Not Started |
-| 8.3 | `po-framework/README.md` — note that PO skills in `skills/po-*/` automate this workflow | ⬜ Not Started |
-| 8.4 | `design-framework/README.md` — note design skills enforce format; remove Figma section | ⬜ Not Started |
-| 8.5 | `codebase-framework/README.md` — update tech stack (Next.js 15 App Router) | ⬜ Not Started |
-| 8.6 | `pm-framework/README.md` — already written in Phase 0; review and finalize | ⬜ Not Started |
-| 8.7 | `skills/README.md` — list all skills, triggers, install instructions | ⬜ Not Started |
-
----
-
-## Phase 9 — Record Plan ✅
-
-**Goal:** Save restructure plan to documentation folder for future reference.
-**Commit:** Included in Phase 0 commit.
-
-| # | Task | Status |
-|---|------|--------|
-| 9.1 | Copy plan to `documentation/restructure-plan-v2.md` | ✅ Done |
+| 7.1 | Root `README.md` — full framework overview, skill/command reference, install instructions | ⬜ Not Started |
+| 7.2 | `GETTING_STARTED.md` — add PM framework as 6th learning path | ⬜ Not Started |
+| 7.3 | `po-framework/README.md` — note that PO skills in `skills/po-*/` automate this workflow | ⬜ Not Started |
+| 7.4 | `design-framework/README.md` — note design skills enforce format; remove Figma section | ⬜ Not Started |
+| 7.5 | `codebase-framework/README.md` — update tech stack (Next.js 15 App Router) | ⬜ Not Started |
+| 7.6 | `pm-framework/README.md` — already written in Phase 0; review and finalize | ⬜ Not Started |
+| 7.7 | `skills/README.md` — list all skills, triggers, install instructions | ⬜ Not Started |
 
 ---
 
@@ -181,10 +156,8 @@ Tracks implementation progress of the restructure plan defined in [restructure-p
 | 0 | Foundation (CLAUDE.md, skills/, agent indexes, pm-framework scaffold) | ✅ Done |
 | 1 | PM Framework knowledge base (rules, templates, examples) | ✅ Done |
 | 2 | PM Skills (6 SKILL.md files) | ✅ Done |
-| 3 | PO Automation Skills (7 SKILL.md files) | ⬜ Not Started |
+| 3 | PO Automation Skills (7 SKILL.md files) | ✅ Done |
 | 4 | Design Skills (2 SKILL.md files) | ⬜ Not Started |
 | 5 | Slash Commands (5 pipeline commands) | ⬜ Not Started |
 | 6 | Distribution Layer (install.sh, package.json) | ⬜ Not Started |
-| 7 | Delete Obsolete Files | ⬜ Not Started |
-| 8 | Update All README Files | ⬜ Not Started |
-| 9 | Record Plan in Documentation | ✅ Done |
+| 7 | Update All README Files | ⬜ Not Started |
