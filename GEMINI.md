@@ -49,11 +49,36 @@ Skills are in `skills/*/SKILL.md`. Read the relevant SKILL.md before generating 
 | Type | Format | Location |
 |---|---|---|
 | PRD | PRD-XXX | `features/{name}/po/prd.md` |
+| User Story Map | USM-XXX | `features/{name}/po/usm.md` |
 | User Story | ST-XXX | `features/{name}/po/usl.md` |
 | Acceptance Criteria | AC-XXX | `features/{name}/po/usd/ST-XXX.md` |
 | UAT Test Case | TC-XXX | `features/{name}/po/uat/ST-XXX.md` |
 | Wireframe | WF-XXX | `features/{name}/design/WF-XXX.md` |
 | Component Spec | COMP-XXX | `features/{name}/design/COMP-XXX.md` |
+| PM Strategy | PM-STRATEGY | `features/{name}/pm/strategy.md` |
+| PM Discovery | PM-DISCOVERY | `features/{name}/pm/discovery.md` |
+
+---
+
+## Feature Folder Structure
+
+```
+features/{feature-name}/
+├── pm/                    # PM artifacts (strategy, discovery, GTM)
+│   ├── strategy.md
+│   ├── discovery.md
+│   └── gtm.md
+├── po/
+│   ├── prd.md
+│   ├── usm.md
+│   ├── usl.md
+│   ├── usd/               # One file per story: ST-XXX.md
+│   └── uat/               # One file per story: ST-XXX.md
+├── design/
+│   ├── WF-XXX.md          # One file per screen
+│   └── COMP-XXX.md        # One file per component
+└── code/
+```
 
 ---
 
@@ -72,3 +97,36 @@ upstream: brief.md
 downstream: usm.md
 ---
 ```
+
+---
+
+## Slash Commands (Claude Code only)
+
+When working in Claude Code, these pipeline commands are available in `.claude/commands/`:
+
+| Command | Purpose |
+|---|---|
+| `/po-pipeline` | Run full PO pipeline: Brief → PRD → USM → USL → USD → UAT |
+| `/design-pipeline` | Generate wireframes and component specs from USD |
+| `/validate-artifacts` | Quality gate check on all feature artifacts |
+| `/pm-strategy` | Start a product strategy session |
+| `/pm-discovery` | Start a discovery sprint session |
+
+---
+
+## Install into Your Project
+
+To add these skills to your own project (outside this repo):
+
+```bash
+# Option A — npx (no clone needed)
+npx ai-ready-workflow install
+
+# Option B — from this repo (Mac/Linux)
+./skills/install.sh
+
+# Option C — from this repo (Windows)
+.\skills\install.ps1
+```
+
+All three options copy every skill folder to `.agent/skills/` in the target directory and optionally append the skill registry to `CLAUDE.md`.
