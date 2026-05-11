@@ -155,10 +155,10 @@ Tracks implementation progress of the restructure plan defined in [restructure-p
 
 | # | Task | Status |
 |---|------|--------|
-| 7.8 | `CLAUDE.md` — add PM artifact IDs to Artifact ID System table; add `pm/` folder details to Feature Folder Structure; confirm design skill triggers match Phase 4 SKILL.md descriptions | ⬜ Not Started |
-| 7.9 | `AGENTS.md` — add Feature Folder Structure section (including `pm/` subfolder); add PM artifact IDs (PM-STRATEGY, PM-DISCOVERY); add Slash Commands reference note pointing Claude Code users to `.claude/commands/` | ⬜ Not Started |
-| 7.10 | `GEMINI.md` — same updates as 7.9 (feature folder structure, PM artifact IDs, slash commands note) | ⬜ Not Started |
-| 7.11 | `.cursorrules` — create Cursor-compatible rules file; mirror `AGENTS.md` structure with all 16 skills, artifact IDs, traceability frontmatter, and feature folder structure (Cursor reads this as active context) | ⬜ Not Started |
+| 7.8 | `CLAUDE.md` — add PM artifact IDs (PM-STRATEGY, PM-DISCOVERY); add Phase 6 install section (`npx ai-ready-workflow install`) | ✅ Done |
+| 7.9 | `AGENTS.md` — add USM-XXX + PM artifact IDs; add Feature Folder Structure section; add Slash Commands reference; add Phase 6 install section | ✅ Done |
+| 7.10 | `GEMINI.md` — same updates as 7.9 (PM artifact IDs, folder structure, slash commands reference, Phase 6 install section) | ✅ Done |
+| 7.11 | `.cursorrules` — create Cursor-compatible rules file; mirror `AGENTS.md` structure with all 16 skills, artifact IDs, traceability frontmatter, feature folder structure, and install instructions | ⬜ Not Started |
 
 ---
 

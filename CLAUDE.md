@@ -80,6 +80,8 @@ Skills live in `skills/*/SKILL.md` (agent-agnostic source of truth). Claude Code
 | UAT Test Case | `TC-XXX` | `features/{name}/po/uat/ST-XXX.md` |
 | Wireframe | `WF-XXX` | `features/{name}/design/WF-XXX.md` |
 | Component Spec | `COMP-XXX` | `features/{name}/design/COMP-XXX.md` |
+| PM Strategy | `PM-STRATEGY` | `features/{name}/pm/strategy.md` |
+| PM Discovery | `PM-DISCOVERY` | `features/{name}/pm/discovery.md` |
 
 ---
 
@@ -139,3 +141,22 @@ python3 skills/ui-ux-pro-max/scripts/search.py "your query"
 | Gemini Code Assist | `GEMINI.md` (skill index) |
 | Cursor | `.cursorrules` |
 | Any agent | `skills/*/SKILL.md` (read directly) |
+
+---
+
+## Install into Another Project
+
+To copy all 16 skills into a different project's `.agent/skills/`:
+
+```bash
+# Option A — npx (no clone needed)
+npx ai-ready-workflow install
+
+# Option B — from this repo (Mac/Linux)
+./skills/install.sh
+
+# Option C — from this repo (Windows)
+.\skills\install.ps1
+```
+
+The installer detects already-installed skills and skips them. Safe to re-run.
