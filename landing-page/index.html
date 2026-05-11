@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI-Ready Product Workflow | Product Lifecycle Management</title>
-    
-    <!-- Fonts: IBM Plex Sans (Swiss Style) & JetBrains Mono (Dev) -->
+    <title>AI-Ready Product Workflow v2 | 4 Frameworks · 16 Skills · 5 Slash Commands</title>
+
+    <!-- Fonts: IBM Plex Sans & JetBrains Mono (MDS theme) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-    
+
     <!-- Tailwind CSS (CDN) -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
+
     <script>
         tailwind.config = {
             theme: {
@@ -23,18 +23,15 @@
                     },
                     colors: {
                         magenta: {
-                            DEFAULT: '#bd1874', // --color-magenta
-                            dark: '#a01462',    // --color-magenta-dark
+                            DEFAULT: '#bd1874',
+                            dark: '#a01462',
+                            light: '#f3e0ec',
                         },
                         teal: {
-                            DEFAULT: '#004d6c', // --color-teal
-                            accent: '#14b8a6',  // --color-teal-accent
+                            DEFAULT: '#004d6c',
+                            accent: '#14b8a6',
+                            light: '#e0f2f1',
                         },
-                        background: '#ffffff',
-                        foreground: '#171717',
-                        slate: {
-                            850: '#1e293b', // Custom dark for footer
-                        }
                     },
                     keyframes: {
                         'reveal-up': {
@@ -52,12 +49,17 @@
                             '10%': { opacity: '1' },
                             '90%': { opacity: '1' },
                             '100%': { top: '100%', opacity: '0' },
+                        },
+                        'fade-in': {
+                            '0%': { opacity: '0', transform: 'translateY(8px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
                         }
                     },
                     animation: {
                         'reveal': 'reveal-up 1.0s cubic-bezier(0.16, 1, 0.3, 1) forwards',
                         'beam-h': 'beam-h 3s linear infinite',
                         'beam-v': 'beam-v 3s linear infinite',
+                        'fade-in': 'fade-in 0.6s ease forwards',
                     }
                 }
             }
@@ -65,7 +67,6 @@
     </script>
 
     <style>
-        /* MDS.CSS Variables & Custom Styles */
         :root {
             --primary-magenta: #bd1874;
             --primary-teal: #004d6c;
@@ -77,502 +78,698 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* Grid Background Pattern */
         .bg-grid {
             background-size: 40px 40px;
             background-image: linear-gradient(to right, #f1f5f9 1px, transparent 1px),
                               linear-gradient(to bottom, #f1f5f9 1px, transparent 1px);
         }
 
-        /* Glass Card Effect */
         .glass-card {
-            background: rgba(255, 255, 255, 0.7);
+            background: rgba(255, 255, 255, 0.75);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(0, 0, 0, 0.05);
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08), 0 2px 4px -1px rgba(0,0,0,0.04);
+            transition: all 0.25s ease;
         }
 
         .glass-card:hover {
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            border-color: rgba(189, 24, 116, 0.2); /* Magenta tint on hover */
+            box-shadow: 0 10px 20px -4px rgba(0,0,0,0.1), 0 4px 8px -2px rgba(0,0,0,0.05);
+            border-color: rgba(189, 24, 116, 0.2);
             transform: translateY(-2px);
-            transition: all 0.3s ease;
         }
 
-        /* Beam Utilities */
         .beam-h-container { position: absolute; top: 0; left: 0; right: 0; height: 1px; overflow: hidden; }
         .beam-h { position: absolute; height: 1px; width: 200px; background: linear-gradient(90deg, transparent, var(--primary-magenta), transparent); }
-        
         .beam-v-container { position: absolute; top: 0; bottom: 0; left: 0; width: 1px; overflow: hidden; }
         .beam-v { position: absolute; width: 1px; height: 200px; background: linear-gradient(180deg, transparent, var(--primary-magenta), transparent); }
 
-        /* Animation Delays */
         .delay-100 { animation-delay: 100ms; }
         .delay-200 { animation-delay: 200ms; }
         .delay-300 { animation-delay: 300ms; }
         .delay-400 { animation-delay: 400ms; }
+        .delay-500 { animation-delay: 500ms; }
 
-        /* Typography Utilities */
         .text-balance { text-wrap: balance; }
-        
-        /* Custom Scrollbar */
+
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #f1f1f1; }
         ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+        /* Skill pill hover */
+        .skill-pill {
+            transition: all 0.18s ease;
+            cursor: default;
+        }
+        .skill-pill:hover {
+            background-color: #bd1874;
+            color: #ffffff;
+            transform: translateY(-1px);
+        }
+
+        /* Pipeline connector */
+        .pipeline-connector {
+            position: absolute;
+            top: 50%;
+            right: -28px;
+            transform: translateY(-50%);
+            z-index: 10;
+        }
+
+        /* Bento grid spans */
+        .bento-wide { grid-column: span 2; }
+        @media (max-width: 768px) {
+            .bento-wide { grid-column: span 1; }
+        }
     </style>
 </head>
 <body class="relative min-h-screen flex flex-col">
 
-    <!-- Navbar -->
-    <nav class="fixed top-0 left-0 right-0 z-50 glass-card border-b border-slate-100/50 bg-white/80">
+    <!-- ═══════════════════════════ NAVBAR ═══════════════════════════ -->
+    <nav class="fixed top-0 left-0 right-0 z-50 glass-card border-b border-slate-100/60 bg-white/85">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
-                <!-- Logo -->
                 <div class="flex items-center space-x-2">
-                    <div class="w-8 h-8 bg-magenta rounded-md flex items-center justify-center text-white font-bold font-mono">AI</div>
-                    <span class="font-bold text-lg tracking-tight text-slate-900">Product Development Workflow</span>
+                    <div class="w-8 h-8 bg-magenta rounded-md flex items-center justify-center text-white font-bold font-mono text-sm">AI</div>
+                    <span class="font-bold text-base tracking-tight text-slate-900">AI-Ready Product Workflow</span>
+                    <span class="hidden sm:inline-flex items-center px-2 py-0.5 rounded text-xs font-bold bg-magenta text-white ml-1">v2</span>
                 </div>
-                
-                <!-- Links -->
-                <div class="hidden md:flex space-x-8">
-                    <a href="#workflow" class="text-sm font-medium text-slate-600 hover:text-magenta transition-colors">Workflow</a>
+
+                <div class="hidden md:flex items-center space-x-7">
+                    <a href="#pipeline" class="text-sm font-medium text-slate-600 hover:text-magenta transition-colors">Pipeline</a>
                     <a href="#frameworks" class="text-sm font-medium text-slate-600 hover:text-magenta transition-colors">Frameworks</a>
-                    <a href="https://github.com/karlng279/ai-ready-product-workflow" target="_blank" rel="noopener noreferrer" class="text-sm font-medium text-slate-600 hover:text-magenta transition-colors inline-flex items-center gap-1">
+                    <a href="#skills" class="text-sm font-medium text-slate-600 hover:text-magenta transition-colors">Skills</a>
+                    <a href="#agents" class="text-sm font-medium text-slate-600 hover:text-magenta transition-colors">Multi-Agent</a>
+                    <a href="https://github.com/karlng279/ai-ready-product-workflow-v2" target="_blank" rel="noopener noreferrer"
+                       class="text-sm font-medium text-slate-600 hover:text-magenta transition-colors inline-flex items-center gap-1">
                         Docs
-                        <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                        </svg>
+                        <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
                     </a>
                 </div>
-                
-                <!-- CTA -->
-                <a href="https://github.com/karlng279/ppo-automation-tasks-otsv" class="bg-slate-900 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-slate-800 transition-colors">
+
+                <a href="https://github.com/karlng279/ai-ready-product-workflow-v2"
+                   class="inline-flex items-center gap-2 bg-slate-900 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-slate-700 transition-colors">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0012 2z"/></svg>
                     GitHub
                 </a>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
+    <!-- ═══════════════════════════ HERO ═══════════════════════════ -->
     <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
-        <!-- Background Grid -->
-        <div class="absolute inset-0 bg-grid -z-10 opacity-60"></div>
+        <div class="absolute inset-0 bg-grid -z-10 opacity-50"></div>
         <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white -z-10"></div>
-        
-        <!-- Animated Beams -->
-        <div class="beam-h-container top-1/4 opacity-30"><div class="beam-h animate-beam-h" style="animation-duration: 4s;"></div></div>
-        <div class="beam-h-container bottom-1/3 opacity-30"><div class="beam-h animate-beam-h" style="animation-duration: 7s; animation-delay: 2s;"></div></div>
-        <div class="beam-v-container left-1/4 opacity-30"><div class="beam-v animate-beam-v" style="animation-duration: 5s;"></div></div>
-        <div class="beam-v-container right-1/3 opacity-30"><div class="beam-v animate-beam-v" style="animation-duration: 6s; animation-delay: 1s;"></div></div>
+
+        <div class="beam-h-container top-1/4 opacity-25"><div class="beam-h animate-beam-h" style="animation-duration:4s;"></div></div>
+        <div class="beam-h-container bottom-1/3 opacity-25"><div class="beam-h animate-beam-h" style="animation-duration:7s;animation-delay:2s;"></div></div>
+        <div class="beam-v-container left-1/4 opacity-25"><div class="beam-v animate-beam-v" style="animation-duration:5s;"></div></div>
+        <div class="beam-v-container right-1/3 opacity-25"><div class="beam-v animate-beam-v" style="animation-duration:6s;animation-delay:1s;"></div></div>
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <!-- Badge -->
-            <div class="inline-flex items-center px-3 py-1 rounded-full border border-teal-unique/20 bg-teal-accent/10 text-teal-unique text-xs font-semibold uppercase tracking-wider mb-6 animate-reveal">
+            <div class="inline-flex items-center px-3 py-1 rounded-full border border-teal-accent/30 bg-teal-accent/10 text-teal text-xs font-semibold uppercase tracking-wider mb-6 animate-reveal">
                 <span class="w-2 h-2 rounded-full bg-teal-accent mr-2 animate-pulse"></span>
-                v1.0.0 Stable
+                v2.0 — 4 Frameworks · 16 Skills · 5 Slash Commands
             </div>
-            
+
             <!-- Headline -->
-            <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-slate-900 mb-6 animate-reveal delay-100 text-balance">
-                From Ideas to Release<br> 
-                <span class="text-magenta">AI-Ready Product Workflow</span>
+            <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-slate-900 mb-6 animate-reveal delay-100 text-balance leading-tight">
+                From Strategy to Code.<br>
+                <span class="text-magenta">AI-Ready from Day One.</span>
             </h1>
-            
+
             <!-- Subhead -->
-            <p class="mt-4 text-xl text-slate-600 max-w-2xl mx-auto mb-10 animate-reveal delay-200">
-                A structured end-to-end workflow managing discovery to deployment.<br><br>
-                <span class="font-mono text-sm bg-slate-100 px-1 py-0.5 rounded text-magenta">Product</span> → 
-                <span class="font-mono text-sm bg-slate-100 px-1 py-0.5 rounded text-magenta">Design</span> → 
-                <span class="font-mono text-sm bg-slate-100 px-1 py-0.5 rounded text-magenta">Code</span>
+            <p class="mt-4 text-xl text-slate-500 max-w-3xl mx-auto mb-8 animate-reveal delay-200 leading-relaxed">
+                A structured knowledge base that gives AI agents methodology for every stage of product development.
+                Four frameworks, sixteen skills, one traceable artifact chain.
             </p>
-            
+
+            <!-- Chain pills -->
+            <div class="flex flex-wrap justify-center gap-2 mb-10 animate-reveal delay-300 text-sm font-mono">
+                <span class="bg-purple-50 text-purple-700 border border-purple-200 px-3 py-1 rounded-full">PM Strategy</span>
+                <span class="text-slate-300 self-center">→</span>
+                <span class="bg-blue-50 text-blue-700 border border-blue-200 px-3 py-1 rounded-full">PO Pipeline</span>
+                <span class="text-slate-300 self-center">→</span>
+                <span class="bg-magenta-light text-magenta border border-magenta/20 px-3 py-1 rounded-full">Design</span>
+                <span class="text-slate-300 self-center">→</span>
+                <span class="bg-teal-light text-teal border border-teal/20 px-3 py-1 rounded-full">Code</span>
+                <span class="text-slate-300 self-center">→</span>
+                <span class="bg-green-50 text-green-700 border border-green-200 px-3 py-1 rounded-full">Validate</span>
+            </div>
+
             <!-- CTAs -->
-            <div class="flex flex-col sm:flex-row justify-center gap-4 animate-reveal delay-300">
-                <a href="https://github.com/karlng279/ai-ready-product-workflow/blob/main/GETTING_STARTED.md" class="group relative inline-flex items-center justify-center px-8 py-3 text-base font-medium text-white bg-magenta hover:bg-magenta-dark rounded-lg transition-all shadow-lg hover:shadow-xl hover:shadow-magenta/20">
+            <div class="flex flex-col sm:flex-row justify-center gap-4 animate-reveal delay-400">
+                <a href="https://github.com/karlng279/ai-ready-product-workflow-v2/blob/main/GETTING_STARTED.md"
+                   class="group relative inline-flex items-center justify-center px-8 py-3 text-base font-medium text-white bg-magenta hover:bg-magenta-dark rounded-lg transition-all shadow-lg hover:shadow-xl hover:shadow-magenta/25">
                     Get Started
-                    <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                    </svg>
+                    <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
                 </a>
-                <a href="https://github.com/karlng279/ai-ready-product-workflow" class="inline-flex items-center justify-center px-8 py-3 text-base font-medium text-slate-700 bg-white border border-slate-200 hover:bg-slate-50 hover:border-slate-300 rounded-lg transition-all shadow-sm">
-                    Read Documentation
+                <a href="https://github.com/karlng279/ai-ready-product-workflow-v2"
+                   class="inline-flex items-center justify-center px-8 py-3 text-base font-medium text-slate-700 bg-white border border-slate-200 hover:bg-slate-50 hover:border-slate-300 rounded-lg transition-all shadow-sm">
+                    View on GitHub
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- Visual Workflow Infographic Section -->
-    <section id="workflow" class="py-20 bg-slate-50 border-y border-slate-100">
+    <!-- ═══════════════════════════ INSTALL BANNER ═══════════════════════════ -->
+    <section class="bg-slate-900 py-10 border-y border-slate-800">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-slate-400 text-sm font-medium uppercase tracking-widest mb-4">Install all 16 skills into any project</p>
+            <div class="inline-flex items-center gap-3 bg-slate-800 border border-slate-700 rounded-xl px-6 py-4 font-mono text-base shadow-lg">
+                <span class="text-teal-accent select-none">$</span>
+                <span class="text-white font-medium">npx ai-ready-workflow install</span>
+                <button onclick="navigator.clipboard.writeText('npx ai-ready-workflow install')"
+                        class="text-slate-500 hover:text-teal-accent transition-colors ml-2 text-xs"
+                        title="Copy">
+                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                </button>
+            </div>
+            <p class="text-slate-500 text-xs mt-3">Copies skills to <code class="text-slate-400">.agent/skills/</code> · patches <code class="text-slate-400">CLAUDE.md</code> · safe to re-run</p>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════ PIPELINE ═══════════════════════════ -->
+    <section id="pipeline" class="py-24 bg-slate-50 border-b border-slate-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
-                <h2 class="text-3xl font-bold text-slate-900 mb-4">The Automation Pipeline</h2>
-                <p class="text-slate-600 max-w-2xl mx-auto">From abstract idea to deployed production code in a single streamlined flow.</p>
+                <h2 class="text-3xl font-bold text-slate-900 mb-4">The End-to-End Pipeline</h2>
+                <p class="text-slate-500 max-w-2xl mx-auto">Every stage produces a traceable artifact. Every artifact links forward and back. Nothing falls through the cracks.</p>
             </div>
 
-            <!-- Infographic Container -->
+            <!-- Pipeline steps -->
             <div class="relative">
-                <!-- Connecting Line (Desktop) -->
-                <div class="hidden lg:block absolute top-1/2 left-0 right-0 h-0.5 bg-slate-200 -translate-y-1/2 z-0"></div>
+                <div class="hidden lg:block absolute top-12 left-[10%] right-[10%] h-0.5 bg-slate-200 z-0"></div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative z-10">
-                    <!-- Step 1: PO -->
-                    <div class="group relative bg-white p-6 rounded-xl shadow-sm border border-slate-200 text-center hover:border-magenta transition-colors duration-300">
-                        <div class="w-16 h-16 mx-auto bg-blue-50 text-blue-600 rounded-full flex items-center justify-center mb-4 border-4 border-white shadow-sm group-hover:scale-110 transition-transform">
-                            <!-- Icon: Document/Plan -->
-                            <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                            </svg>
+                <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6 relative z-10">
+                    <!-- Step 1: PM -->
+                    <div class="group bg-white p-6 rounded-2xl shadow-sm border border-slate-200 text-center hover:border-purple-400 hover:shadow-md transition-all duration-200">
+                        <div class="w-14 h-14 mx-auto bg-purple-50 text-purple-600 rounded-full flex items-center justify-center mb-4 border-4 border-white shadow-sm group-hover:scale-110 transition-transform">
+                            <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
                         </div>
-                        <h3 class="text-lg font-bold text-slate-900 mb-2">1. Discovery</h3>
-                        <p class="text-sm text-slate-500 mb-3">PRD, Stories & Acceptance Criteria</p>
-                        <div class="inline-block px-2 py-1 bg-blue-100 text-blue-700 text-xs font-mono rounded">/po-framework</div>
+                        <h3 class="text-sm font-bold text-slate-900 mb-1">1. PM Strategy</h3>
+                        <p class="text-xs text-slate-500 mb-3">OKRs, OST, discovery</p>
+                        <div class="inline-block px-2 py-1 bg-purple-50 text-purple-700 text-xs font-mono rounded-md">/pm-strategy</div>
                     </div>
 
-                    <!-- Step 2: Design -->
-                    <div class="group relative bg-white p-6 rounded-xl shadow-sm border border-slate-200 text-center hover:border-magenta transition-colors duration-300">
-                        <div class="w-16 h-16 mx-auto bg-purple-50 text-purple-600 rounded-full flex items-center justify-center mb-4 border-4 border-white shadow-sm group-hover:scale-110 transition-transform">
-                            <!-- Icon: Layout/Wireframe -->
-                            <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
-                            </svg>
+                    <!-- Step 2: PO -->
+                    <div class="group bg-white p-6 rounded-2xl shadow-sm border border-slate-200 text-center hover:border-blue-400 hover:shadow-md transition-all duration-200">
+                        <div class="w-14 h-14 mx-auto bg-blue-50 text-blue-600 rounded-full flex items-center justify-center mb-4 border-4 border-white shadow-sm group-hover:scale-110 transition-transform">
+                            <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
                         </div>
-                        <h3 class="text-lg font-bold text-slate-900 mb-2">2. Design</h3>
-                        <p class="text-sm text-slate-500 mb-3">Wireframes, Components & States</p>
-                        <div class="inline-block px-2 py-1 bg-purple-100 text-purple-700 text-xs font-mono rounded">/design-framework</div>
+                        <h3 class="text-sm font-bold text-slate-900 mb-1">2. PO Pipeline</h3>
+                        <p class="text-xs text-slate-500 mb-3">PRD → USM → USL → USD → UAT</p>
+                        <div class="inline-block px-2 py-1 bg-blue-50 text-blue-700 text-xs font-mono rounded-md">/po-pipeline</div>
                     </div>
 
-                    <!-- Step 3: Code -->
-                    <div class="group relative bg-white p-6 rounded-xl shadow-sm border border-slate-200 text-center hover:border-magenta transition-colors duration-300">
-                        <div class="w-16 h-16 mx-auto bg-teal-50 text-teal-600 rounded-full flex items-center justify-center mb-4 border-4 border-white shadow-sm group-hover:scale-110 transition-transform">
-                            <!-- Icon: Code -->
-                            <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-                            </svg>
+                    <!-- Step 3: Design -->
+                    <div class="group bg-white p-6 rounded-2xl shadow-sm border border-slate-200 text-center hover:border-magenta hover:shadow-md transition-all duration-200">
+                        <div class="w-14 h-14 mx-auto bg-magenta-light text-magenta rounded-full flex items-center justify-center mb-4 border-4 border-white shadow-sm group-hover:scale-110 transition-transform">
+                            <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"/></svg>
                         </div>
-                        <h3 class="text-lg font-bold text-slate-900 mb-2">3. Implementation</h3>
-                        <p class="text-sm text-slate-500 mb-3">Next.js 14, Tailwind & ShadCN</p>
-                        <div class="inline-block px-2 py-1 bg-teal-100 text-teal-700 text-xs font-mono rounded">/codebase-framework</div>
+                        <h3 class="text-sm font-bold text-slate-900 mb-1">3. Design</h3>
+                        <p class="text-xs text-slate-500 mb-3">WF-XXX → COMP-XXX</p>
+                        <div class="inline-block px-2 py-1 bg-magenta-light text-magenta text-xs font-mono rounded-md">/design-pipeline</div>
                     </div>
 
-                    <!-- Step 4: Verify -->
-                    <div class="group relative bg-white p-6 rounded-xl shadow-sm border border-slate-200 text-center hover:border-magenta transition-colors duration-300">
-                        <div class="w-16 h-16 mx-auto bg-green-50 text-green-600 rounded-full flex items-center justify-center mb-4 border-4 border-white shadow-sm group-hover:scale-110 transition-transform">
-                            <!-- Icon: Check/Verify -->
-                            <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
+                    <!-- Step 4: Code -->
+                    <div class="group bg-white p-6 rounded-2xl shadow-sm border border-slate-200 text-center hover:border-teal-accent hover:shadow-md transition-all duration-200">
+                        <div class="w-14 h-14 mx-auto bg-teal-light text-teal rounded-full flex items-center justify-center mb-4 border-4 border-white shadow-sm group-hover:scale-110 transition-transform">
+                            <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
                         </div>
-                        <h3 class="text-lg font-bold text-slate-900 mb-2 flex items-center justify-center gap-2">
-                            4. Verification 
-                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800 border border-yellow-200">
-                                In Progress
-                            </span>
-                        </h3>
-                        <p class="text-sm text-slate-500 mb-3">UAT Scenarios & auto-tests</p>
-                        <div class="inline-block px-2 py-1 bg-green-100 text-green-700 text-xs font-mono rounded">/verification</div>
+                        <h3 class="text-sm font-bold text-slate-900 mb-1">4. Code</h3>
+                        <p class="text-xs text-slate-500 mb-3">Next.js 15 + ShadCN</p>
+                        <div class="inline-block px-2 py-1 bg-teal-light text-teal text-xs font-mono rounded-md">codebase-framework</div>
+                    </div>
+
+                    <!-- Step 5: Validate -->
+                    <div class="group bg-white p-6 rounded-2xl shadow-sm border border-slate-200 text-center hover:border-green-400 hover:shadow-md transition-all duration-200">
+                        <div class="w-14 h-14 mx-auto bg-green-50 text-green-600 rounded-full flex items-center justify-center mb-4 border-4 border-white shadow-sm group-hover:scale-110 transition-transform">
+                            <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        </div>
+                        <h3 class="text-sm font-bold text-slate-900 mb-1">5. Validate</h3>
+                        <p class="text-xs text-slate-500 mb-3">Quality gates on all artifacts</p>
+                        <div class="inline-block px-2 py-1 bg-green-50 text-green-700 text-xs font-mono rounded-md">/validate-artifacts</div>
                     </div>
                 </div>
+            </div>
+
+            <!-- Artifact chain -->
+            <div class="mt-12 flex flex-wrap justify-center items-center gap-2 font-mono text-xs text-slate-500">
+                <span class="bg-white border border-slate-200 px-3 py-1.5 rounded-lg shadow-sm">PM-STRATEGY</span>
+                <span class="text-slate-300">→</span>
+                <span class="bg-white border border-slate-200 px-3 py-1.5 rounded-lg shadow-sm">PRD-XXX</span>
+                <span class="text-slate-300">→</span>
+                <span class="bg-white border border-slate-200 px-3 py-1.5 rounded-lg shadow-sm">USM-XXX</span>
+                <span class="text-slate-300">→</span>
+                <span class="bg-white border border-slate-200 px-3 py-1.5 rounded-lg shadow-sm">ST-XXX</span>
+                <span class="text-slate-300">→</span>
+                <span class="bg-white border border-slate-200 px-3 py-1.5 rounded-lg shadow-sm">AC-XXX</span>
+                <span class="text-slate-300">→</span>
+                <span class="bg-white border border-slate-200 px-3 py-1.5 rounded-lg shadow-sm">TC-XXX</span>
+                <span class="text-slate-300">→</span>
+                <span class="bg-white border border-slate-200 px-3 py-1.5 rounded-lg shadow-sm">WF-XXX</span>
+                <span class="text-slate-300">→</span>
+                <span class="bg-white border border-slate-200 px-3 py-1.5 rounded-lg shadow-sm">COMP-XXX</span>
             </div>
         </div>
     </section>
 
-    <!-- Frameworks Grid -->
-    <section id="frameworks" class="py-20 relative overflow-hidden">
-        <!-- Decoration -->
-        <div class="absolute -right-20 top-40 w-96 h-96 bg-magenta/5 rounded-full blur-3xl -z-10"></div>
-        <div class="absolute -left-20 bottom-40 w-96 h-96 bg-teal/5 rounded-full blur-3xl -z-10"></div>
+    <!-- ═══════════════════════════ FRAMEWORKS ═══════════════════════════ -->
+    <section id="frameworks" class="py-24 relative overflow-hidden">
+        <div class="absolute -right-24 top-32 w-96 h-96 bg-magenta/5 rounded-full blur-3xl -z-10"></div>
+        <div class="absolute -left-24 bottom-32 w-96 h-96 bg-teal/5 rounded-full blur-3xl -z-10"></div>
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Card 1 -->
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-slate-900 mb-4">4 Frameworks</h2>
+                <p class="text-slate-500 max-w-2xl mx-auto">Each framework is a complete knowledge base — rules, templates, and examples. AI agents load them automatically via skills.</p>
+            </div>
+
+            <!-- Bento grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+                <!-- PM Framework — featured wide card -->
+                <div class="glass-card p-8 rounded-2xl relative lg:col-span-2 bg-gradient-to-br from-purple-50/80 to-white border-purple-100">
+                    <div class="absolute top-4 right-4 bg-gradient-to-r from-purple-600 to-purple-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow">
+                        New in v2
+                    </div>
+                    <div class="h-12 w-12 bg-purple-100 rounded-xl flex items-center justify-center mb-5">
+                        <svg class="w-6 h-6 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-2">PM Framework</h3>
+                    <p class="text-slate-600 mb-5 leading-relaxed text-sm">Six PM disciplines with embedded methodology from Teresa Torres, Marty Cagan, and Strategyzer. From vision to go-to-market.</p>
+                    <div class="grid grid-cols-2 gap-2 text-xs">
+                        <div class="flex items-center gap-1.5 text-slate-500"><span class="w-1.5 h-1.5 bg-purple-400 rounded-full flex-shrink-0"></span>Product Strategy + OKRs</div>
+                        <div class="flex items-center gap-1.5 text-slate-500"><span class="w-1.5 h-1.5 bg-purple-400 rounded-full flex-shrink-0"></span>Customer Discovery (OST)</div>
+                        <div class="flex items-center gap-1.5 text-slate-500"><span class="w-1.5 h-1.5 bg-purple-400 rounded-full flex-shrink-0"></span>Market Research + Personas</div>
+                        <div class="flex items-center gap-1.5 text-slate-500"><span class="w-1.5 h-1.5 bg-purple-400 rounded-full flex-shrink-0"></span>North Star + HEART + A/B</div>
+                        <div class="flex items-center gap-1.5 text-slate-500"><span class="w-1.5 h-1.5 bg-purple-400 rounded-full flex-shrink-0"></span>Growth Loops + PLG</div>
+                        <div class="flex items-center gap-1.5 text-slate-500"><span class="w-1.5 h-1.5 bg-purple-400 rounded-full flex-shrink-0"></span>GTM · ICP · Launch Plan</div>
+                    </div>
+                </div>
+
+                <!-- PO Framework -->
                 <div class="glass-card p-8 rounded-2xl relative">
-                    <!-- Featured Badge (Moved to PO) -->
-                    <div class="absolute top-0 right-0 -mt-2 -mr-2 bg-gradient-to-r from-magenta to-pink-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg transform rotate-12">
-                        Core Info
+                    <div class="absolute top-4 right-4 bg-gradient-to-r from-magenta to-pink-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow">
+                        Core
                     </div>
-                    <div class="h-12 w-12 bg-slate-100 rounded-lg flex items-center justify-center mb-6">
-                        <span class="text-2xl">📋</span>
+                    <div class="h-12 w-12 bg-slate-100 rounded-xl flex items-center justify-center mb-5">
+                        <svg class="w-6 h-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
                     </div>
-                    <h3 class="text-xl font-bold text-slate-900 mb-3">PO Framework</h3>
-                    <p class="text-slate-600 mb-6 leading-relaxed">
-                        A rigorous 5-stage specification workflow. Convert vague ideas into crystal-clear requirement documents.
-                    </p>
-                    <ul class="space-y-2 text-sm text-slate-500 mb-6">
-                        <li class="flex items-center"><span class="w-1.5 h-1.5 bg-magenta rounded-full mr-2"></span>PRD & Strategy</li>
-                        <li class="flex items-center"><span class="w-1.5 h-1.5 bg-magenta rounded-full mr-2"></span>User Story Mapping</li>
-                        <li class="flex items-center"><span class="w-1.5 h-1.5 bg-magenta rounded-full mr-2"></span>MoSCoW Prioritization</li>
+                    <h3 class="text-xl font-bold text-slate-900 mb-2">PO Framework</h3>
+                    <p class="text-slate-600 mb-5 text-sm leading-relaxed">5-stage pipeline from brief to BDD test cases. Every story gets acceptance criteria. Every AC gets a test case.</p>
+                    <ul class="space-y-1.5 text-xs text-slate-500">
+                        <li class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 bg-magenta rounded-full flex-shrink-0"></span>PRD · USM · USL</li>
+                        <li class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 bg-magenta rounded-full flex-shrink-0"></span>USD with AC-XXX criteria</li>
+                        <li class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 bg-magenta rounded-full flex-shrink-0"></span>UAT with Given/When/Then</li>
                     </ul>
                 </div>
 
-                <!-- Card 2 -->
+                <!-- Design Framework -->
                 <div class="glass-card p-8 rounded-2xl">
-                    <div class="h-12 w-12 bg-slate-100 rounded-lg flex items-center justify-center mb-6">
-                        <span class="text-2xl">🎨</span>
+                    <div class="h-12 w-12 bg-slate-100 rounded-xl flex items-center justify-center mb-5">
+                        <svg class="w-6 h-6 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/></svg>
                     </div>
-                    <h3 class="text-xl font-bold text-slate-900 mb-3">Design Framework</h3>
-                    <p class="text-slate-600 mb-6 leading-relaxed">
-                        Text-based design system that bridges the gap between requirements and code without complex tools.
-                    </p>
-                    <ul class="space-y-2 text-sm text-slate-500 mb-6">
-                        <li class="flex items-center"><span class="w-1.5 h-1.5 bg-teal rounded-full mr-2"></span>ASCII Wireframes</li>
-                        <li class="flex items-center"><span class="w-1.5 h-1.5 bg-teal rounded-full mr-2"></span>Component Specs</li>
-                        <li class="flex items-center"><span class="w-1.5 h-1.5 bg-teal rounded-full mr-2"></span>Interaction Flows</li>
+                    <h3 class="text-xl font-bold text-slate-900 mb-2">Design Framework</h3>
+                    <p class="text-slate-600 mb-5 text-sm leading-relaxed">Text-based UI design. 4 themes. WF-XXX wireframes and COMP-XXX specs without leaving Markdown.</p>
+                    <ul class="space-y-1.5 text-xs text-slate-500">
+                        <li class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 bg-teal rounded-full flex-shrink-0"></span>4 themes (MDS, Corporate, Ecommerce, ERP)</li>
+                        <li class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 bg-teal rounded-full flex-shrink-0"></span>ASCII wireframes + ShadCN specs</li>
+                        <li class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 bg-teal rounded-full flex-shrink-0"></span>TanStack Table full config</li>
                     </ul>
                 </div>
 
-                <!-- Card 3 -->
+                <!-- Codebase Framework -->
                 <div class="glass-card p-8 rounded-2xl">
-                    <div class="h-12 w-12 bg-slate-100 rounded-lg flex items-center justify-center mb-6">
-                        <span class="text-2xl">⚡</span>
+                    <div class="h-12 w-12 bg-slate-100 rounded-xl flex items-center justify-center mb-5">
+                        <svg class="w-6 h-6 text-teal" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
                     </div>
-                    <h3 class="text-xl font-bold text-slate-900 mb-3">Codebase Framework</h3>
-                    <p class="text-slate-600 mb-6 leading-relaxed">
-                        Production-ready Next.js templates. Skip the boilerplate and start building features immediately.
-                    </p>
-                    <ul class="space-y-2 text-sm text-slate-500 mb-6">
-                        <li class="flex items-center"><span class="w-1.5 h-1.5 bg-blue-500 rounded-full mr-2"></span>Next.js 14 App Router</li>
-                        <li class="flex items-center"><span class="w-1.5 h-1.5 bg-blue-500 rounded-full mr-2"></span>Tailwind & ShadCN</li>
-                        <li class="flex items-center"><span class="w-1.5 h-1.5 bg-blue-500 rounded-full mr-2"></span>Dummy Data Pattern</li>
+                    <h3 class="text-xl font-bold text-slate-900 mb-2">Codebase Framework</h3>
+                    <p class="text-slate-600 mb-5 text-sm leading-relaxed">Next.js 15 App Router patterns. Build working frontends with dummy data before investing in backend.</p>
+                    <ul class="space-y-1.5 text-xs text-slate-500">
+                        <li class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 bg-blue-500 rounded-full flex-shrink-0"></span>Next.js 15 + TailwindCSS</li>
+                        <li class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 bg-blue-500 rounded-full flex-shrink-0"></span>ShadCN UI + TanStack Query</li>
+                        <li class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 bg-blue-500 rounded-full flex-shrink-0"></span>Dummy JSON → Vercel deploy</li>
                     </ul>
+                </div>
+
+                <!-- Codebase Framework continuation below, already has 4 cards above. Removing duplicate -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════ SKILLS ═══════════════════════════ -->
+    <section id="skills" class="py-24 bg-slate-50 border-y border-slate-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-slate-900 mb-4">16 Skills — Auto-Loaded by Keyword</h2>
+                <p class="text-slate-500 max-w-2xl mx-auto">Each skill is a markdown file that activates when you use a trigger keyword. No configuration needed. Works with Claude Code, Codex, Gemini, and Cursor.</p>
+            </div>
+
+            <div class="space-y-10">
+                <!-- UI/UX -->
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="text-xs font-bold uppercase tracking-widest text-slate-400">UI / UX</span>
+                        <div class="flex-1 h-px bg-slate-200"></div>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="skill-pill inline-flex items-center gap-2 bg-white border border-slate-200 rounded-lg px-4 py-2 text-sm shadow-sm">
+                            <span class="w-2 h-2 rounded-full bg-yellow-400"></span>
+                            <code class="font-mono font-medium text-slate-800">ui-ux-pro-max</code>
+                            <span class="text-slate-400 text-xs">palette · typography · chart type · design system</span>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- PO Pipeline -->
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="text-xs font-bold uppercase tracking-widest text-slate-400">PO Pipeline</span>
+                        <div class="flex-1 h-px bg-slate-200"></div>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="skill-pill inline-flex items-center gap-2 bg-white border border-slate-200 rounded-lg px-4 py-2 text-sm shadow-sm">
+                            <span class="w-2 h-2 rounded-full bg-blue-400"></span>
+                            <code class="font-mono font-medium text-slate-800">po-brief-to-prd</code>
+                            <span class="text-slate-400 text-xs">feature brief · PRD · product requirements</span>
+                        </span>
+                        <span class="skill-pill inline-flex items-center gap-2 bg-white border border-slate-200 rounded-lg px-4 py-2 text-sm shadow-sm">
+                            <span class="w-2 h-2 rounded-full bg-blue-400"></span>
+                            <code class="font-mono font-medium text-slate-800">po-prd-to-usm</code>
+                            <span class="text-slate-400 text-xs">user story map · USM</span>
+                        </span>
+                        <span class="skill-pill inline-flex items-center gap-2 bg-white border border-slate-200 rounded-lg px-4 py-2 text-sm shadow-sm">
+                            <span class="w-2 h-2 rounded-full bg-blue-400"></span>
+                            <code class="font-mono font-medium text-slate-800">po-usm-to-usl</code>
+                            <span class="text-slate-400 text-xs">user story list · MoSCoW</span>
+                        </span>
+                        <span class="skill-pill inline-flex items-center gap-2 bg-white border border-slate-200 rounded-lg px-4 py-2 text-sm shadow-sm">
+                            <span class="w-2 h-2 rounded-full bg-blue-400"></span>
+                            <code class="font-mono font-medium text-slate-800">po-usl-to-usd</code>
+                            <span class="text-slate-400 text-xs">acceptance criteria · AC-XXX</span>
+                        </span>
+                        <span class="skill-pill inline-flex items-center gap-2 bg-white border border-slate-200 rounded-lg px-4 py-2 text-sm shadow-sm">
+                            <span class="w-2 h-2 rounded-full bg-blue-400"></span>
+                            <code class="font-mono font-medium text-slate-800">po-usd-to-uat</code>
+                            <span class="text-slate-400 text-xs">UAT · BDD · given-when-then</span>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Validation -->
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="text-xs font-bold uppercase tracking-widest text-slate-400">Validation</span>
+                        <div class="flex-1 h-px bg-slate-200"></div>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="skill-pill inline-flex items-center gap-2 bg-white border border-slate-200 rounded-lg px-4 py-2 text-sm shadow-sm">
+                            <span class="w-2 h-2 rounded-full bg-green-400"></span>
+                            <code class="font-mono font-medium text-slate-800">validate-prd</code>
+                            <span class="text-slate-400 text-xs">validate PRD · quality gate</span>
+                        </span>
+                        <span class="skill-pill inline-flex items-center gap-2 bg-white border border-slate-200 rounded-lg px-4 py-2 text-sm shadow-sm">
+                            <span class="w-2 h-2 rounded-full bg-green-400"></span>
+                            <code class="font-mono font-medium text-slate-800">validate-usd</code>
+                            <span class="text-slate-400 text-xs">acceptance criteria check · AC completeness</span>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Design -->
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="text-xs font-bold uppercase tracking-widest text-slate-400">Design</span>
+                        <div class="flex-1 h-px bg-slate-200"></div>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="skill-pill inline-flex items-center gap-2 bg-white border border-slate-200 rounded-lg px-4 py-2 text-sm shadow-sm">
+                            <span class="w-2 h-2 rounded-full bg-magenta"></span>
+                            <code class="font-mono font-medium text-slate-800">design-wireframe</code>
+                            <span class="text-slate-400 text-xs">wireframe · WF-XXX · ASCII wireframe</span>
+                        </span>
+                        <span class="skill-pill inline-flex items-center gap-2 bg-white border border-slate-200 rounded-lg px-4 py-2 text-sm shadow-sm">
+                            <span class="w-2 h-2 rounded-full bg-magenta"></span>
+                            <code class="font-mono font-medium text-slate-800">design-component-spec</code>
+                            <span class="text-slate-400 text-xs">component spec · COMP-XXX · ShadCN · design to code</span>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- PM Framework -->
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="text-xs font-bold uppercase tracking-widest text-slate-400">PM Framework</span>
+                        <div class="flex-1 h-px bg-slate-200"></div>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="skill-pill inline-flex items-center gap-2 bg-white border border-slate-200 rounded-lg px-4 py-2 text-sm shadow-sm">
+                            <span class="w-2 h-2 rounded-full bg-purple-400"></span>
+                            <code class="font-mono font-medium text-slate-800">pm-product-strategy</code>
+                            <span class="text-slate-400 text-xs">strategy · vision · OKRs · SWOT</span>
+                        </span>
+                        <span class="skill-pill inline-flex items-center gap-2 bg-white border border-slate-200 rounded-lg px-4 py-2 text-sm shadow-sm">
+                            <span class="w-2 h-2 rounded-full bg-purple-400"></span>
+                            <code class="font-mono font-medium text-slate-800">pm-product-discovery</code>
+                            <span class="text-slate-400 text-xs">customer discovery · JTBD · opportunity tree</span>
+                        </span>
+                        <span class="skill-pill inline-flex items-center gap-2 bg-white border border-slate-200 rounded-lg px-4 py-2 text-sm shadow-sm">
+                            <span class="w-2 h-2 rounded-full bg-purple-400"></span>
+                            <code class="font-mono font-medium text-slate-800">pm-market-research</code>
+                            <span class="text-slate-400 text-xs">persona · TAM SAM SOM · journey map</span>
+                        </span>
+                        <span class="skill-pill inline-flex items-center gap-2 bg-white border border-slate-200 rounded-lg px-4 py-2 text-sm shadow-sm">
+                            <span class="w-2 h-2 rounded-full bg-purple-400"></span>
+                            <code class="font-mono font-medium text-slate-800">pm-data-analytics</code>
+                            <span class="text-slate-400 text-xs">North Star · HEART · A/B test · funnel</span>
+                        </span>
+                        <span class="skill-pill inline-flex items-center gap-2 bg-white border border-slate-200 rounded-lg px-4 py-2 text-sm shadow-sm">
+                            <span class="w-2 h-2 rounded-full bg-purple-400"></span>
+                            <code class="font-mono font-medium text-slate-800">pm-marketing-growth</code>
+                            <span class="text-slate-400 text-xs">growth loop · PLG · value proposition</span>
+                        </span>
+                        <span class="skill-pill inline-flex items-center gap-2 bg-white border border-slate-200 rounded-lg px-4 py-2 text-sm shadow-sm">
+                            <span class="w-2 h-2 rounded-full bg-purple-400"></span>
+                            <code class="font-mono font-medium text-slate-800">pm-go-to-market</code>
+                            <span class="text-slate-400 text-xs">GTM · ICP · launch plan · pricing · battlecard</span>
+                        </span>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- PO Framework Deep Dive -->
-    <section class="py-20 bg-slate-50 border-y border-slate-100">
+    <!-- ═══════════════════════════ MULTI-AGENT ═══════════════════════════ -->
+    <section id="agents" class="py-24 relative overflow-hidden">
+        <div class="absolute inset-0 bg-grid -z-10 opacity-30"></div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-slate-900 mb-4">Works with Every AI Agent</h2>
+                <p class="text-slate-500 max-w-2xl mx-auto">Skills are agent-agnostic markdown. Each AI agent gets its own entry point into the same knowledge base.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+                <!-- Claude Code -->
+                <div class="glass-card p-6 rounded-2xl text-center hover:border-magenta/40">
+                    <div class="w-14 h-14 mx-auto bg-orange-50 rounded-xl flex items-center justify-center mb-4 text-2xl">🤖</div>
+                    <h3 class="font-bold text-slate-900 mb-1">Claude Code</h3>
+                    <p class="text-xs text-slate-500 mb-3">Auto-loads via <code class="text-xs font-mono bg-slate-100 px-1 rounded">.agent/skills/</code></p>
+                    <div class="text-xs font-mono bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-slate-600">5 slash commands</div>
+                </div>
+
+                <!-- OpenAI Codex -->
+                <div class="glass-card p-6 rounded-2xl text-center hover:border-magenta/40">
+                    <div class="w-14 h-14 mx-auto bg-emerald-50 rounded-xl flex items-center justify-center mb-4 text-2xl">🧠</div>
+                    <h3 class="font-bold text-slate-900 mb-1">OpenAI Codex</h3>
+                    <p class="text-xs text-slate-500 mb-3">Skill index via <code class="text-xs font-mono bg-slate-100 px-1 rounded">AGENTS.md</code></p>
+                    <div class="text-xs font-mono bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-slate-600">16 skills indexed</div>
+                </div>
+
+                <!-- Gemini -->
+                <div class="glass-card p-6 rounded-2xl text-center hover:border-magenta/40">
+                    <div class="w-14 h-14 mx-auto bg-blue-50 rounded-xl flex items-center justify-center mb-4 text-2xl">✨</div>
+                    <h3 class="font-bold text-slate-900 mb-1">Gemini Code Assist</h3>
+                    <p class="text-xs text-slate-500 mb-3">Skill index via <code class="text-xs font-mono bg-slate-100 px-1 rounded">GEMINI.md</code></p>
+                    <div class="text-xs font-mono bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-slate-600">16 skills indexed</div>
+                </div>
+
+                <!-- Cursor -->
+                <div class="glass-card p-6 rounded-2xl text-center hover:border-magenta/40">
+                    <div class="w-14 h-14 mx-auto bg-slate-100 rounded-xl flex items-center justify-center mb-4 text-2xl">⚡</div>
+                    <h3 class="font-bold text-slate-900 mb-1">Cursor</h3>
+                    <p class="text-xs text-slate-500 mb-3">Rules file via <code class="text-xs font-mono bg-slate-100 px-1 rounded">.cursorrules</code></p>
+                    <div class="text-xs font-mono bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-slate-600">16 skills indexed</div>
+                </div>
+            </div>
+
+            <!-- Source of truth note -->
+            <div class="max-w-2xl mx-auto glass-card rounded-2xl px-8 py-6 text-center border-slate-200">
+                <p class="text-sm text-slate-600">All agents read from <code class="font-mono text-xs bg-slate-100 px-1.5 py-0.5 rounded text-magenta">skills/*/SKILL.md</code> — the single agent-agnostic source of truth. One knowledge base, every agent.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════ PO DEEP DIVE ═══════════════════════════ -->
+    <section class="py-24 bg-slate-50 border-y border-slate-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                 <div>
-                     <div class="inline-flex items-center px-3 py-1 rounded-full bg-magenta/10 text-magenta text-xs font-semibold mb-6">
-                        Step 1
-                    </div>
-                    <h2 class="text-3xl font-bold text-slate-900 mb-6">The 5 Stages of Discovery</h2>
-                    <p class="text-slate-600 text-lg mb-8 leading-relaxed">
-                        The PO Framework systematically breaks down features from high-level requirements to testable acceptance criteria through five progressive stages.
-                    </p>
-                    
-                    <div class="space-y-4">
-                        <div class="bg-white p-4 rounded-lg border border-slate-200 shadow-sm flex items-start">
-                             <div class="bg-blue-100 text-blue-700 font-bold px-2 py-1 rounded text-xs mt-1 mr-3 w-16 text-center">Stage 1</div>
-                             <div>
-                                 <h4 class="font-bold text-slate-900">Product Requirements (PRD)</h4>
-                                 <p class="text-sm text-slate-500">Defines the problem, goals, and success metrics.</p>
-                             </div>
+                    <div class="inline-flex items-center px-3 py-1 rounded-full bg-magenta/10 text-magenta text-xs font-semibold mb-6">PO Framework</div>
+                    <h2 class="text-3xl font-bold text-slate-900 mb-5">5 Stages, Zero Ambiguity</h2>
+                    <p class="text-slate-500 text-lg mb-8 leading-relaxed">Every story gets acceptance criteria. Every AC gets a test case. The `/po-pipeline` command runs all five stages automatically, pausing for your review at the right moments.</p>
+                    <div class="space-y-3">
+                        <div class="flex items-start gap-3 bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+                            <div class="bg-blue-100 text-blue-700 font-bold px-2 py-1 rounded text-xs mt-0.5 w-16 text-center shrink-0">Stage 1</div>
+                            <div><h4 class="font-semibold text-slate-900 text-sm">Product Requirements (PRD-XXX)</h4><p class="text-xs text-slate-500 mt-0.5">Problem, goals, personas, success metrics.</p></div>
                         </div>
-                        <div class="bg-white p-4 rounded-lg border border-slate-200 shadow-sm flex items-start">
-                             <div class="bg-blue-100 text-blue-700 font-bold px-2 py-1 rounded text-xs mt-1 mr-3 w-16 text-center">Stage 2</div>
-                             <div>
-                                 <h4 class="font-bold text-slate-900">User Story Map (USM)</h4>
-                                 <p class="text-sm text-slate-500">Visual mapping of user activities and steps.</p>
-                             </div>
+                        <div class="flex items-start gap-3 bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+                            <div class="bg-blue-100 text-blue-700 font-bold px-2 py-1 rounded text-xs mt-0.5 w-16 text-center shrink-0">Stage 2</div>
+                            <div><h4 class="font-semibold text-slate-900 text-sm">User Story Map (USM-XXX)</h4><p class="text-xs text-slate-500 mt-0.5">User activities and steps, visually mapped.</p></div>
                         </div>
-                        <div class="bg-white p-4 rounded-lg border border-slate-200 shadow-sm flex items-start">
-                             <div class="bg-blue-100 text-blue-700 font-bold px-2 py-1 rounded text-xs mt-1 mr-3 w-16 text-center">Stage 3</div>
-                             <div>
-                                 <h4 class="font-bold text-slate-900">User Story List (USL)</h4>
-                                 <p class="text-sm text-slate-500">Prioritized backlog using MoSCoW method.</p>
-                             </div>
+                        <div class="flex items-start gap-3 bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+                            <div class="bg-blue-100 text-blue-700 font-bold px-2 py-1 rounded text-xs mt-0.5 w-16 text-center shrink-0">Stage 3</div>
+                            <div><h4 class="font-semibold text-slate-900 text-sm">User Story List (ST-XXX)</h4><p class="text-xs text-slate-500 mt-0.5">Prioritized backlog with MoSCoW method.</p></div>
                         </div>
-                         <div class="bg-white p-4 rounded-lg border border-slate-200 shadow-sm flex items-start">
-                             <div class="bg-blue-100 text-blue-700 font-bold px-2 py-1 rounded text-xs mt-1 mr-3 w-16 text-center">Stage 4</div>
-                             <div>
-                                 <h4 class="font-bold text-slate-900">User Story Details (USD)</h4>
-                                 <p class="text-sm text-slate-500">Detailed acceptance criteria per story.</p>
-                             </div>
+                        <div class="flex items-start gap-3 bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+                            <div class="bg-blue-100 text-blue-700 font-bold px-2 py-1 rounded text-xs mt-0.5 w-16 text-center shrink-0">Stage 4</div>
+                            <div><h4 class="font-semibold text-slate-900 text-sm">User Story Details (AC-XXX)</h4><p class="text-xs text-slate-500 mt-0.5">Atomic, observable, binary acceptance criteria per story.</p></div>
                         </div>
-                         <div class="bg-white p-4 rounded-lg border border-slate-200 shadow-sm flex items-start">
-                             <div class="bg-blue-100 text-blue-700 font-bold px-2 py-1 rounded text-xs mt-1 mr-3 w-16 text-center">Stage 5</div>
-                             <div>
-                                 <h4 class="font-bold text-slate-900">User Acceptance Tests (UAT)</h4>
-                                 <p class="text-sm text-slate-500">BDD scenarios (Given/When/Then).</p>
-                             </div>
+                        <div class="flex items-start gap-3 bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+                            <div class="bg-blue-100 text-blue-700 font-bold px-2 py-1 rounded text-xs mt-0.5 w-16 text-center shrink-0">Stage 5</div>
+                            <div><h4 class="font-semibold text-slate-900 text-sm">UAT Test Cases (TC-XXX)</h4><p class="text-xs text-slate-500 mt-0.5">BDD scenarios (Given / When / Then).</p></div>
                         </div>
                     </div>
                 </div>
-                <!-- Visual Decoration for PO -->
-                <div class="relative h-full flex items-center justify-center bg-white rounded-2xl border border-slate-200 shadow-lg p-8">
-                     <div class="absolute inset-0 bg-blue-50/50 rounded-2xl"></div>
-                     <div class="relative z-10 w-full font-mono text-sm text-slate-600 bg-slate-900 rounded-lg p-6 shadow-2xl">
+
+                <div class="relative flex items-center justify-center bg-white rounded-2xl border border-slate-200 shadow-lg p-8 min-h-72">
+                    <div class="absolute inset-0 bg-blue-50/40 rounded-2xl"></div>
+                    <div class="relative z-10 w-full font-mono text-sm bg-slate-900 rounded-xl p-6 shadow-2xl">
                         <div class="flex space-x-2 mb-4">
                             <div class="w-3 h-3 rounded-full bg-red-500"></div>
                             <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
                             <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                            <span class="ml-2 text-slate-500 text-xs">features/search/po/usd/ST-003.md</span>
                         </div>
-                        <p class="text-blue-400 mb-2"># features/one-api/po/usd/ST-001.md</p>
-                        <p class="text-white">## Acceptance Criteria</p>
-                        <br>
-                        <p class="text-green-400">- [ ] User can view list of API keys</p>
-                        <p class="text-green-400">- [ ] User can click "Create New Key"</p>
-                        <p class="text-green-400">- [ ] Pagination works for > 10 items</p>
-                        <br>
-                        <p class="text-slate-400"># Validated against PRD requirements</p>
-                     </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Design Framework Deep Dive -->
-    <section class="py-20 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center lg:flex-row-reverse">
-                 <!-- Visual Decoration for Design (Left on LG) -->
-                 <div class="lg:order-1 relative h-full flex items-center justify-center bg-slate-50 rounded-2xl border border-slate-200 shadow-lg p-8">
-                     <div class="absolute inset-0 bg-purple-50/50 rounded-2xl"></div>
-                     <div class="relative z-10 w-full font-mono text-sm text-slate-600 bg-white rounded-lg p-6 shadow-xl border border-slate-200">
-                        <div class="flex justify-between border-b pb-2 mb-4">
-                            <span class="font-bold">WF-001: Login Screen</span>
-                            <span class="text-xs bg-slate-100 px-2 py-1 rounded">Text Wireframe</span>
-                        </div>
-                        <pre class="whitespace-pre text-xs leading-relaxed text-slate-700">
-+------------------------------+
-|  [ Logo ]                    |
-|                              |
-|  Email                       |
-|  [_____________]             |
-|                              |
-|  Password                    |
-|  [_____________]             |
-|                              |
-|  [ Sign In ]                 |
-|                              |
-|  [x] Remember me             |
-+------------------------------+</pre>
-                        <div class="mt-4 pt-4 border-t text-xs">
-                            <span class="text-purple-600 font-bold">Mapped to:</span> COMP-001, INT-001
-                        </div>
-                     </div>
-                </div>
-
-                <div class="lg:order-2">
-                     <div class="inline-flex items-center px-3 py-1 rounded-full bg-teal/10 text-teal text-xs font-semibold mb-6">
-                        Step 2
-                    </div>
-                    <h2 class="text-3xl font-bold text-slate-900 mb-6">Text-Based Design System</h2>
-                    <p class="text-slate-600 text-lg mb-8 leading-relaxed">
-                        Create comprehensive UI/UX specifications without opening a design tool. The Design Framework links every pixel back to a user requirement.
-                    </p>
-                    
-                    <div class="space-y-6">
-                        <div class="flex gap-4">
-                            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 font-bold">1</div>
-                            <div>
-                                <h4 class="font-bold text-slate-900">Wireframes (WF-XXX)</h4>
-                                <p class="text-sm text-slate-500 mt-1">ASCII visual layouts and element descriptions mapped to acceptance criteria.</p>
-                            </div>
-                        </div>
-                        <div class="flex gap-4">
-                            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 font-bold">2</div>
-                            <div>
-                                <h4 class="font-bold text-slate-900">Component Specs (COMP-XXX)</h4>
-                                <p class="text-sm text-slate-500 mt-1">Detailed configuration for ShadCN components and Tanstack tables.</p>
-                            </div>
-                        </div>
-                        <div class="flex gap-4">
-                            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 font-bold">3</div>
-                            <div>
-                                <h4 class="font-bold text-slate-900">Interactions (INT-XXX)</h4>
-                                <p class="text-sm text-slate-500 mt-1">State diagrams and clear user flows for every interactive element.</p>
-                            </div>
-                        </div>
+                        <p class="text-blue-400 text-xs mb-1">---</p>
+                        <p class="text-yellow-300 text-xs">artifact: USD</p>
+                        <p class="text-yellow-300 text-xs">generated-by: po-usl-to-usd</p>
+                        <p class="text-blue-400 text-xs mb-3">---</p>
+                        <p class="text-white text-xs font-bold mb-2">## UI Elements</p>
+                        <p class="text-green-400 text-xs">- <span class="text-slate-400">AC-001:</span> Search input visible with placeholder</p>
+                        <p class="text-green-400 text-xs">- <span class="text-slate-400">AC-002:</span> Results list shows title + excerpt</p>
+                        <p class="text-white text-xs font-bold mt-3 mb-2">## UI Behavior</p>
+                        <p class="text-green-400 text-xs">- <span class="text-slate-400">AC-003:</span> Results update on keystroke (300ms debounce)</p>
+                        <p class="text-white text-xs font-bold mt-3 mb-2">## Non-Functional</p>
+                        <p class="text-green-400 text-xs">- <span class="text-slate-400">NFR-001:</span> Response &lt; 200ms for &lt; 10k records</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Codebase Framework Deep Dive -->
-    <section class="py-20 bg-slate-50 border-y border-slate-100">
+    <!-- ═══════════════════════════ PM DEEP DIVE ═══════════════════════════ -->
+    <section class="py-24 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <!-- Visual: OST tree -->
+                <div class="relative flex items-center justify-center bg-white rounded-2xl border border-slate-200 shadow-lg p-8 min-h-72 order-1 lg:order-none">
+                    <div class="absolute inset-0 bg-purple-50/40 rounded-2xl"></div>
+                    <div class="relative z-10 w-full font-mono text-xs bg-slate-900 rounded-xl p-6 shadow-2xl">
+                        <div class="flex space-x-2 mb-4">
+                            <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                            <span class="ml-2 text-slate-500 text-xs">/pm-discovery → OST</span>
+                        </div>
+                        <p class="text-purple-400 font-bold mb-2">Desired Outcome</p>
+                        <p class="text-slate-300 ml-2">↳ Increase activation rate by 20%</p>
+                        <p class="text-purple-300 mt-2 ml-2">Opportunity 1</p>
+                        <p class="text-slate-400 ml-6">↳ Users don't understand value at signup</p>
+                        <p class="text-green-400 ml-10">→ Solution A: Interactive onboarding tour</p>
+                        <p class="text-green-400 ml-10">→ Solution B: Video demo on welcome screen</p>
+                        <p class="text-purple-300 mt-2 ml-2">Opportunity 2</p>
+                        <p class="text-slate-400 ml-6">↳ Setup takes too long (&gt; 10 min)</p>
+                        <p class="text-green-400 ml-10">→ Solution C: One-click template import</p>
+                        <p class="text-yellow-300 mt-3">Riskiest assumption:</p>
+                        <p class="text-slate-400 ml-2">Users want templates (Evidence: None 🔴)</p>
+                    </div>
+                </div>
+
                 <div>
-                     <div class="inline-flex items-center px-3 py-1 rounded-full bg-blue-500/10 text-blue-600 text-xs font-semibold mb-6">
-                        Step 3
-                    </div>
-                    <h2 class="text-3xl font-bold text-slate-900 mb-6">Rapid Frontend Prototyping</h2>
-                    <p class="text-slate-600 text-lg mb-8 leading-relaxed">
-                        Build working Next.js applications with dummy data first. Validate UX with stakeholders before investing in backend infrastructure.
-                    </p>
-                    
+                    <div class="inline-flex items-center px-3 py-1 rounded-full bg-purple-100 text-purple-700 text-xs font-semibold mb-6">PM Framework — New in v2</div>
+                    <h2 class="text-3xl font-bold text-slate-900 mb-5">Strategy Before Requirements</h2>
+                    <p class="text-slate-500 text-lg mb-8 leading-relaxed">Grounded in Teresa Torres' Continuous Discovery, Marty Cagan's product thinking, and Strategyzer's business model tools. Run a discovery sprint before a single story is written.</p>
                     <div class="space-y-4">
-                        <div class="bg-white p-4 rounded-lg border border-slate-200 shadow-sm flex items-start">
-                             <div class="bg-blue-100 text-blue-700 font-bold px-2 py-1 rounded text-xs mt-1 mr-3 w-20 text-center">Config</div>
-                             <div>
-                                 <h4 class="font-bold text-slate-900">Next.js 14+ Starter</h4>
-                                 <p class="text-sm text-slate-500">App router, TypeScript, and Tailwind pre-configured.</p>
-                             </div>
+                        <div class="flex gap-4">
+                            <div class="shrink-0 w-9 h-9 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 font-bold text-sm">1</div>
+                            <div>
+                                <h4 class="font-semibold text-slate-900 text-sm">Opportunity Solution Tree</h4>
+                                <p class="text-xs text-slate-500 mt-0.5">Map user needs → solutions → riskiest assumptions. Don't jump to features.</p>
+                            </div>
                         </div>
-                        <div class="bg-white p-4 rounded-lg border border-slate-200 shadow-sm flex items-start">
-                             <div class="bg-blue-100 text-blue-700 font-bold px-2 py-1 rounded text-xs mt-1 mr-3 w-20 text-center">Data</div>
-                             <div>
-                                 <h4 class="font-bold text-slate-900">Dummy JSON Backend</h4>
-                                 <p class="text-sm text-slate-500">Zero-database setup using local JSON files for data.</p>
-                             </div>
+                        <div class="flex gap-4">
+                            <div class="shrink-0 w-9 h-9 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 font-bold text-sm">2</div>
+                            <div>
+                                <h4 class="font-semibold text-slate-900 text-sm">Assumption Mapping + Interview Guide</h4>
+                                <p class="text-xs text-slate-500 mt-0.5">Surface riskiest assumptions. Generate JTBD interview scripts to test them.</p>
+                            </div>
                         </div>
-                        <div class="bg-white p-4 rounded-lg border border-slate-200 shadow-sm flex items-start">
-                             <div class="bg-blue-100 text-blue-700 font-bold px-2 py-1 rounded text-xs mt-1 mr-3 w-20 text-center">UI</div>
-                             <div>
-                                 <h4 class="font-bold text-slate-900">ShadCN Components</h4>
-                                 <p class="text-sm text-slate-500">Beautiful, accessible components copied from specs.</p>
-                             </div>
-                        </div>
-                         <div class="bg-white p-4 rounded-lg border border-slate-200 shadow-sm flex items-start">
-                             <div class="bg-blue-100 text-blue-700 font-bold px-2 py-1 rounded text-xs mt-1 mr-3 w-20 text-center">Deploy</div>
-                             <div>
-                                 <h4 class="font-bold text-slate-900">Vercel / Netlify</h4>
-                                 <p class="text-sm text-slate-500">One-click static deployment for stakeholder demos.</p>
-                             </div>
+                        <div class="flex gap-4">
+                            <div class="shrink-0 w-9 h-9 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 font-bold text-sm">3</div>
+                            <div>
+                                <h4 class="font-semibold text-slate-900 text-sm">OKRs · North Star · GTM</h4>
+                                <p class="text-xs text-slate-500 mt-0.5">Strategy Canvas, OKR hierarchy, value proposition, launch plan, battlecards.</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <!-- Visual Decoration for Codebase -->
-                <div class="relative h-full flex items-center justify-center bg-white rounded-2xl border border-slate-200 shadow-lg p-8">
-                     <div class="absolute inset-0 bg-blue-50/50 rounded-2xl"></div>
-                     <div class="relative z-10 w-full font-mono text-xs text-slate-300 bg-slate-900 rounded-lg shadow-2xl overflow-hidden leading-relaxed">
-                        <div class="flex items-center px-4 py-2 bg-slate-800 border-b border-slate-700">
-                             <div class="flex space-x-1.5">
-                                <div class="w-3 h-3 rounded-full bg-red-500"></div>
-                                <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
-                                <div class="w-3 h-3 rounded-full bg-green-500"></div>
-                            </div>
-                            <div class="ml-4 text-slate-400">page.tsx</div>
-                        </div>
-                        <div class="p-6">
-                            <p><span class="text-pink-400">import</span> { <span class="text-yellow-300">Button</span> } <span class="text-pink-400">from</span> <span class="text-green-300">'@/components/ui/button'</span></p>
-                            <p><span class="text-pink-400">import</span> { <span class="text-yellow-300">DataTable</span> } <span class="text-pink-400">from</span> <span class="text-green-300">'@/components/data-table'</span></p>
-                            <p><span class="text-pink-400">import</span> <span class="text-yellow-300">users</span> <span class="text-pink-400">from</span> <span class="text-green-300">'@/data/users.json'</span></p>
-                            <br>
-                            <p><span class="text-blue-400">export default function</span> <span class="text-yellow-300">UsersPage</span>() {</p>
-                            <p class="pl-4"><span class="text-pink-400">return</span> (</p>
-                            <p class="pl-8">&lt;<span class="text-yellow-300">div</span> <span class="text-green-300">className</span>=<span class="text-green-300">"p-8"</span>&gt;</p>
-                            <p class="pl-12">&lt;<span class="text-yellow-300">h1</span>&gt;User Management&lt;/<span class="text-yellow-300">h1</span>&gt;</p>
-                            <p class="pl-12">&lt;<span class="text-yellow-300">DataTable</span> <span class="text-green-300">data</span>={users} /&gt;</p>
-                            <p class="pl-12">&lt;<span class="text-yellow-300">Button</span>&gt;Add User&lt;/<span class="text-yellow-300">Button</span>&gt;</p>
-                            <p class="pl-8">&lt;/<span class="text-yellow-300">div</span>&gt;</p>
-                            <p class="pl-4">)</p>
-                            <p>}</p>
-                        </div>
-                     </div>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- ═══════════════════════════ FINAL CTA ═══════════════════════════ -->
+    <section class="py-24 bg-slate-900 relative overflow-hidden">
+        <div class="beam-h-container top-1/3 opacity-20"><div class="beam-h" style="background:linear-gradient(90deg,transparent,#14b8a6,transparent);animation:beam-h 4s linear infinite;"></div></div>
+        <div class="beam-v-container left-1/4 opacity-20"><div class="beam-v" style="background:linear-gradient(180deg,transparent,#bd1874,transparent);animation:beam-v 5s linear infinite;"></div></div>
 
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <h2 class="text-4xl font-bold text-white mb-4">Ready to ship AI-ready products?</h2>
+            <p class="text-slate-400 text-lg mb-10">Install all 16 skills into your project in one command. Works with Claude Code, Codex, Gemini, and Cursor.</p>
 
-    <!-- Footer -->
-    <footer class="bg-white border-t border-slate-200 py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center">
-            <div class="mb-4 md:mb-0">
-                <span class="font-bold text-slate-900 tracking-tight">PPO Automation Framework</span>
-                <p class="text-sm text-slate-500 mt-1">© 2026 Karl Nguyen. All rights reserved.</p>
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4 mb-8">
+                <div class="inline-flex items-center gap-3 bg-slate-800 border border-slate-700 rounded-xl px-6 py-4 font-mono text-base">
+                    <span class="text-teal-accent">$</span>
+                    <span class="text-white">npx ai-ready-workflow install</span>
+                </div>
             </div>
-            <div class="text-slate-500 text-sm">
-                Design & Develop by <a href="https://karl-nguyen.com/" target="_blank" rel="noopener noreferrer" class="text-magenta hover:text-magenta-dark font-medium transition-colors">Karl Nguyen</a>
+
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="https://github.com/karlng279/ai-ready-product-workflow-v2/blob/main/GETTING_STARTED.md"
+                   class="group inline-flex items-center justify-center px-8 py-3 text-base font-medium text-white bg-magenta hover:bg-magenta-dark rounded-lg transition-all shadow-lg hover:shadow-xl hover:shadow-magenta/30">
+                    Get Started
+                    <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+                </a>
+                <a href="https://github.com/karlng279/ai-ready-product-workflow-v2"
+                   class="inline-flex items-center justify-center px-8 py-3 text-base font-medium text-slate-300 bg-slate-800 border border-slate-700 hover:bg-slate-700 rounded-lg transition-all">
+                    View on GitHub
+                </a>
             </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════ FOOTER ═══════════════════════════ -->
+    <footer class="bg-white border-t border-slate-200 py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-2">
+                <div class="w-6 h-6 bg-magenta rounded flex items-center justify-center text-white font-bold font-mono text-xs">AI</div>
+                <span class="font-bold text-slate-900 text-sm">AI-Ready Product Workflow v2</span>
+                <span class="text-slate-400 text-xs">· 4 frameworks · 16 skills · 5 slash commands</span>
+            </div>
+            <p class="text-slate-400 text-sm">© 2026 Karl Nguyen · Design &amp; Dev by <a href="https://karl-nguyen.com/" target="_blank" rel="noopener noreferrer" class="text-magenta hover:text-magenta-dark font-medium transition-colors">Karl Nguyen</a></p>
         </div>
     </footer>
 
