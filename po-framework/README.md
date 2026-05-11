@@ -81,6 +81,28 @@ Each stage has its own folder containing:
 
 ---
 
+## Automation with Skills
+
+The PO pipeline can be run automatically using the slash command:
+
+```
+/po-pipeline {feature-name}
+```
+
+This chains all 5 stages — Brief → PRD → USM → USL → USD → UAT — with pause points for review after PRD and USL. Skills auto-load at each stage:
+
+| Stage | Skill |
+|-------|-------|
+| Brief → PRD | `po-brief-to-prd` |
+| PRD → USM | `po-prd-to-usm` |
+| USM → USL | `po-usm-to-usl` |
+| USL → USD | `po-usl-to-usd` |
+| USD → UAT | `po-usd-to-uat` |
+
+For quality checks after generation: `/validate-artifacts {feature-name}` (uses `validate-prd` and `validate-usd` skills).
+
+---
+
 ## Getting Started
 
 1. Start with [stage1-prd/](stage1-prd/) to understand how to write Product Requirements Documents
