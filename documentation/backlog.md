@@ -125,10 +125,10 @@ Tracks implementation progress of the restructure plan defined in [restructure-p
 
 | # | Task | Status |
 |---|------|--------|
-| 6.1 | `skills/install.sh` (copies skills to `.agent/skills/`, patches CLAUDE.md) | ⬜ Not Started |
-| 6.2 | `skills/install.ps1` (Windows equivalent) | ⬜ Not Started |
-| 6.3 | `skills/package.json` (enables `npx ai-ready-workflow install`) | ⬜ Not Started |
-| 6.4 | `skills/README.md` (lists all skills, trigger keywords, install instructions) | ⬜ Not Started |
+| 6.1 | `skills/install.sh` (copies skills to `.agent/skills/`, patches CLAUDE.md) | ✅ Done |
+| 6.2 | `skills/install.ps1` (Windows equivalent) | ✅ Done |
+| 6.3 | `skills/package.json` + `skills/cli.js` (enables `npx ai-ready-workflow install`) | ✅ Done |
+| 6.4 | `skills/README.md` (lists all skills, trigger keywords, install instructions) | ✅ Done |
 
 ---
 
@@ -147,7 +147,7 @@ Tracks implementation progress of the restructure plan defined in [restructure-p
 | 7.4 | `design-framework/README.md` — note design skills enforce format; remove Figma section | ⬜ Not Started |
 | 7.5 | `codebase-framework/README.md` — update tech stack (Next.js 15 App Router) | ⬜ Not Started |
 | 7.6 | `pm-framework/README.md` — already written in Phase 0; review and finalize | ⬜ Not Started |
-| 7.7 | `skills/README.md` — list all 16 skills with triggers and install instructions | ⬜ Not Started |
+| 7.7 | `skills/README.md` — list all 16 skills with triggers and install instructions | ✅ Done (Phase 6) |
 
 ### 7b — Agent Index Files (reflect phases 0–5)
 
@@ -172,5 +172,5 @@ Tracks implementation progress of the restructure plan defined in [restructure-p
 | 3 | PO Automation Skills (7 SKILL.md files) | ✅ Done |
 | 4 | Design Skills (2 SKILL.md files) | ✅ Done |
 | 5 | Slash Commands (5 pipeline commands) | ✅ Done |
-| 6 | Distribution Layer (install.sh, package.json) | ⬜ Not Started |
+| 6 | Distribution Layer (install.sh, package.json) | ✅ Done |
 | 7 | Documentation & Agent Index Updates | ⬜ Not Started |
