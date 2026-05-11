@@ -110,11 +110,11 @@ Tracks implementation progress of the restructure plan defined in [restructure-p
 
 | # | Task | Status |
 |---|------|--------|
-| 5.1 | `.claude/commands/po-pipeline.md` — brief → PRD → USM → USL → USD → UAT | ⬜ Not Started |
-| 5.2 | `.claude/commands/design-pipeline.md` — USD → wireframes → component specs | ⬜ Not Started |
-| 5.3 | `.claude/commands/validate-artifacts.md` — quality gate check | ⬜ Not Started |
-| 5.4 | `.claude/commands/pm-strategy.md` — product strategy session | ⬜ Not Started |
-| 5.5 | `.claude/commands/pm-discovery.md` — discovery sprint session | ⬜ Not Started |
+| 5.1 | `.claude/commands/po-pipeline.md` — brief → PRD → USM → USL → USD → UAT | ✅ Done |
+| 5.2 | `.claude/commands/design-pipeline.md` — USD → wireframes → component specs | ✅ Done |
+| 5.3 | `.claude/commands/validate-artifacts.md` — quality gate check | ✅ Done |
+| 5.4 | `.claude/commands/pm-strategy.md` — product strategy session | ✅ Done |
+| 5.5 | `.claude/commands/pm-discovery.md` — discovery sprint session | ✅ Done |
 
 ---
 
@@ -158,6 +158,6 @@ Tracks implementation progress of the restructure plan defined in [restructure-p
 | 2 | PM Skills (6 SKILL.md files) | ✅ Done |
 | 3 | PO Automation Skills (7 SKILL.md files) | ✅ Done |
 | 4 | Design Skills (2 SKILL.md files) | ✅ Done |
-| 5 | Slash Commands (5 pipeline commands) | ⬜ Not Started |
+| 5 | Slash Commands (5 pipeline commands) | ✅ Done |
 | 6 | Distribution Layer (install.sh, package.json) | ⬜ Not Started |
 | 7 | Update All README Files | ⬜ Not Started |
