@@ -141,12 +141,12 @@ Tracks implementation progress of the restructure plan defined in [restructure-p
 
 | # | Task | Status |
 |---|------|--------|
-| 7.1 | Root `README.md` — full framework overview, skill/command reference, install instructions | ⬜ Not Started |
-| 7.2 | `GETTING_STARTED.md` — add PM framework as 6th learning path | ⬜ Not Started |
-| 7.3 | `po-framework/README.md` — note that PO skills in `skills/po-*/` automate this workflow | ⬜ Not Started |
-| 7.4 | `design-framework/README.md` — note design skills enforce format; remove Figma section | ⬜ Not Started |
-| 7.5 | `codebase-framework/README.md` — update tech stack (Next.js 15 App Router) | ⬜ Not Started |
-| 7.6 | `pm-framework/README.md` — already written in Phase 0; review and finalize | ⬜ Not Started |
+| 7.1 | Root `README.md` — full framework overview, skill/command reference, install instructions | ✅ Done |
+| 7.2 | `GETTING_STARTED.md` — create with all 4 frameworks + 6 learning paths | ✅ Done |
+| 7.3 | `po-framework/README.md` — add PO skills + `/po-pipeline` automation section | ✅ Done |
+| 7.4 | `design-framework/README.md` — add design skills automation section (no Figma to remove) | ✅ Done |
+| 7.5 | `codebase-framework/README.md` — update tech stack to Next.js 15 | ✅ Done |
+| 7.6 | `pm-framework/README.md` — add `/pm-strategy` + `/pm-discovery` slash commands section | ✅ Done |
 | 7.7 | `skills/README.md` — list all 16 skills with triggers and install instructions | ✅ Done (Phase 6) |
 
 ### 7b — Agent Index Files (reflect phases 0–5)
@@ -158,7 +158,7 @@ Tracks implementation progress of the restructure plan defined in [restructure-p
 | 7.8 | `CLAUDE.md` — add PM artifact IDs (PM-STRATEGY, PM-DISCOVERY); add Phase 6 install section (`npx ai-ready-workflow install`) | ✅ Done |
 | 7.9 | `AGENTS.md` — add USM-XXX + PM artifact IDs; add Feature Folder Structure section; add Slash Commands reference; add Phase 6 install section | ✅ Done |
 | 7.10 | `GEMINI.md` — same updates as 7.9 (PM artifact IDs, folder structure, slash commands reference, Phase 6 install section) | ✅ Done |
-| 7.11 | `.cursorrules` — create Cursor-compatible rules file; mirror `AGENTS.md` structure with all 16 skills, artifact IDs, traceability frontmatter, feature folder structure, and install instructions | ⬜ Not Started |
+| 7.11 | `.cursorrules` — create Cursor-compatible rules file; mirror `AGENTS.md` structure with all 16 skills, artifact IDs, traceability frontmatter, feature folder structure, and install instructions | ✅ Done |
 
 ---
 
@@ -173,4 +173,4 @@ Tracks implementation progress of the restructure plan defined in [restructure-p
 | 4 | Design Skills (2 SKILL.md files) | ✅ Done |
 | 5 | Slash Commands (5 pipeline commands) | ✅ Done |
 | 6 | Distribution Layer (install.sh, package.json) | ✅ Done |
-| 7 | Documentation & Agent Index Updates | ⬜ Not Started |
+| 7 | Documentation & Agent Index Updates | ✅ Done |

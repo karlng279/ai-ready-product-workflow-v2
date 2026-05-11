@@ -52,6 +52,17 @@ Each sub-framework has a corresponding skill in `skills/pm-*/SKILL.md` that Clau
 
 ---
 
+## Automation with Slash Commands
+
+Two slash commands are available in Claude Code for running PM sessions:
+
+| Command | Purpose |
+|---------|---------|
+| `/pm-strategy` | Product strategy session — Vision, OKRs, SWOT, Strategic Bets. Saves to `features/{name}/pm/strategy.md` |
+| `/pm-discovery` | Discovery sprint — Opportunity Solution Tree, Assumption Map, Interview Guide, Experiments. Saves to `features/{name}/pm/discovery.md` |
+
+---
+
 ## Workflow
 
 See [pm-workflow.md](pm-workflow.md) for how PM skills chain together in a typical product development cycle.

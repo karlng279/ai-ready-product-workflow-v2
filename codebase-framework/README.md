@@ -39,7 +39,7 @@ A working website that:
 The framework is built for this modern, lean stack:
 
 ### Frontend (Core)
-- **Framework:** Next.js 14+ with App Router
+- **Framework:** Next.js 15 with App Router
 - **Styling:** TailwindCSS + ShadCN UI
 - **Tables:** TanStack Table
 - **Forms:** React Hook Form + Zod
