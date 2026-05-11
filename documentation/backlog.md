@@ -97,9 +97,9 @@ Tracks implementation progress of the restructure plan defined in [restructure-p
 
 | # | Task | Status |
 |---|------|--------|
-| 4.1 | `skills/design-wireframe/SKILL.md` (WF-XXX format, ASCII conventions, AC mapping) | ⬜ Not Started |
-| 4.2 | `skills/design-component-spec/SKILL.md` (COMP-XXX format, ShadCN component reference) | ⬜ Not Started |
-| 4.3 | Create `.agent/skills/` symlinks for both design skills | ⬜ Not Started |
+| 4.1 | `skills/design-wireframe/SKILL.md` (WF-XXX format, ASCII conventions, AC mapping) | ✅ Done |
+| 4.2 | `skills/design-component-spec/SKILL.md` (COMP-XXX format, ShadCN component reference) | ✅ Done |
+| 4.3 | Create `.agent/skills/` symlinks for both design skills | ✅ Done |
 
 ---
 
@@ -157,7 +157,7 @@ Tracks implementation progress of the restructure plan defined in [restructure-p
 | 1 | PM Framework knowledge base (rules, templates, examples) | ✅ Done |
 | 2 | PM Skills (6 SKILL.md files) | ✅ Done |
 | 3 | PO Automation Skills (7 SKILL.md files) | ✅ Done |
-| 4 | Design Skills (2 SKILL.md files) | ⬜ Not Started |
+| 4 | Design Skills (2 SKILL.md files) | ✅ Done |
 | 5 | Slash Commands (5 pipeline commands) | ⬜ Not Started |
 | 6 | Distribution Layer (install.sh, package.json) | ⬜ Not Started |
 | 7 | Update All README Files | ⬜ Not Started |
