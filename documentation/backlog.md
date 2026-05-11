@@ -132,10 +132,12 @@ Tracks implementation progress of the restructure plan defined in [restructure-p
 
 ---
 
-## Phase 7 — Update All README Files
+## Phase 7 — Documentation & Agent Index Updates
 
-**Goal:** Ensure all framework READMEs reflect the new structure and skill references.
-**Commit:** `docs: phase 8 - update all README files`
+**Goal:** Ensure all framework READMEs, agent index files, and multi-agent entry points reflect the full capability set from phases 0–5 (16 skills, 5 slash commands, PM framework, design skills, pm/ artifact folder).
+**Commit:** `docs: phase 7 - documentation and agent index updates`
+
+### 7a — Framework READMEs
 
 | # | Task | Status |
 |---|------|--------|
@@ -145,7 +147,18 @@ Tracks implementation progress of the restructure plan defined in [restructure-p
 | 7.4 | `design-framework/README.md` — note design skills enforce format; remove Figma section | ⬜ Not Started |
 | 7.5 | `codebase-framework/README.md` — update tech stack (Next.js 15 App Router) | ⬜ Not Started |
 | 7.6 | `pm-framework/README.md` — already written in Phase 0; review and finalize | ⬜ Not Started |
-| 7.7 | `skills/README.md` — list all skills, triggers, install instructions | ⬜ Not Started |
+| 7.7 | `skills/README.md` — list all 16 skills with triggers and install instructions | ⬜ Not Started |
+
+### 7b — Agent Index Files (reflect phases 0–5)
+
+> **What each file needs:** PM artifact IDs (PM-STRATEGY, PM-DISCOVERY), `pm/` subfolder in feature folder structure, full 16-skill registry, and (where appropriate) slash command references.
+
+| # | Task | Status |
+|---|------|--------|
+| 7.8 | `CLAUDE.md` — add PM artifact IDs to Artifact ID System table; add `pm/` folder details to Feature Folder Structure; confirm design skill triggers match Phase 4 SKILL.md descriptions | ⬜ Not Started |
+| 7.9 | `AGENTS.md` — add Feature Folder Structure section (including `pm/` subfolder); add PM artifact IDs (PM-STRATEGY, PM-DISCOVERY); add Slash Commands reference note pointing Claude Code users to `.claude/commands/` | ⬜ Not Started |
+| 7.10 | `GEMINI.md` — same updates as 7.9 (feature folder structure, PM artifact IDs, slash commands note) | ⬜ Not Started |
+| 7.11 | `.cursorrules` — create Cursor-compatible rules file; mirror `AGENTS.md` structure with all 16 skills, artifact IDs, traceability frontmatter, and feature folder structure (Cursor reads this as active context) | ⬜ Not Started |
 
 ---
 
@@ -160,4 +173,4 @@ Tracks implementation progress of the restructure plan defined in [restructure-p
 | 4 | Design Skills (2 SKILL.md files) | ✅ Done |
 | 5 | Slash Commands (5 pipeline commands) | ✅ Done |
 | 6 | Distribution Layer (install.sh, package.json) | ⬜ Not Started |
-| 7 | Update All README Files | ⬜ Not Started |
+| 7 | Documentation & Agent Index Updates | ⬜ Not Started |
