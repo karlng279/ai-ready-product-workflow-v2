@@ -169,6 +169,7 @@
                 </div>
 
                 <a href="https://github.com/karlng279/ai-ready-product-workflow-v2"
+                   target="_blank" rel="noopener noreferrer"
                    class="inline-flex items-center gap-2 bg-slate-900 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-slate-700 transition-colors">
                     <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0012 2z"/></svg>
                     GitHub
@@ -222,11 +223,13 @@
             <!-- CTAs -->
             <div class="flex flex-col sm:flex-row justify-center gap-4 animate-reveal delay-400">
                 <a href="https://github.com/karlng279/ai-ready-product-workflow-v2/blob/main/GETTING_STARTED.md"
+                   target="_blank" rel="noopener noreferrer"
                    class="group relative inline-flex items-center justify-center px-8 py-3 text-base font-medium text-white bg-magenta hover:bg-magenta-dark rounded-lg transition-all shadow-lg hover:shadow-xl hover:shadow-magenta/25">
                     Get Started
                     <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
                 </a>
                 <a href="https://github.com/karlng279/ai-ready-product-workflow-v2"
+                   target="_blank" rel="noopener noreferrer"
                    class="inline-flex items-center justify-center px-8 py-3 text-base font-medium text-slate-700 bg-white border border-slate-200 hover:bg-slate-50 hover:border-slate-300 rounded-lg transition-all shadow-sm">
                     View on GitHub
                 </a>
@@ -348,11 +351,11 @@
                 <p class="text-slate-500 max-w-2xl mx-auto">Each framework is a complete knowledge base — rules, templates, and examples. AI agents load them automatically via skills.</p>
             </div>
 
-            <!-- Bento grid -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Bento grid: 2×2 equal layout -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-                <!-- PM Framework — featured wide card -->
-                <div class="glass-card p-8 rounded-2xl relative lg:col-span-2 bg-gradient-to-br from-purple-50/80 to-white border-purple-100">
+                <!-- PM Framework -->
+                <div class="glass-card p-8 rounded-2xl relative bg-gradient-to-br from-purple-50/80 to-white border-purple-100">
                     <div class="absolute top-4 right-4 bg-gradient-to-r from-purple-600 to-purple-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow">
                         New in v2
                     </div>
@@ -371,21 +374,24 @@
                     </div>
                 </div>
 
-                <!-- PO Framework -->
-                <div class="glass-card p-8 rounded-2xl relative">
+                <!-- PO Framework — equal size to PM -->
+                <div class="glass-card p-8 rounded-2xl relative bg-gradient-to-br from-blue-50/80 to-white border-blue-100">
                     <div class="absolute top-4 right-4 bg-gradient-to-r from-magenta to-pink-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow">
                         Core
                     </div>
-                    <div class="h-12 w-12 bg-slate-100 rounded-xl flex items-center justify-center mb-5">
+                    <div class="h-12 w-12 bg-blue-100 rounded-xl flex items-center justify-center mb-5">
                         <svg class="w-6 h-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
                     </div>
                     <h3 class="text-xl font-bold text-slate-900 mb-2">PO Framework</h3>
-                    <p class="text-slate-600 mb-5 text-sm leading-relaxed">5-stage pipeline from brief to BDD test cases. Every story gets acceptance criteria. Every AC gets a test case.</p>
-                    <ul class="space-y-1.5 text-xs text-slate-500">
-                        <li class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 bg-magenta rounded-full flex-shrink-0"></span>PRD · USM · USL</li>
-                        <li class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 bg-magenta rounded-full flex-shrink-0"></span>USD with AC-XXX criteria</li>
-                        <li class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 bg-magenta rounded-full flex-shrink-0"></span>UAT with Given/When/Then</li>
-                    </ul>
+                    <p class="text-slate-600 mb-5 leading-relaxed text-sm">Five-stage pipeline from product brief to BDD test cases. Every story gets acceptance criteria. Every AC gets a test case. Fully auto-traced artifact chain.</p>
+                    <div class="grid grid-cols-2 gap-2 text-xs">
+                        <div class="flex items-center gap-1.5 text-slate-500"><span class="w-1.5 h-1.5 bg-blue-400 rounded-full flex-shrink-0"></span>PRD · Problem, goals, personas</div>
+                        <div class="flex items-center gap-1.5 text-slate-500"><span class="w-1.5 h-1.5 bg-blue-400 rounded-full flex-shrink-0"></span>USM · User Story Map</div>
+                        <div class="flex items-center gap-1.5 text-slate-500"><span class="w-1.5 h-1.5 bg-blue-400 rounded-full flex-shrink-0"></span>USL · MoSCoW Prioritization</div>
+                        <div class="flex items-center gap-1.5 text-slate-500"><span class="w-1.5 h-1.5 bg-blue-400 rounded-full flex-shrink-0"></span>USD · Acceptance Criteria (AC-XXX)</div>
+                        <div class="flex items-center gap-1.5 text-slate-500"><span class="w-1.5 h-1.5 bg-blue-400 rounded-full flex-shrink-0"></span>UAT · BDD Given/When/Then</div>
+                        <div class="flex items-center gap-1.5 text-slate-500"><span class="w-1.5 h-1.5 bg-blue-400 rounded-full flex-shrink-0"></span>/po-pipeline auto-runs all 5</div>
+                    </div>
                 </div>
 
                 <!-- Design Framework -->
@@ -395,11 +401,14 @@
                     </div>
                     <h3 class="text-xl font-bold text-slate-900 mb-2">Design Framework</h3>
                     <p class="text-slate-600 mb-5 text-sm leading-relaxed">Text-based UI design. 4 themes. WF-XXX wireframes and COMP-XXX specs without leaving Markdown.</p>
-                    <ul class="space-y-1.5 text-xs text-slate-500">
-                        <li class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 bg-teal rounded-full flex-shrink-0"></span>4 themes (MDS, Corporate, Ecommerce, ERP)</li>
-                        <li class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 bg-teal rounded-full flex-shrink-0"></span>ASCII wireframes + ShadCN specs</li>
-                        <li class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 bg-teal rounded-full flex-shrink-0"></span>TanStack Table full config</li>
-                    </ul>
+                    <div class="grid grid-cols-2 gap-2 text-xs">
+                        <div class="flex items-center gap-1.5 text-slate-500"><span class="w-1.5 h-1.5 bg-teal rounded-full flex-shrink-0"></span>4 themes (MDS, Corporate, Ecommerce, ERP)</div>
+                        <div class="flex items-center gap-1.5 text-slate-500"><span class="w-1.5 h-1.5 bg-teal rounded-full flex-shrink-0"></span>ASCII wireframes + screen layouts</div>
+                        <div class="flex items-center gap-1.5 text-slate-500"><span class="w-1.5 h-1.5 bg-teal rounded-full flex-shrink-0"></span>ShadCN UI component specs</div>
+                        <div class="flex items-center gap-1.5 text-slate-500"><span class="w-1.5 h-1.5 bg-teal rounded-full flex-shrink-0"></span>TanStack Table full config</div>
+                        <div class="flex items-center gap-1.5 text-slate-500"><span class="w-1.5 h-1.5 bg-teal rounded-full flex-shrink-0"></span>WF-XXX traceable wireframes</div>
+                        <div class="flex items-center gap-1.5 text-slate-500"><span class="w-1.5 h-1.5 bg-teal rounded-full flex-shrink-0"></span>COMP-XXX design-to-code specs</div>
+                    </div>
                 </div>
 
                 <!-- Codebase Framework -->
@@ -409,14 +418,15 @@
                     </div>
                     <h3 class="text-xl font-bold text-slate-900 mb-2">Codebase Framework</h3>
                     <p class="text-slate-600 mb-5 text-sm leading-relaxed">Next.js 15 App Router patterns. Build working frontends with dummy data before investing in backend.</p>
-                    <ul class="space-y-1.5 text-xs text-slate-500">
-                        <li class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 bg-blue-500 rounded-full flex-shrink-0"></span>Next.js 15 + TailwindCSS</li>
-                        <li class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 bg-blue-500 rounded-full flex-shrink-0"></span>ShadCN UI + TanStack Query</li>
-                        <li class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 bg-blue-500 rounded-full flex-shrink-0"></span>Dummy JSON → Vercel deploy</li>
-                    </ul>
+                    <div class="grid grid-cols-2 gap-2 text-xs">
+                        <div class="flex items-center gap-1.5 text-slate-500"><span class="w-1.5 h-1.5 bg-blue-500 rounded-full flex-shrink-0"></span>Next.js 15 + TailwindCSS</div>
+                        <div class="flex items-center gap-1.5 text-slate-500"><span class="w-1.5 h-1.5 bg-blue-500 rounded-full flex-shrink-0"></span>ShadCN UI + TanStack Query</div>
+                        <div class="flex items-center gap-1.5 text-slate-500"><span class="w-1.5 h-1.5 bg-blue-500 rounded-full flex-shrink-0"></span>Type-safe server components</div>
+                        <div class="flex items-center gap-1.5 text-slate-500"><span class="w-1.5 h-1.5 bg-blue-500 rounded-full flex-shrink-0"></span>Zustand + TanStack patterns</div>
+                        <div class="flex items-center gap-1.5 text-slate-500"><span class="w-1.5 h-1.5 bg-blue-500 rounded-full flex-shrink-0"></span>Dummy JSON → real API swap</div>
+                        <div class="flex items-center gap-1.5 text-slate-500"><span class="w-1.5 h-1.5 bg-blue-500 rounded-full flex-shrink-0"></span>Vercel deploy ready</div>
+                    </div>
                 </div>
-
-                <!-- Codebase Framework continuation below, already has 4 cards above. Removing duplicate -->
             </div>
         </div>
     </section>
@@ -425,22 +435,47 @@
     <section id="skills" class="py-24 bg-slate-50 border-y border-slate-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
-                <h2 class="text-3xl font-bold text-slate-900 mb-4">16 Skills — Auto-Loaded by Keyword</h2>
+                <h2 class="text-3xl font-bold text-slate-900 mb-4">15 Skills — Auto-Loaded by Keyword</h2>
                 <p class="text-slate-500 max-w-2xl mx-auto">Each skill is a markdown file that activates when you use a trigger keyword. No configuration needed. Works with Claude Code, Codex, Gemini, and Cursor.</p>
             </div>
 
             <div class="space-y-10">
-                <!-- UI/UX -->
+                <!-- PM Framework — first -->
                 <div>
                     <div class="flex items-center gap-3 mb-4">
-                        <span class="text-xs font-bold uppercase tracking-widest text-slate-400">UI / UX</span>
+                        <span class="text-xs font-bold uppercase tracking-widest text-slate-400">PM Framework</span>
                         <div class="flex-1 h-px bg-slate-200"></div>
                     </div>
                     <div class="flex flex-wrap gap-2">
                         <span class="skill-pill inline-flex items-center gap-2 bg-white border border-slate-200 rounded-lg px-4 py-2 text-sm shadow-sm">
-                            <span class="w-2 h-2 rounded-full bg-yellow-400"></span>
-                            <code class="font-mono font-medium text-slate-800">ui-ux-pro-max</code>
-                            <span class="text-slate-400 text-xs">palette · typography · chart type · design system</span>
+                            <span class="w-2 h-2 rounded-full bg-purple-400"></span>
+                            <code class="font-mono font-medium text-slate-800">pm-product-strategy</code>
+                            <span class="text-slate-400 text-xs">strategy · vision · OKRs · SWOT</span>
+                        </span>
+                        <span class="skill-pill inline-flex items-center gap-2 bg-white border border-slate-200 rounded-lg px-4 py-2 text-sm shadow-sm">
+                            <span class="w-2 h-2 rounded-full bg-purple-400"></span>
+                            <code class="font-mono font-medium text-slate-800">pm-product-discovery</code>
+                            <span class="text-slate-400 text-xs">customer discovery · JTBD · opportunity tree</span>
+                        </span>
+                        <span class="skill-pill inline-flex items-center gap-2 bg-white border border-slate-200 rounded-lg px-4 py-2 text-sm shadow-sm">
+                            <span class="w-2 h-2 rounded-full bg-purple-400"></span>
+                            <code class="font-mono font-medium text-slate-800">pm-market-research</code>
+                            <span class="text-slate-400 text-xs">persona · TAM SAM SOM · journey map</span>
+                        </span>
+                        <span class="skill-pill inline-flex items-center gap-2 bg-white border border-slate-200 rounded-lg px-4 py-2 text-sm shadow-sm">
+                            <span class="w-2 h-2 rounded-full bg-purple-400"></span>
+                            <code class="font-mono font-medium text-slate-800">pm-data-analytics</code>
+                            <span class="text-slate-400 text-xs">North Star · HEART · A/B test · funnel</span>
+                        </span>
+                        <span class="skill-pill inline-flex items-center gap-2 bg-white border border-slate-200 rounded-lg px-4 py-2 text-sm shadow-sm">
+                            <span class="w-2 h-2 rounded-full bg-purple-400"></span>
+                            <code class="font-mono font-medium text-slate-800">pm-marketing-growth</code>
+                            <span class="text-slate-400 text-xs">growth loop · PLG · value proposition</span>
+                        </span>
+                        <span class="skill-pill inline-flex items-center gap-2 bg-white border border-slate-200 rounded-lg px-4 py-2 text-sm shadow-sm">
+                            <span class="w-2 h-2 rounded-full bg-purple-400"></span>
+                            <code class="font-mono font-medium text-slate-800">pm-go-to-market</code>
+                            <span class="text-slate-400 text-xs">GTM · ICP · launch plan · pricing · battlecard</span>
                         </span>
                     </div>
                 </div>
@@ -519,46 +554,6 @@
                         </span>
                     </div>
                 </div>
-
-                <!-- PM Framework -->
-                <div>
-                    <div class="flex items-center gap-3 mb-4">
-                        <span class="text-xs font-bold uppercase tracking-widest text-slate-400">PM Framework</span>
-                        <div class="flex-1 h-px bg-slate-200"></div>
-                    </div>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="skill-pill inline-flex items-center gap-2 bg-white border border-slate-200 rounded-lg px-4 py-2 text-sm shadow-sm">
-                            <span class="w-2 h-2 rounded-full bg-purple-400"></span>
-                            <code class="font-mono font-medium text-slate-800">pm-product-strategy</code>
-                            <span class="text-slate-400 text-xs">strategy · vision · OKRs · SWOT</span>
-                        </span>
-                        <span class="skill-pill inline-flex items-center gap-2 bg-white border border-slate-200 rounded-lg px-4 py-2 text-sm shadow-sm">
-                            <span class="w-2 h-2 rounded-full bg-purple-400"></span>
-                            <code class="font-mono font-medium text-slate-800">pm-product-discovery</code>
-                            <span class="text-slate-400 text-xs">customer discovery · JTBD · opportunity tree</span>
-                        </span>
-                        <span class="skill-pill inline-flex items-center gap-2 bg-white border border-slate-200 rounded-lg px-4 py-2 text-sm shadow-sm">
-                            <span class="w-2 h-2 rounded-full bg-purple-400"></span>
-                            <code class="font-mono font-medium text-slate-800">pm-market-research</code>
-                            <span class="text-slate-400 text-xs">persona · TAM SAM SOM · journey map</span>
-                        </span>
-                        <span class="skill-pill inline-flex items-center gap-2 bg-white border border-slate-200 rounded-lg px-4 py-2 text-sm shadow-sm">
-                            <span class="w-2 h-2 rounded-full bg-purple-400"></span>
-                            <code class="font-mono font-medium text-slate-800">pm-data-analytics</code>
-                            <span class="text-slate-400 text-xs">North Star · HEART · A/B test · funnel</span>
-                        </span>
-                        <span class="skill-pill inline-flex items-center gap-2 bg-white border border-slate-200 rounded-lg px-4 py-2 text-sm shadow-sm">
-                            <span class="w-2 h-2 rounded-full bg-purple-400"></span>
-                            <code class="font-mono font-medium text-slate-800">pm-marketing-growth</code>
-                            <span class="text-slate-400 text-xs">growth loop · PLG · value proposition</span>
-                        </span>
-                        <span class="skill-pill inline-flex items-center gap-2 bg-white border border-slate-200 rounded-lg px-4 py-2 text-sm shadow-sm">
-                            <span class="w-2 h-2 rounded-full bg-purple-400"></span>
-                            <code class="font-mono font-medium text-slate-800">pm-go-to-market</code>
-                            <span class="text-slate-400 text-xs">GTM · ICP · launch plan · pricing · battlecard</span>
-                        </span>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
@@ -613,66 +608,8 @@
         </div>
     </section>
 
-    <!-- ═══════════════════════════ PO DEEP DIVE ═══════════════════════════ -->
-    <section class="py-24 bg-slate-50 border-y border-slate-100">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                <div>
-                    <div class="inline-flex items-center px-3 py-1 rounded-full bg-magenta/10 text-magenta text-xs font-semibold mb-6">PO Framework</div>
-                    <h2 class="text-3xl font-bold text-slate-900 mb-5">5 Stages, Zero Ambiguity</h2>
-                    <p class="text-slate-500 text-lg mb-8 leading-relaxed">Every story gets acceptance criteria. Every AC gets a test case. The `/po-pipeline` command runs all five stages automatically, pausing for your review at the right moments.</p>
-                    <div class="space-y-3">
-                        <div class="flex items-start gap-3 bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
-                            <div class="bg-blue-100 text-blue-700 font-bold px-2 py-1 rounded text-xs mt-0.5 w-16 text-center shrink-0">Stage 1</div>
-                            <div><h4 class="font-semibold text-slate-900 text-sm">Product Requirements (PRD-XXX)</h4><p class="text-xs text-slate-500 mt-0.5">Problem, goals, personas, success metrics.</p></div>
-                        </div>
-                        <div class="flex items-start gap-3 bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
-                            <div class="bg-blue-100 text-blue-700 font-bold px-2 py-1 rounded text-xs mt-0.5 w-16 text-center shrink-0">Stage 2</div>
-                            <div><h4 class="font-semibold text-slate-900 text-sm">User Story Map (USM-XXX)</h4><p class="text-xs text-slate-500 mt-0.5">User activities and steps, visually mapped.</p></div>
-                        </div>
-                        <div class="flex items-start gap-3 bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
-                            <div class="bg-blue-100 text-blue-700 font-bold px-2 py-1 rounded text-xs mt-0.5 w-16 text-center shrink-0">Stage 3</div>
-                            <div><h4 class="font-semibold text-slate-900 text-sm">User Story List (ST-XXX)</h4><p class="text-xs text-slate-500 mt-0.5">Prioritized backlog with MoSCoW method.</p></div>
-                        </div>
-                        <div class="flex items-start gap-3 bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
-                            <div class="bg-blue-100 text-blue-700 font-bold px-2 py-1 rounded text-xs mt-0.5 w-16 text-center shrink-0">Stage 4</div>
-                            <div><h4 class="font-semibold text-slate-900 text-sm">User Story Details (AC-XXX)</h4><p class="text-xs text-slate-500 mt-0.5">Atomic, observable, binary acceptance criteria per story.</p></div>
-                        </div>
-                        <div class="flex items-start gap-3 bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
-                            <div class="bg-blue-100 text-blue-700 font-bold px-2 py-1 rounded text-xs mt-0.5 w-16 text-center shrink-0">Stage 5</div>
-                            <div><h4 class="font-semibold text-slate-900 text-sm">UAT Test Cases (TC-XXX)</h4><p class="text-xs text-slate-500 mt-0.5">BDD scenarios (Given / When / Then).</p></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="relative flex items-center justify-center bg-white rounded-2xl border border-slate-200 shadow-lg p-8 min-h-72">
-                    <div class="absolute inset-0 bg-blue-50/40 rounded-2xl"></div>
-                    <div class="relative z-10 w-full font-mono text-sm bg-slate-900 rounded-xl p-6 shadow-2xl">
-                        <div class="flex space-x-2 mb-4">
-                            <div class="w-3 h-3 rounded-full bg-red-500"></div>
-                            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
-                            <div class="w-3 h-3 rounded-full bg-green-500"></div>
-                            <span class="ml-2 text-slate-500 text-xs">features/search/po/usd/ST-003.md</span>
-                        </div>
-                        <p class="text-blue-400 text-xs mb-1">---</p>
-                        <p class="text-yellow-300 text-xs">artifact: USD</p>
-                        <p class="text-yellow-300 text-xs">generated-by: po-usl-to-usd</p>
-                        <p class="text-blue-400 text-xs mb-3">---</p>
-                        <p class="text-white text-xs font-bold mb-2">## UI Elements</p>
-                        <p class="text-green-400 text-xs">- <span class="text-slate-400">AC-001:</span> Search input visible with placeholder</p>
-                        <p class="text-green-400 text-xs">- <span class="text-slate-400">AC-002:</span> Results list shows title + excerpt</p>
-                        <p class="text-white text-xs font-bold mt-3 mb-2">## UI Behavior</p>
-                        <p class="text-green-400 text-xs">- <span class="text-slate-400">AC-003:</span> Results update on keystroke (300ms debounce)</p>
-                        <p class="text-white text-xs font-bold mt-3 mb-2">## Non-Functional</p>
-                        <p class="text-green-400 text-xs">- <span class="text-slate-400">NFR-001:</span> Response &lt; 200ms for &lt; 10k records</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- ═══════════════════════════ PM DEEP DIVE ═══════════════════════════ -->
-    <section class="py-24 bg-white">
+    <section class="py-24 bg-slate-50 border-y border-slate-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                 <!-- Visual: OST tree -->
@@ -731,6 +668,64 @@
         </div>
     </section>
 
+    <!-- ═══════════════════════════ PO DEEP DIVE ═══════════════════════════ -->
+    <section class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div>
+                    <div class="inline-flex items-center px-3 py-1 rounded-full bg-magenta/10 text-magenta text-xs font-semibold mb-6">PO Framework</div>
+                    <h2 class="text-3xl font-bold text-slate-900 mb-5">5 Stages, Zero Ambiguity</h2>
+                    <p class="text-slate-500 text-lg mb-8 leading-relaxed">Every story gets acceptance criteria. Every AC gets a test case. The `/po-pipeline` command runs all five stages automatically, pausing for your review at the right moments.</p>
+                    <div class="space-y-3">
+                        <div class="flex items-start gap-3 bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+                            <div class="bg-blue-100 text-blue-700 font-bold px-2 py-1 rounded text-xs mt-0.5 w-16 text-center shrink-0">Stage 1</div>
+                            <div><h4 class="font-semibold text-slate-900 text-sm">Product Requirements (PRD-XXX)</h4><p class="text-xs text-slate-500 mt-0.5">Problem, goals, personas, success metrics.</p></div>
+                        </div>
+                        <div class="flex items-start gap-3 bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+                            <div class="bg-blue-100 text-blue-700 font-bold px-2 py-1 rounded text-xs mt-0.5 w-16 text-center shrink-0">Stage 2</div>
+                            <div><h4 class="font-semibold text-slate-900 text-sm">User Story Map (USM-XXX)</h4><p class="text-xs text-slate-500 mt-0.5">User activities and steps, visually mapped.</p></div>
+                        </div>
+                        <div class="flex items-start gap-3 bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+                            <div class="bg-blue-100 text-blue-700 font-bold px-2 py-1 rounded text-xs mt-0.5 w-16 text-center shrink-0">Stage 3</div>
+                            <div><h4 class="font-semibold text-slate-900 text-sm">User Story List (ST-XXX)</h4><p class="text-xs text-slate-500 mt-0.5">Prioritized backlog with MoSCoW method.</p></div>
+                        </div>
+                        <div class="flex items-start gap-3 bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+                            <div class="bg-blue-100 text-blue-700 font-bold px-2 py-1 rounded text-xs mt-0.5 w-16 text-center shrink-0">Stage 4</div>
+                            <div><h4 class="font-semibold text-slate-900 text-sm">User Story Details (AC-XXX)</h4><p class="text-xs text-slate-500 mt-0.5">Atomic, observable, binary acceptance criteria per story.</p></div>
+                        </div>
+                        <div class="flex items-start gap-3 bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+                            <div class="bg-blue-100 text-blue-700 font-bold px-2 py-1 rounded text-xs mt-0.5 w-16 text-center shrink-0">Stage 5</div>
+                            <div><h4 class="font-semibold text-slate-900 text-sm">UAT Test Cases (TC-XXX)</h4><p class="text-xs text-slate-500 mt-0.5">BDD scenarios (Given / When / Then).</p></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative flex items-center justify-center bg-white rounded-2xl border border-slate-200 shadow-lg p-8 min-h-72">
+                    <div class="absolute inset-0 bg-blue-50/40 rounded-2xl"></div>
+                    <div class="relative z-10 w-full font-mono text-sm bg-slate-900 rounded-xl p-6 shadow-2xl">
+                        <div class="flex space-x-2 mb-4">
+                            <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                            <span class="ml-2 text-slate-500 text-xs">features/search/po/usd/ST-003.md</span>
+                        </div>
+                        <p class="text-blue-400 text-xs mb-1">---</p>
+                        <p class="text-yellow-300 text-xs">artifact: USD</p>
+                        <p class="text-yellow-300 text-xs">generated-by: po-usl-to-usd</p>
+                        <p class="text-blue-400 text-xs mb-3">---</p>
+                        <p class="text-white text-xs font-bold mb-2">## UI Elements</p>
+                        <p class="text-green-400 text-xs">- <span class="text-slate-400">AC-001:</span> Search input visible with placeholder</p>
+                        <p class="text-green-400 text-xs">- <span class="text-slate-400">AC-002:</span> Results list shows title + excerpt</p>
+                        <p class="text-white text-xs font-bold mt-3 mb-2">## UI Behavior</p>
+                        <p class="text-green-400 text-xs">- <span class="text-slate-400">AC-003:</span> Results update on keystroke (300ms debounce)</p>
+                        <p class="text-white text-xs font-bold mt-3 mb-2">## Non-Functional</p>
+                        <p class="text-green-400 text-xs">- <span class="text-slate-400">NFR-001:</span> Response &lt; 200ms for &lt; 10k records</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- ═══════════════════════════ FINAL CTA ═══════════════════════════ -->
     <section class="py-24 bg-slate-900 relative overflow-hidden">
         <div class="beam-h-container top-1/3 opacity-20"><div class="beam-h" style="background:linear-gradient(90deg,transparent,#14b8a6,transparent);animation:beam-h 4s linear infinite;"></div></div>
@@ -749,11 +744,13 @@
 
             <div class="flex flex-col sm:flex-row justify-center gap-4">
                 <a href="https://github.com/karlng279/ai-ready-product-workflow-v2/blob/main/GETTING_STARTED.md"
+                   target="_blank" rel="noopener noreferrer"
                    class="group inline-flex items-center justify-center px-8 py-3 text-base font-medium text-white bg-magenta hover:bg-magenta-dark rounded-lg transition-all shadow-lg hover:shadow-xl hover:shadow-magenta/30">
                     Get Started
                     <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
                 </a>
                 <a href="https://github.com/karlng279/ai-ready-product-workflow-v2"
+                   target="_blank" rel="noopener noreferrer"
                    class="inline-flex items-center justify-center px-8 py-3 text-base font-medium text-slate-300 bg-slate-800 border border-slate-700 hover:bg-slate-700 rounded-lg transition-all">
                     View on GitHub
                 </a>
