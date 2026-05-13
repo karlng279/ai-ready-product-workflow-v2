@@ -97,11 +97,32 @@ else
   echo "  Tip: create CLAUDE.md in your project root and re-run to add the skill registry."
 fi
 
+# ── Copy agent entry point files to target root ───────────────────────────────
+echo ""
+ENTRY_POINTS_COPIED=0
+for f in AGENTS.md GEMINI.md .cursorrules GETTING_STARTED.md; do
+  src="$SCRIPT_DIR/$f"
+  dst="$TARGET_DIR/$f"
+  if [ -f "$src" ] && [ ! -f "$dst" ]; then
+    cp "$src" "$dst"
+    echo "  ✓  $f"
+    ENTRY_POINTS_COPIED=$((ENTRY_POINTS_COPIED + 1))
+  elif [ -f "$src" ] && [ -f "$dst" ]; then
+    echo "  ↻  $f (already present — skipping)"
+  fi
+done
+if [ "$ENTRY_POINTS_COPIED" -eq 0 ] && [ -z "${ENTRY_POINTS_COPIED+_}" ]; then
+  echo "  No agent entry point files found in source."
+fi
+
 # ── Done ──────────────────────────────────────────────────────────────────────
 echo ""
 echo "  Done! Skills are ready in $AGENT_SKILLS_DIR"
 echo ""
-echo "  Next steps:"
-echo "    • In Claude Code, type a trigger keyword to activate a skill"
-echo "    • For UI/UX queries: python3 $AGENT_SKILLS_DIR/ui-ux-pro-max/scripts/search.py \"<query>\""
+echo "  Next steps by agent:"
+echo "    Claude Code   → type a trigger keyword: \"create a PRD for...\""
+echo "    Cursor        → .cursorrules auto-loaded on project open"
+echo "    Codex/Gemini  → \"Read AGENTS.md then help me write a PRD\""
+echo ""
+echo "  Full guide: GETTING_STARTED.md (in your project root)"
 echo ""

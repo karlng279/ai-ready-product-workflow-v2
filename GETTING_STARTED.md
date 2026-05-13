@@ -6,13 +6,25 @@ Choose your entry point based on where you are in the product lifecycle.
 
 ## Quick Install
 
-If you want to use these skills in your own project:
+To use these skills in your own project:
 
 ```bash
 npx ai-ready-workflow install
 ```
 
-This copies all 16 skills to `.agent/skills/` and patches your `CLAUDE.md`. Then jump to whichever path below fits your current stage.
+**What gets installed into your project root:**
+
+| File / Folder | Used by |
+|---|---|
+| `.agent/skills/` (16 skill folders) | Claude Code (auto-loaded on keyword match) |
+| `AGENTS.md` | OpenAI Codex — "Read AGENTS.md then help me write a PRD" |
+| `GEMINI.md` | Gemini Code Assist — "Read GEMINI.md then help me write a PRD" |
+| `.cursorrules` | Cursor (auto-loaded on project open) |
+| `GETTING_STARTED.md` | All agents — per-agent setup guide |
+
+Claude Code users also get their `CLAUDE.md` patched with the skill registry.
+
+Then jump to whichever path below fits your current stage.
 
 ---
 
@@ -162,10 +174,29 @@ PM-STRATEGY → PM-DISCOVERY → PRD → USM → USL → USD (AC-XXX) → UAT (T
 
 ## Multi-Agent Usage
 
-| Agent | How to use this repo |
-|-------|---------------------|
-| Claude Code | Skills auto-load via `.agent/skills/`; use slash commands in `.claude/commands/` |
-| OpenAI Codex | Read `AGENTS.md`, then read the relevant `skills/*/SKILL.md` |
-| Gemini Code Assist | Read `GEMINI.md`, then read the relevant `skills/*/SKILL.md` |
-| Cursor | Read `.cursorrules` for active context |
-| Any agent | Read `skills/*/SKILL.md` directly |
+### Claude Code
+Skills auto-load via `.agent/skills/` when you mention a trigger keyword. Use slash commands to chain multiple pipeline stages:
+
+| Command | What it does |
+|---|---|
+| `/po-pipeline` | Brief → PRD → USM → USL → USD → UAT |
+| `/design-pipeline` | USD → Wireframes → Component Specs |
+| `/validate-artifacts` | Quality gate check on all feature artifacts |
+| `/pm-strategy` | Product strategy session |
+| `/pm-discovery` | Discovery sprint session |
+
+### OpenAI Codex
+```
+Read AGENTS.md at the project root, then help me create a PRD for a user authentication feature.
+```
+
+### Gemini Code Assist
+```
+Read GEMINI.md at the project root, then help me create a PRD for a user authentication feature.
+```
+
+### Cursor
+`.cursorrules` is auto-loaded when you open the project — no setup needed. Mention a skill by name or describe what you want to build and Cursor will apply the right methodology.
+
+### Any agent
+Read `skills/{skill-name}/SKILL.md` directly and ask the agent to apply its methodology.

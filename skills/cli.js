@@ -17,12 +17,15 @@ function printUsage() {
   console.log('  AI-Ready Product Workflow');
   console.log('');
   console.log('  Usage:');
-  console.log('    npx ai-ready-workflow install              # install skills into current directory');
-  console.log('    npx ai-ready-workflow install <target>     # install skills into <target>');
+  console.log('    npx ai-ready-workflow install              # install into current directory');
+  console.log('    npx ai-ready-workflow install <target>     # install into <target>');
   console.log('');
   console.log('  What it does:');
-  console.log('    • Copies all 16 skills to <target>/.agent/skills/');
+  console.log('    • Copies 16 skills to <target>/.agent/skills/');
+  console.log('    • Copies agent entry points: AGENTS.md, GEMINI.md, .cursorrules, GETTING_STARTED.md');
   console.log('    • Appends the skill registry to <target>/CLAUDE.md (if it exists)');
+  console.log('');
+  console.log('  Supports: Claude Code, OpenAI Codex, Gemini Code Assist, Cursor');
   console.log('');
 }
 

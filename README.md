@@ -2,9 +2,10 @@
 
 > From Idea to Implementation. A structured, AI-optimized knowledge base for building software products end-to-end.
 
-[![License](https://img.shields.io/badge/license-Proprietary-red)](LICENSE)
-[![Status](https://img.shields.io/badge/status-Active-green)]()
+[![npm version](https://img.shields.io/npm/v/ai-ready-workflow)](https://www.npmjs.com/package/ai-ready-workflow)
+[![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 [![Skills](https://img.shields.io/badge/skills-16-blue)]()
+[![Agents](https://img.shields.io/badge/agents-Claude%20%7C%20Codex%20%7C%20Gemini%20%7C%20Cursor-purple)]()
 
 ---
 
@@ -30,7 +31,7 @@ A multi-framework knowledge base that gives AI agents (Claude Code, Codex, Gemin
 ## Install Skills into Your Project
 
 ```bash
-# Option A — npx (no clone needed)
+# Option A — npx (no clone needed, recommended)
 npx ai-ready-workflow install
 
 # Option B — from this repo (Mac/Linux)
@@ -40,9 +41,19 @@ npx ai-ready-workflow install
 .\skills\install.ps1
 ```
 
-Copies all 16 skills to `.agent/skills/` in your project and patches `CLAUDE.md` with the skill registry. Safe to re-run.
+**What the installer copies to your project:**
 
-→ See [`skills/README.md`](skills/README.md) for the full catalogue.
+| File / Folder | Used by |
+|---|---|
+| `.agent/skills/` (16 skill folders) | Claude Code (auto-loaded) |
+| `AGENTS.md` | OpenAI Codex |
+| `GEMINI.md` | Gemini Code Assist |
+| `.cursorrules` | Cursor (auto-loaded on project open) |
+| `GETTING_STARTED.md` | All agents — per-agent setup guide |
+
+Safe to re-run — existing files are skipped.
+
+→ See [`skills/README.md`](skills/README.md) for the full skill catalogue and [`GETTING_STARTED.md`](GETTING_STARTED.md) for per-agent setup.
 
 ---
 
@@ -165,13 +176,17 @@ ai-ready-product-workflow-v2/
 
 ## Multi-Agent Support
 
-| Agent | Entry Point |
-|---|---|
-| Claude Code | `.agent/skills/*/SKILL.md` (auto-loaded) |
-| OpenAI Codex | `AGENTS.md` |
-| Gemini Code Assist | `GEMINI.md` |
-| Cursor | `.cursorrules` |
-| Any agent | `skills/*/SKILL.md` (read directly) |
+All 4 agents are supported. `npx ai-ready-workflow install` provisions each agent's entry point automatically.
+
+| Agent | Entry Point | How skills activate |
+|---|---|---|
+| Claude Code | `.agent/skills/*/SKILL.md` | Auto-loaded on keyword match |
+| OpenAI Codex | `AGENTS.md` | "Read AGENTS.md then help me write a PRD" |
+| Gemini Code Assist | `GEMINI.md` | "Read GEMINI.md then help me write a PRD" |
+| Cursor | `.cursorrules` | Auto-loaded on project open |
+| Any agent | `skills/*/SKILL.md` | Read the relevant SKILL.md directly |
+
+See [`GETTING_STARTED.md`](GETTING_STARTED.md) for per-agent first prompts and setup.
 
 ---
 
