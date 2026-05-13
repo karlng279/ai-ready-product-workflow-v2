@@ -1,8 +1,18 @@
-# Skills
+# ai-ready-workflow
 
-Agent-agnostic skill library for AI-assisted product development. 16 skills across PM strategy, PO pipeline, design format enforcement, and validation.
+[![npm version](https://img.shields.io/npm/v/ai-ready-workflow)](https://www.npmjs.com/package/ai-ready-workflow)
+[![license](https://img.shields.io/npm/l/ai-ready-workflow)](https://github.com/karlng279/ai-ready-product-workflow-v2/blob/main/LICENSE)
+[![node](https://img.shields.io/node/v/ai-ready-workflow)](https://www.npmjs.com/package/ai-ready-workflow)
 
-Skills are pure markdown — any AI agent that can read a file can use them. Claude Code loads them automatically via `.agent/skills/`.
+Agent-agnostic skill library for AI-assisted product development. One install command gives your AI agent structured methodology across PM strategy, PO pipeline, design, and validation.
+
+**What you get:**
+- 16 skills across 4 frameworks (PM, PO, Design, UI/UX)
+- 5 pipeline slash commands (Claude Code)
+- Entry point files for all 4 major AI agents
+- Per-agent onboarding guide
+
+Skills are pure markdown — any AI agent that can read a file can use them.
 
 ---
 
@@ -38,6 +48,22 @@ cd ai-ready-product-workflow-v2
 3. Appends the skill registry table to `CLAUDE.md` (if present and not already patched)
 
 Skills already present are skipped — re-running is safe.
+
+---
+
+## After Install
+
+The installer copies the following into your project root:
+
+| File | Agent | How skills activate |
+|---|---|---|
+| `.agent/skills/*/SKILL.md` | Claude Code | Auto-loaded on keyword match |
+| `AGENTS.md` | OpenAI Codex | "Read AGENTS.md then help me write a PRD" |
+| `GEMINI.md` | Gemini Code Assist | "Read GEMINI.md then help me write a PRD" |
+| `.cursorrules` | Cursor | Auto-loaded on project open |
+| `GETTING_STARTED.md` | All agents | Per-agent setup and first prompt examples |
+
+See `GETTING_STARTED.md` in your project root for agent-specific setup and example prompts.
 
 ---
 

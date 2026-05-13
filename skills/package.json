@@ -1,6 +1,6 @@
 {
   "name": "ai-ready-workflow",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "AI-ready product workflow skills for Claude Code and other AI agents. 16 skills across PM, PO, design, and validation pipelines.",
   "keywords": [
     "claude-code",
@@ -16,16 +16,20 @@
   "homepage": "https://github.com/karlng279/ai-ready-product-workflow-v2",
   "repository": {
     "type": "git",
-    "url": "https://github.com/karlng279/ai-ready-product-workflow-v2"
+    "url": "git+https://github.com/karlng279/ai-ready-product-workflow-v2.git"
   },
   "license": "MIT",
   "bin": {
-    "ai-ready-workflow": "./cli.js"
+    "ai-ready-workflow": "cli.js"
   },
   "files": [
     "cli.js",
     "install.sh",
     "install.ps1",
+    "AGENTS.md",
+    "GEMINI.md",
+    ".cursorrules",
+    "GETTING_STARTED.md",
     "*/SKILL.md",
     "ui-ux-pro-max/scripts/",
     "ui-ux-pro-max/data/"

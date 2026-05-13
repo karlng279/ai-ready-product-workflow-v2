@@ -160,6 +160,59 @@ Tracks implementation progress of the restructure plan defined in [restructure-p
 | 7.10 | `GEMINI.md` — same updates as 7.9 (PM artifact IDs, folder structure, slash commands reference, Phase 6 install section) | ✅ Done |
 | 7.11 | `.cursorrules` — create Cursor-compatible rules file; mirror `AGENTS.md` structure with all 16 skills, artifact IDs, traceability frontmatter, feature folder structure, and install instructions | ✅ Done |
 
+### 7c — npm Publish & Distribution Fix
+
+**Goal:** Publish `skills/package.json` to npm so `npx ai-ready-workflow install` works. Add GitHub Actions workflow for automated publishing on git tags.
+**Plan:** [npm-publish-plan.md](npm-publish-plan.md)
+
+| # | Task | Status |
+|---|------|--------|
+| 7c.1 | Create `.github/workflows/npm-publish.yml` (auto-publish on `v*` tags) | ✅ Done |
+| 7c.2 | Add `NPM_TOKEN` secret to GitHub repo settings | ✅ Done |
+| 7c.3 | Run `npm login` + `npm publish --access public` from `skills/` | ✅ Done |
+| 7c.4 | Verify: `npm info ai-ready-workflow` returns version 0.1.0 | ✅ Done |
+| 7c.5 | End-to-end test: `npx ai-ready-workflow install` in a blank directory | ✅ Done |
+
+### 7d — npm Package Documentation
+
+> **Superseded by 7e.** All 7d tasks are covered in 7e with broader scope. No separate publish needed.
+
+---
+
+### 7e — Multi-Agent Fix + Documentation + Publish (0.1.1)
+
+**Goal:** Fix the installer for all 4 agents, ship all entry point files in the npm package, add per-agent docs, then publish once as `0.1.1`. Single pass — no intermediate publish.
+**Plan:** [npm-docs-plan.md](npm-docs-plan.md)
+
+**Critical finding:** The package claims multi-agent support but the installer only provisions Claude Code. `AGENTS.md`, `GEMINI.md`, and `.cursorrules` are never copied to the target project and are not in the npm files array.
+
+#### Step 1 — Code Fix
+
+| # | Task | Status |
+|---|------|--------|
+| 7e.1 | Create `skills/AGENTS.md` — copy from repo root, maintained in `skills/` for packaging | ✅ Done |
+| 7e.2 | Create `skills/GEMINI.md` — copy from repo root | ✅ Done |
+| 7e.3 | Create `skills/.cursorrules` — copy from repo root | ✅ Done |
+| 7e.4 | Update `skills/install.sh` — copy `AGENTS.md`, `GEMINI.md`, `.cursorrules` to target root (skip if exists) | ✅ Done |
+| 7e.5 | Update `skills/install.ps1` — same for Windows | ✅ Done |
+
+#### Step 2 — Documentation
+
+| # | Task | Status |
+|---|------|--------|
+| 7e.6 | Create `skills/GETTING_STARTED.md` — 4 agent-specific sections (Claude Code, Codex, Cursor, Gemini) | ✅ Done |
+| 7e.7 | Rework `skills/README.md` — npm badges, "what you get" box, "after install" section, all-agent entry point table | ✅ Done |
+| 7e.8 | Update `skills/cli.js` — post-install banner with agent-aware next steps | ✅ Done |
+
+#### Step 3 — Package & Publish
+
+| # | Task | Status |
+|---|------|--------|
+| 7e.9 | Update `skills/package.json` — add `AGENTS.md`, `GEMINI.md`, `.cursorrules`, `GETTING_STARTED.md` to files array; bump to `0.1.1` | ✅ Done |
+| 7e.10 | `npm pack --dry-run` — confirm all new files are in the tarball | ✅ Done |
+| 7e.11 | `npm publish --access public` from `skills/` | ✅ Done |
+| 7e.12 | Verify: `npx ai-ready-workflow install` copies entry points for all 4 agents | ✅ Done |
+
 ---
 
 ## Summary

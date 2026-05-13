@@ -103,11 +103,29 @@ if (Test-Path $claudeMd) {
     Write-Host "  Tip: create CLAUDE.md in your project root and re-run to add the skill registry."
 }
 
+# ── Copy agent entry point files to target root ────────────────────────────────
+Write-Host ""
+$entryPointsCopied = 0
+foreach ($f in @("AGENTS.md", "GEMINI.md", ".cursorrules", "GETTING_STARTED.md")) {
+    $src = Join-Path $ScriptDir $f
+    $dst = Join-Path $TargetDir $f
+    if ((Test-Path $src) -and -not (Test-Path $dst)) {
+        Copy-Item -Path $src -Destination $dst
+        Write-Host "  ✓  $f"
+        $entryPointsCopied++
+    } elseif ((Test-Path $src) -and (Test-Path $dst)) {
+        Write-Host "  ↻  $f (already present — skipping)"
+    }
+}
+
 # ── Done ───────────────────────────────────────────────────────────────────────
 Write-Host ""
 Write-Host "  Done! Skills are ready in $AgentSkillsDir"
 Write-Host ""
-Write-Host "  Next steps:"
-Write-Host "    • In Claude Code, type a trigger keyword to activate a skill"
-Write-Host "    • For UI/UX queries: python3 $AgentSkillsDir\ui-ux-pro-max\scripts\search.py `"<query>`""
+Write-Host "  Next steps by agent:"
+Write-Host "    Claude Code   -> type a trigger keyword: 'create a PRD for...'"
+Write-Host "    Cursor        -> .cursorrules auto-loaded on project open"
+Write-Host "    Codex/Gemini  -> 'Read AGENTS.md then help me write a PRD'"
+Write-Host ""
+Write-Host "  Full guide: GETTING_STARTED.md (in your project root)"
 Write-Host ""
