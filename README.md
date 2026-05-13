@@ -59,10 +59,15 @@ Safe to re-run — existing files are skipped.
 
 ## Skills
 
-### UI/UX
+### PM Framework
 | Skill | Triggers |
 |---|---|
-| `ui-ux-pro-max` | UI design, color palette, typography, chart type, design system |
+| `pm-product-strategy` | product strategy, vision, OKRs, SWOT, competitive analysis |
+| `pm-product-discovery` | customer discovery, Jobs-to-be-Done, opportunity tree |
+| `pm-market-research` | market research, persona, TAM SAM SOM, journey map |
+| `pm-data-analytics` | metrics, KPIs, A/B test, North Star, funnel analysis |
+| `pm-marketing-growth` | growth, value proposition, growth loop, PLG, retention |
+| `pm-go-to-market` | go-to-market, GTM, launch plan, ICP, pricing, battlecard |
 
 ### PO Pipeline
 | Skill | Triggers |
@@ -73,27 +78,18 @@ Safe to re-run — existing files are skipped.
 | `po-usl-to-usd` | user story details, acceptance criteria, AC-XXX |
 | `po-usd-to-uat` | UAT, test cases, BDD, given-when-then |
 
-### Validation
-| Skill | Triggers |
-|---|---|
-| `validate-prd` | validate PRD, PRD quality gate |
-| `validate-usd` | validate USD, acceptance criteria check |
-
 ### Design
 | Skill | Triggers |
 |---|---|
 | `design-wireframe` | wireframe, WF-XXX, ASCII wireframe, screen layout |
 | `design-component-spec` | component spec, COMP-XXX, ShadCN component, design to code |
+| `ui-ux-pro-max` | UI design, color palette, typography, chart type, design system — forked from [uupm.cc](https://www.uupm.cc/) |
 
-### PM Framework
+### Validation
 | Skill | Triggers |
 |---|---|
-| `pm-product-strategy` | product strategy, vision, OKRs, SWOT, competitive analysis |
-| `pm-product-discovery` | customer discovery, Jobs-to-be-Done, opportunity tree |
-| `pm-market-research` | market research, persona, TAM SAM SOM, journey map |
-| `pm-data-analytics` | metrics, KPIs, A/B test, North Star, funnel analysis |
-| `pm-marketing-growth` | growth, value proposition, growth loop, PLG, retention |
-| `pm-go-to-market` | go-to-market, GTM, launch plan, ICP, pricing, battlecard |
+| `validate-prd` | validate PRD, PRD quality gate |
+| `validate-usd` | validate USD, acceptance criteria check |
 
 ---
 
