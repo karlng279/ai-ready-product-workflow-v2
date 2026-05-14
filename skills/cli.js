@@ -19,6 +19,7 @@ function printUsage() {
   console.log('  Usage:');
   console.log('    npx ai-ready-workflow install              # install into current directory');
   console.log('    npx ai-ready-workflow install <target>     # install into <target>');
+  console.log('    npx ai-ready-workflow mcp                  # start MCP server for Claude Desktop');
   console.log('');
   console.log('  What it does:');
   console.log('    • Copies 16 skills to <target>/.agent/skills/');
@@ -32,6 +33,11 @@ function printUsage() {
 if (!command || command === 'help' || command === '--help' || command === '-h') {
   printUsage();
   process.exit(0);
+}
+
+if (command === 'mcp') {
+  require('./mcp-server.js');
+  return;
 }
 
 if (command !== 'install') {
