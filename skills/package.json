@@ -1,6 +1,6 @@
 {
   "name": "ai-ready-workflow",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "AI-ready product workflow skills for Claude Code and other AI agents. 16 skills across PM, PO, design, and validation pipelines.",
   "keywords": [
     "claude-code",
@@ -11,7 +11,9 @@
     "workflow",
     "pm-framework",
     "po-framework",
-    "design-system"
+    "design-system",
+    "mcp",
+    "claude-desktop"
   ],
   "homepage": "https://github.com/karlng279/ai-ready-product-workflow-v2",
   "repository": {
@@ -24,6 +26,8 @@
   },
   "files": [
     "cli.js",
+    "mcp-server.js",
+    "smithery.yaml",
     "install.sh",
     "install.ps1",
     "AGENTS.md",
@@ -34,6 +38,9 @@
     "ui-ux-pro-max/scripts/",
     "ui-ux-pro-max/data/"
   ],
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.0"
+  },
   "engines": {
     "node": ">=18.0.0"
   }

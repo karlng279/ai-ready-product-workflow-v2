@@ -16,7 +16,35 @@ Skills are pure markdown — any AI agent that can read a file can use them.
 
 ---
 
-## Install
+## Claude Desktop
+
+Add all 16 skills to Claude Desktop — no cloning required.
+
+**1. Edit your Claude Desktop config:**
+
+`~/Library/Application Support/Claude/claude_desktop_config.json` (Mac)
+`%APPDATA%\Claude\claude_desktop_config.json` (Windows)
+
+```json
+{
+  "mcpServers": {
+    "ai-ready-workflow": {
+      "command": "npx",
+      "args": ["-y", "ai-ready-workflow", "mcp"]
+    }
+  }
+}
+```
+
+**2. Fully quit and reopen Claude Desktop** (Cmd+Q on Mac, then reopen).
+
+**3. Type `/` in any conversation** — all 16 skills appear as selectable prompt templates.
+
+Each skill loads its full methodology into the conversation. Optionally add your own brief or context when selecting a prompt.
+
+---
+
+## Install (Claude Code / other AI agents)
 
 ### Option A — npx (no clone required)
 
@@ -178,6 +206,7 @@ Skills are in `skills/*/SKILL.md` — the agent-agnostic source of truth. Each A
 
 | Agent | Entry Point |
 |-------|-------------|
+| Claude Desktop | MCP server via `npx ai-ready-workflow mcp` (see above) |
 | Claude Code | `.agent/skills/*/SKILL.md` (auto-loaded on skill match) |
 | OpenAI Codex | `AGENTS.md` (skill index at repo root) |
 | Gemini Code Assist | `GEMINI.md` (skill index at repo root) |
