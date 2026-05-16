@@ -1,6 +1,6 @@
 # npm Publish Plan — `ai-ready-workflow`
 
-> **Status:** v0.1.0 is live on npm. This document now tracks the ongoing publish workflow and version history.
+> **Status:** v0.1.2 is live on npm. This document tracks the ongoing publish workflow and version history.
 
 ---
 
@@ -9,7 +9,8 @@
 | Version | What changed | Status |
 |---|---|---|
 | `0.1.0` | Initial publish — 16 skills, CLI, install scripts | ✅ Live |
-| `0.1.1` | Multi-agent fix + documentation (Phase 7e) | ⬜ Pending |
+| `0.1.1` | Multi-agent fix + documentation (Phase 7e) | ✅ Live |
+| `0.1.2` | MCP server for Claude Desktop public distribution | ✅ Live |
 
 ---
 
@@ -103,12 +104,49 @@ ls AGENTS.md GEMINI.md .cursorrules GETTING_STARTED.md   # all 4 present
 | `.github/workflows/npm-publish.yml` | 0.1.0 | Created — auto-publish on `v*` tags |
 | `skills/package.json` | 0.1.0 | `./cli.js` → `cli.js` in bin; version set |
 | `skills/cli.js` | 0.1.0 | `chmod +x` applied |
-| `skills/AGENTS.md` | 0.1.1 | To create |
-| `skills/GEMINI.md` | 0.1.1 | To create |
-| `skills/.cursorrules` | 0.1.1 | To create |
-| `skills/install.sh` | 0.1.1 | To update — multi-agent entry point copy |
-| `skills/install.ps1` | 0.1.1 | To update — multi-agent entry point copy |
-| `skills/GETTING_STARTED.md` | 0.1.1 | To create |
-| `skills/README.md` | 0.1.1 | To update |
-| `skills/cli.js` | 0.1.1 | To update — post-install banner |
-| `skills/package.json` | 0.1.1 | To update — files array + version bump |
+| `skills/AGENTS.md` | 0.1.1 | Created |
+| `skills/GEMINI.md` | 0.1.1 | Created |
+| `skills/.cursorrules` | 0.1.1 | Created |
+| `skills/install.sh` | 0.1.1 | Updated — multi-agent entry point copy |
+| `skills/install.ps1` | 0.1.1 | Updated — multi-agent entry point copy |
+| `skills/GETTING_STARTED.md` | 0.1.1 | Created |
+| `skills/README.md` | 0.1.1 | Updated — multi-agent table, after-install section |
+| `skills/cli.js` | 0.1.1 | Updated — post-install banner |
+| `skills/package.json` | 0.1.1 | Updated — files array + version bump |
+| `skills/mcp-server.js` | 0.1.2 | Created — MCP stdio server (resources, tools, prompts) |
+| `skills/cli.js` | 0.1.2 | Updated — `mcp` subcommand dispatch |
+| `skills/package.json` | 0.1.2 | Updated — `@modelcontextprotocol/sdk` dep, version bump |
+| `skills/README.md` | 0.1.2 | Updated — Claude Desktop section + config snippet |
+| `skills/smithery.yaml` | 0.1.2 | Created — Smithery MCP registry manifest |
+
+---
+
+## v0.1.2 — Claude Desktop Public Distribution
+
+**Goal:** Any Claude Desktop user worldwide can add all 16 skills via a single config line — no cloning required.
+
+**User config (`claude_desktop_config.json`):**
+```json
+{
+  "mcpServers": {
+    "ai-ready-workflow": {
+      "command": "npx",
+      "args": ["-y", "ai-ready-workflow", "mcp"]
+    }
+  }
+}
+```
+
+**What this enables:**
+- All 16 skills appear in the `/` prompt picker inside Claude Desktop conversations
+- `list_skills` and `get_skill` tools available for Claude to call
+- `search_ui_ux` tool bridges to the existing Python design database
+- Skills exposed as MCP Resources (`skill://skill-name` URIs)
+
+**Key design decisions:**
+- Skill discovery is runtime filesystem scan — adding a new skill requires no server code changes
+- `__dirname` resolution works identically locally and via `npx` because npm bundles `*/SKILL.md` per the `files` glob
+- No YAML parser dependency — frontmatter parsed with regex to keep zero extra deps
+- `search_ui_ux` delegates to existing `ui-ux-pro-max/scripts/search.py` via `spawnSync`
+
+**Distribution note:** MCP sidebar "Skills" tab in Claude Desktop is Anthropic-controlled and not accessible to third parties. The `/` prompt picker is the correct third-party skill distribution mechanism. Smithery registration requires a hosted HTTP endpoint (not compatible with our stdio model); submit to Glama or mcp.so instead for discoverability.
