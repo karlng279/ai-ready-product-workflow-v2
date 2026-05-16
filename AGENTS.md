@@ -130,3 +130,12 @@ npx ai-ready-workflow install
 ```
 
 All three options copy every skill folder to `.agent/skills/` in the target directory and optionally append the skill registry to `CLAUDE.md`.
+
+
+<claude-mem-context>
+# Memory Context
+
+# [ai-ready-product-workflow-v2] recent context, 2026-05-16 4:55pm GMT+7
+
+No previous sessions found.
+</claude-mem-context>

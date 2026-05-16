@@ -5,12 +5,84 @@
 # Usage:
 #   ./skills/install.sh                   # installs into current directory
 #   ./skills/install.sh /path/to/project  # installs into specified directory
+#   ./skills/install.sh --cowork          # installs into Claude Desktop Cowork (Local Agent) mode
 #   npx ai-ready-workflow install         # same via npx
+#   npx ai-ready-workflow install-cowork  # install into Claude Desktop Cowork mode
 
 set -euo pipefail
 
-# ── Resolve paths ─────────────────────────────────────────────────────────────
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# ── Detect Cowork mode ────────────────────────────────────────────────────────
+COWORK_MODE=false
+if [ "${1:-}" = "--cowork" ]; then
+  COWORK_MODE=true
+fi
+
+if [ "$COWORK_MODE" = true ]; then
+  # ── Claude Desktop Cowork / Local Agent Mode installer ──────────────────────
+  COWORK_BASE="$HOME/Library/Application Support/Claude/local-agent-mode-sessions/skills-plugin"
+
+  if [ ! -d "$COWORK_BASE" ]; then
+    echo ""
+    echo "  Error: Claude Desktop Cowork skills directory not found."
+    echo "  Expected: $COWORK_BASE"
+    echo "  Make sure Claude Desktop is installed and has been opened at least once."
+    echo ""
+    exit 1
+  fi
+
+  COWORK_SKILLS=$(find "$COWORK_BASE" -maxdepth 3 -type d -name "skills" 2>/dev/null | head -1)
+
+  if [ -z "$COWORK_SKILLS" ]; then
+    echo ""
+    echo "  Error: No skills directory found inside $COWORK_BASE"
+    echo "  Open Claude Desktop → Cowork / Local Agent mode at least once, then re-run."
+    echo ""
+    exit 1
+  fi
+
+  echo ""
+  echo "╔══════════════════════════════════════════════════╗"
+  echo "║   AI-Ready Workflow — Claude Desktop Installer   ║"
+  echo "╚══════════════════════════════════════════════════╝"
+  echo ""
+  echo "  Source : $SCRIPT_DIR"
+  echo "  Target : $COWORK_SKILLS"
+  echo ""
+
+  SKILLS_COPIED=0
+  SKILLS_SKIPPED=0
+
+  for skill_dir in "$SCRIPT_DIR"/*/; do
+    skill_name="$(basename "$skill_dir")"
+    if [ ! -f "$skill_dir/SKILL.md" ]; then
+      continue
+    fi
+    dest="$COWORK_SKILLS/$skill_name"
+    if [ -d "$dest" ]; then
+      echo "  ↻  $skill_name (already installed — skipping)"
+      SKILLS_SKIPPED=$((SKILLS_SKIPPED + 1))
+    else
+      cp -r "$skill_dir" "$dest"
+      echo "  ✓  $skill_name"
+      SKILLS_COPIED=$((SKILLS_COPIED + 1))
+    fi
+  done
+
+  echo ""
+  echo "  Installed : $SKILLS_COPIED skill(s)"
+  if [ "$SKILLS_SKIPPED" -gt 0 ]; then
+    echo "  Skipped   : $SKILLS_SKIPPED already present"
+  fi
+  echo ""
+  echo "  Restart Claude Desktop for the skills to appear in Cowork sessions."
+  echo "  Skills will be available at /mnt/skills/user/ in Local Agent mode."
+  echo ""
+  exit 0
+fi
+
+# ── Standard project installer ────────────────────────────────────────────────
 TARGET_DIR="${1:-$(pwd)}"
 AGENT_SKILLS_DIR="$TARGET_DIR/.agent/skills"
 

@@ -12,6 +12,37 @@ You just installed **16 skills** across 4 frameworks for AI-assisted product dev
 
 ## Agent Setup
 
+### Claude Desktop — Cowork / Local Agent Mode
+
+Skills must be installed into Claude Desktop's skill folder:
+
+```bash
+npx ai-ready-workflow install-cowork
+```
+
+Then **restart Claude Desktop**. All 16 skills will appear under `/mnt/skills/user/` in Local Agent sessions and activate automatically on trigger keywords.
+
+---
+
+### Claude Desktop — Regular Chat (MCP)
+
+Add to `~/Library/Application Support/Claude/claude_desktop_config.json`:
+
+```json
+{
+  "mcpServers": {
+    "ai-ready-workflow": {
+      "command": "npx",
+      "args": ["-y", "ai-ready-workflow", "mcp"]
+    }
+  }
+}
+```
+
+Restart Claude Desktop. Skills are available as MCP prompts (click `+` in chat input) and tools (`list_skills`, `get_skill`).
+
+---
+
 ### Claude Code
 
 Skills activate automatically — no setup needed.

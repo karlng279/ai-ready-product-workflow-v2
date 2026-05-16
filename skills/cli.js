@@ -19,14 +19,15 @@ function printUsage() {
   console.log('  Usage:');
   console.log('    npx ai-ready-workflow install              # install into current directory');
   console.log('    npx ai-ready-workflow install <target>     # install into <target>');
+  console.log('    npx ai-ready-workflow install-cowork       # install into Claude Desktop Cowork mode');
   console.log('    npx ai-ready-workflow mcp                  # start MCP server for Claude Desktop');
   console.log('');
   console.log('  What it does:');
-  console.log('    • Copies 16 skills to <target>/.agent/skills/');
-  console.log('    • Copies agent entry points: AGENTS.md, GEMINI.md, .cursorrules, GETTING_STARTED.md');
-  console.log('    • Appends the skill registry to <target>/CLAUDE.md (if it exists)');
+  console.log('    • install        — copies 16 skills to <target>/.agent/skills/ (Claude Code, Cursor, Codex)');
+  console.log('    • install-cowork — copies 16 skills to Claude Desktop Local Agent / Cowork skills folder');
+  console.log('    • mcp            — starts the MCP server for Claude Desktop regular chat');
   console.log('');
-  console.log('  Supports: Claude Code, OpenAI Codex, Gemini Code Assist, Cursor');
+  console.log('  Supports: Claude Code, Claude Desktop (chat + Cowork), OpenAI Codex, Gemini, Cursor');
   console.log('');
 }
 
@@ -38,6 +39,17 @@ if (!command || command === 'help' || command === '--help' || command === '-h') 
 if (command === 'mcp') {
   require('./mcp-server.js');
   return;
+}
+
+if (command === 'install-cowork') {
+  if (process.platform !== 'darwin') {
+    console.error('  install-cowork is only supported on macOS (Claude Desktop for Mac).');
+    process.exit(1);
+  }
+  const sh = path.join(SCRIPT_DIR, 'install.sh');
+  fs.chmodSync(sh, '755');
+  execSync(`bash "${sh}" --cowork`, { stdio: 'inherit' });
+  process.exit(0);
 }
 
 if (command !== 'install') {
