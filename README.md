@@ -206,6 +206,6 @@ downstream: usm.md
 
 ## License
 
-**Proprietary — All Rights Reserved**
+**MIT License**
 
-Copyright © 2026 Karl Nguyen. Unauthorized copying, distribution, or modification is prohibited without explicit written permission.
+Copyright © 2026 Karl Nguyen. Licensed under the MIT License. See [LICENSE](LICENSE) for details.
