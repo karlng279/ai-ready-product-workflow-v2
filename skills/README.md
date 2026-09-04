@@ -4,11 +4,11 @@
 [![license](https://img.shields.io/npm/l/ai-ready-workflow)](https://github.com/karlng279/ai-ready-product-workflow-v2/blob/main/LICENSE)
 [![node](https://img.shields.io/node/v/ai-ready-workflow)](https://www.npmjs.com/package/ai-ready-workflow)
 
-Agent-agnostic skill library for AI-assisted product development. One install command gives your AI agent structured methodology across PM strategy, PO pipeline, design, and validation.
+Agent-agnostic skill library for AI-assisted product development. One install command gives your AI agent structured methodology across PM strategy, PO pipeline, design, validation, and artifact sync.
 
 **What you get:**
-- 16 skills across 4 frameworks (PM, PO, Design, UI/UX)
-- 5 pipeline slash commands (Claude Code)
+- 17 skills across 4 frameworks (PM, PO, Design, UI/UX) + artifact sync
+- 6 pipeline slash commands (Claude Code)
 - Entry point files for all 4 major AI agents
 - Per-agent onboarding guide
 
@@ -38,7 +38,7 @@ Add all 16 skills to Claude Desktop — no cloning required.
 
 **2. Fully quit and reopen Claude Desktop** (Cmd+Q on Mac, then reopen).
 
-**3. Type `/` in any conversation** — all 16 skills appear as selectable prompt templates.
+**3. Type `/` in any conversation** — all 17 skills appear as selectable prompt templates.
 
 Each skill loads its full methodology into the conversation. Optionally add your own brief or context when selecting a prompt.
 
@@ -52,7 +52,7 @@ Each skill loads its full methodology into the conversation. Optionally add your
 npx ai-ready-workflow install
 ```
 
-Installs all 16 skills into `.agent/skills/` in the current directory and appends the skill registry to `CLAUDE.md` (if it exists).
+Installs all 17 skills into `.agent/skills/` in the current directory and appends the skill registry to `CLAUDE.md` (if it exists).
 
 To install into a specific project:
 
@@ -125,14 +125,16 @@ Full pipeline: `/po-pipeline` slash command chains all 5 stages automatically.
 
 ---
 
-### Validation
+### Validation & Sync
 
-| Skill | Trigger Keywords | What It Checks |
-|-------|-----------------|----------------|
+| Skill | Trigger Keywords | What It Does |
+|-------|-----------------|--------------|
 | `validate-prd` | validate PRD, PRD quality gate, PRD completeness check | PRD sections, measurable goals, personas, no placeholder text |
 | `validate-usd` | validate USD, acceptance criteria check, AC completeness | Atomic ACs, observable outcomes, NFR metrics, empty/error state coverage |
+| `artifact-sync` | sync check, stale artifacts, ripple impact, upstream changed, downstream stale, artifact drift, propagate changes | Detects stale artifacts when an upstream changes; produces Stale Impact Report with surgical per-artifact patches |
 
 Full validation: `/validate-artifacts` slash command runs all quality gates.
+Sync check: `/sync-check {feature-name} {changed-artifact-path}` detects and patches stale artifacts after any pipeline change.
 
 ---
 
@@ -224,6 +226,7 @@ Available in `.claude/commands/`:
 | `/po-pipeline` | Run full PO pipeline: Brief → PRD → USM → USL → USD → UAT |
 | `/design-pipeline` | Generate wireframes and component specs from USD |
 | `/validate-artifacts` | Quality gate check on all feature artifacts |
+| `/sync-check` | Detect stale artifacts after a change; generate surgical sync patches |
 | `/pm-strategy` | Start a product strategy session |
 | `/pm-discovery` | Start a discovery sprint session |
 
@@ -242,5 +245,13 @@ status: draft
 generated-by: po-brief-to-prd
 upstream: brief.md
 downstream: usm.md
+# Sync fields (tracked by artifact-sync skill)
+last_modified: 2026-05-22
+change_summary: "One-sentence description of what changed"
+change_type: additive        # additive | reductive | interface | structural
+sync_status: in_sync         # in_sync | stale | pending_review | diverged
+based_on_upstream_version: 0.1
 ---
 ```
+
+When an artifact is modified mid-pipeline, run `/sync-check` to detect all stale downstream and upstream artifacts and apply surgical patches.

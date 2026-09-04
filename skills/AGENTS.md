@@ -26,9 +26,10 @@ Skills are in `skills/*/SKILL.md`. Read the relevant SKILL.md before generating 
 - `skills/po-usl-to-usd/SKILL.md` — USL stories to User Story Details / Acceptance Criteria (AC-XXX)
 - `skills/po-usd-to-uat/SKILL.md` — USD acceptance criteria to UAT BDD test cases (TC-XXX)
 
-### Validation
+### Validation & Sync
 - `skills/validate-prd/SKILL.md` — PRD quality gate checker
 - `skills/validate-usd/SKILL.md` — USD / acceptance criteria completeness checker
+- `skills/artifact-sync/SKILL.md` — Stale artifact detection and surgical sync patch generation after any pipeline change
 
 ### Design
 - `skills/design-wireframe/SKILL.md` — WF-XXX wireframe format, ASCII conventions, AC mapping
@@ -109,6 +110,7 @@ When working in Claude Code, these pipeline commands are available in `.claude/c
 | `/po-pipeline` | Run full PO pipeline: Brief → PRD → USM → USL → USD → UAT |
 | `/design-pipeline` | Generate wireframes and component specs from USD |
 | `/validate-artifacts` | Quality gate check on all feature artifacts |
+| `/sync-check` | Detect stale artifacts after a change and generate surgical sync patches |
 | `/pm-strategy` | Start a product strategy session |
 | `/pm-discovery` | Start a discovery sprint session |
 
