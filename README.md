@@ -4,7 +4,7 @@
 
 [![npm version](https://img.shields.io/npm/v/ai-ready-workflow)](https://www.npmjs.com/package/ai-ready-workflow)
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
-[![Skills](https://img.shields.io/badge/skills-16-blue)]()
+[![Skills](https://img.shields.io/badge/skills-17-blue)]()
 [![Agents](https://img.shields.io/badge/agents-Claude%20%7C%20Codex%20%7C%20Gemini%20%7C%20Cursor-purple)]()
 
 ---
@@ -13,7 +13,7 @@
 
 A multi-framework knowledge base that gives AI agents (Claude Code, Codex, Gemini, Cursor) structured methodology for every stage of product development — from strategy to code-ready specs.
 
-**4 frameworks. 16 skills. 5 pipeline commands. One traceable artifact chain.**
+**4 frameworks. 17 skills. 6 pipeline commands. One traceable artifact chain.**
 
 ---
 
@@ -45,7 +45,7 @@ npx ai-ready-workflow install
 
 | File / Folder | Used by |
 |---|---|
-| `.agent/skills/` (16 skill folders) | Claude Code (auto-loaded) |
+| `.agent/skills/` (17 skill folders) | Claude Code (auto-loaded) |
 | `AGENTS.md` | OpenAI Codex |
 | `GEMINI.md` | Gemini Code Assist |
 | `.cursorrules` | Cursor (auto-loaded on project open) |
@@ -85,11 +85,12 @@ Safe to re-run — existing files are skipped.
 | `design-component-spec` | component spec, COMP-XXX, ShadCN component, design to code |
 | `ui-ux-pro-max` | UI design, color palette, typography, chart type, design system — forked from [uupm.cc](https://www.uupm.cc/) |
 
-### Validation
+### Validation & Sync
 | Skill | Triggers |
 |---|---|
 | `validate-prd` | validate PRD, PRD quality gate |
 | `validate-usd` | validate USD, acceptance criteria check |
+| `artifact-sync` | sync check, stale artifacts, ripple impact, upstream changed, downstream stale, artifact drift, propagate changes |
 
 ---
 
@@ -100,6 +101,7 @@ Safe to re-run — existing files are skipped.
 | `/po-pipeline` | Full PO pipeline: Brief → PRD → USM → USL → USD → UAT |
 | `/design-pipeline` | Wireframes + component specs from USD |
 | `/validate-artifacts` | Quality gate check on all feature artifacts |
+| `/sync-check` | Detect stale artifacts after a change; generate surgical sync patches |
 | `/pm-strategy` | Product strategy session |
 | `/pm-discovery` | Discovery sprint session |
 
@@ -152,7 +154,7 @@ ai-ready-product-workflow-v2/
 ├── GEMINI.md                   # Gemini Code Assist skill index
 ├── .cursorrules                # Cursor rules file
 │
-├── skills/                     # Agent-agnostic skill source of truth (16 skills)
+├── skills/                     # Agent-agnostic skill source of truth (17 skills)
 │   ├── install.sh              # Mac/Linux installer
 │   ├── install.ps1             # Windows installer
 │   ├── cli.js + package.json   # npx ai-ready-workflow install
@@ -199,6 +201,12 @@ status: draft
 generated-by: po-brief-to-prd
 upstream: brief.md
 downstream: usm.md
+# Sync fields (tracked by artifact-sync skill)
+last_modified: 2026-05-22
+change_summary: "One-sentence description of what changed"
+change_type: additive        # additive | reductive | interface | structural
+sync_status: in_sync         # in_sync | stale | pending_review | diverged
+based_on_upstream_version: 0.1
 ---
 ```
 

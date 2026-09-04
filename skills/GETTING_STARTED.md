@@ -1,9 +1,9 @@
 # Getting Started — AI-Ready Product Workflow
 
-You just installed **16 skills** across 4 frameworks for AI-assisted product development.
+You just installed **17 skills** across 4 frameworks for AI-assisted product development.
 
 **What was installed:**
-- `.agent/skills/` — 16 skill folders in your project root (Claude Code auto-loads from here)
+- `.agent/skills/` — 17 skill folders in your project root (Claude Code auto-loads from here)
 - `AGENTS.md` — skill index for OpenAI Codex / ChatGPT
 - `GEMINI.md` — skill index for Gemini Code Assist
 - `.cursorrules` — rules file auto-loaded by Cursor

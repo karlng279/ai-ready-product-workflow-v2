@@ -16,7 +16,7 @@ npx ai-ready-workflow install
 
 | File / Folder | Used by |
 |---|---|
-| `.agent/skills/` (16 skill folders) | Claude Code (auto-loaded on keyword match) |
+| `.agent/skills/` (17 skill folders) | Claude Code (auto-loaded on keyword match) |
 | `AGENTS.md` | OpenAI Codex — "Read AGENTS.md then help me write a PRD" |
 | `GEMINI.md` | Gemini Code Assist — "Read GEMINI.md then help me write a PRD" |
 | `.cursorrules` | Cursor (auto-loaded on project open) |
@@ -111,6 +111,25 @@ Runs quality gates on all artifacts — PRD, USD, wireframes, component specs �
 
 ---
 
+### Path 5b — Artifact Sync (Changed your mind mid-pipeline?)
+
+Use when: You've modified an artifact after downstream artifacts were already written — e.g., redesigned a wireframe after USD and UAT exist, or updated a PRD requirement after design is complete.
+
+```
+/sync-check {feature-name} {changed-artifact-path}
+```
+
+Walks the full dependency graph in **both directions** (forward to downstream, backward to upstream), identifies every artifact that references the changed content, and generates a **surgical patch per artifact** — no full regenerations.
+
+1. Update the changed artifact's frontmatter: bump `version`, write `change_summary`, set `change_type`
+2. Run `/sync-check {feature-name} design/wireframes.md` (or whichever artifact changed)
+3. Review the Stale Impact Report — HIGH severity items need your decision before patching
+4. Apply approved patches — each artifact gets `sync_status: in_sync` restored
+
+**Relevant skill:** `artifact-sync`
+
+---
+
 ### Path 6 — Analytics & Growth (Post-launch PM work)
 
 Use when: The product is live and you are working on metrics, growth, or GTM.
@@ -137,9 +156,9 @@ PM Discovery (/pm-discovery)
 PO Pipeline (/po-pipeline): Brief → PRD → USM → USL → USD → UAT
     ↓
 Design Pipeline (/design-pipeline): USD → WF-XXX → COMP-XXX
-    ↓
-Code Implementation (codebase-framework)
-    ↓
+    ↓                                        ↕  changed your mind?
+Code Implementation (codebase-framework)    /sync-check propagates
+    ↓                                        changes forward + backward
 Validation (/validate-artifacts)
     ↓
 Analytics & Growth (pm-data-analytics, pm-marketing-growth)
@@ -182,6 +201,7 @@ Skills auto-load via `.agent/skills/` when you mention a trigger keyword. Use sl
 | `/po-pipeline` | Brief → PRD → USM → USL → USD → UAT |
 | `/design-pipeline` | USD → Wireframes → Component Specs |
 | `/validate-artifacts` | Quality gate check on all feature artifacts |
+| `/sync-check` | Detect stale artifacts after a change; apply surgical patches |
 | `/pm-strategy` | Product strategy session |
 | `/pm-discovery` | Discovery sprint session |
 

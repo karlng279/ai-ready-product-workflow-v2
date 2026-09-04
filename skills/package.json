@@ -1,7 +1,7 @@
 {
   "name": "ai-ready-workflow",
-  "version": "0.1.2",
-  "description": "AI-ready product workflow skills for Claude Code and other AI agents. 16 skills across PM, PO, design, and validation pipelines.",
+  "version": "0.2.0",
+  "description": "AI-ready product workflow skills for Claude Code and other AI agents. 17 skills across PM, PO, design, validation, and artifact sync pipelines.",
   "keywords": [
     "claude-code",
     "ai-agent",

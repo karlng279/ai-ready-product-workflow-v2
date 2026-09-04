@@ -33,11 +33,12 @@ Skills live in `skills/*/SKILL.md` (agent-agnostic source of truth). Claude Code
 | `po-usl-to-usd` | user story details, acceptance criteria, AC-XXX, USD |
 | `po-usd-to-uat` | UAT, test cases, BDD, given-when-then, test scenarios |
 
-### Validation
+### Validation & Sync
 | Skill | Triggers |
 |---|---|
 | `validate-prd` | validate PRD, PRD quality gate, PRD completeness check |
 | `validate-usd` | validate USD, acceptance criteria check, AC completeness |
+| `artifact-sync` | sync check, artifact sync, stale artifacts, ripple impact, upstream changed, downstream stale, artifact drift, check dependencies, propagate changes |
 
 ### Design
 | Skill | Triggers |
@@ -64,6 +65,7 @@ Skills live in `skills/*/SKILL.md` (agent-agnostic source of truth). Claude Code
 | `/po-pipeline` | Run full PO pipeline: brief → PRD → USM → USL → USD → UAT |
 | `/design-pipeline` | Generate wireframes and component specs from USD |
 | `/validate-artifacts` | Quality gate check on current feature artifacts |
+| `/sync-check` | Detect stale artifacts after a change and generate surgical sync patches |
 | `/pm-strategy` | Start a product strategy session |
 | `/pm-discovery` | Start a discovery sprint session |
 
