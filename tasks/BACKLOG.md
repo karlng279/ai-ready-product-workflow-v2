@@ -1,0 +1,51 @@
+# BACKLOG
+
+The full plan, one row per unit of work. **Card files are authored just-in-time** — a card written before its
+dependencies land encodes guesses. When you claim a row with no card file, write the card first from this row
+plus the sections it cites, using `tasks/cards/TEMPLATE.md`.
+
+Card IDs encode the milestone: `M8-*` was artifact-sync and the doc reconciliation, `M9-*` is playbook
+adoption and the cleanup it surfaced. The milestone is an ID range; there is no separate phase structure.
+
+Status: `todo` · `in-flight` · `done` · `blocked`
+Claim a card in `docs/STATE.md` and commit that line **before** starting.
+
+Phases 0–7 are complete; their detail is in [`docs/history/phases-0-7.md`](../docs/history/phases-0-7.md).
+
+---
+
+## M8 — Artifact sync and agent-doc reconciliation
+
+| ID | Title | Status | Blocked by | File set |
+|---|---|---|---|---|
+| M8-01 | `skills/artifact-sync/SKILL.md` — staleness detection and surgical patches | done | — | `skills/artifact-sync/` |
+| M8-02 | `.agent/skills/artifact-sync` symlink | done | M8-01 | `.agent/skills/` |
+| M8-03 | `.claude/commands/sync-check.md` — 6th slash command | done | M8-01 | `.claude/commands/sync-check.md` |
+| M8-04 | Add artifact-sync + `/sync-check` to the `skills/` agent indexes | done | M8-01 | `skills/{AGENTS.md,GEMINI.md,.cursorrules}` |
+| M8-05 | Sync the root agent indexes with their `skills/` twins | done | M8-04 | `AGENTS.md`, `GEMINI.md`, `.cursorrules` |
+| M8-06 | Correct the wireframe output path everywhere (see decision 0001) | done | — | 11 docs + 2 commands |
+| M8-07 | Correct "TanStack Query" → TanStack Table in 9 documents | done | — | agent indexes, `README.md`, `GETTING_STARTED.md` |
+| M8-08 | Correct PM `artifact:` values (see decision 0002) | done | — | `.claude/commands/pm-*.md` |
+| M8-09 | Add artifact-sync to the installer registry tables | done | M8-01 | `skills/install.{sh,ps1}` |
+| M8-10 | `skills/cli.js` help banner 16 → 17 | done | — | `skills/cli.js` |
+| M8-11 | Correct stale `ui-ux-pro-max` frontmatter counts | done | — | `skills/ui-ux-pro-max/SKILL.md` |
+
+---
+
+## M9 — Playbook adoption and the cleanup it surfaced
+
+| ID | Title | Status | Blocked by | File set |
+|---|---|---|---|---|
+| M9-01 | Adopt the playbook layout: `PRD`/`ARCHITECTURE` split, `docs/`, `tasks/`, `tests/` | done | — | `CLAUDE.md`, `PRD.md`, `ARCHITECTURE.md`, `docs/**`, `tasks/**`, `tests/**` |
+| M9-02 | Sweep `landing-page/index.html` — 16→17 skills, 5→6 commands (8 occurrences) | blocked | owner Q3 | `landing-page/index.html` |
+| M9-03 | Delete the 65 claude-mem stub `CLAUDE.md` files; gitignore them | blocked | owner Q5 | 65 `**/CLAUDE.md`, `.gitignore` |
+| M9-04 | Fix 4 dead links to a plan file that never existed | blocked | owner Q8 | `design-framework/design-rules/README.md`, `design-framework/themes/*.md` |
+| M9-05 | Write `po-framework/stage2-usm/template.md` | todo | — | `po-framework/stage2-usm/template.md` |
+| M9-06 | Resolve `WF-XXX` placeholders in 12 USD Design Reference tables | blocked | owner Q4 | `features/Export Customs Clearances/po/usd/*.md` |
+| M9-07 | Publish `0.2.0` — bump `package-lock.json`, sweep sites, tag `v0.2.0` | blocked | owner Q2 | `skills/package{.json,-lock.json}`, `README.md`, `landing-page/` |
+| M9-08 | Decide the npm knowledge-base gap: ship framework dirs, or degrade gracefully | blocked | owner Q1 | `skills/package.json` or all 17 `SKILL.md` |
+| M9-09 | Build a `design-interactions` skill, or document stage 3 as permanently manual | blocked | owner Q6 | `skills/design-interactions/` or `ARCHITECTURE 5.2` |
+| M9-10 | Apply the five `artifact-sync` sync fields to artifacts, or drop them from the spec | blocked | owner Q7 | `PRD 5.4`, `features/**` |
+| M9-11 | Clear the 38 rotted links allowlisted in `tests/known_dead_links.txt` | todo | — | `design-framework/**`, `po-framework/README.md`, `codebase-framework/component-patterns/animations.md` |
+
+Owner questions Q1–Q9 are in [`docs/STATE.md`](../docs/STATE.md) → Waiting on owner.

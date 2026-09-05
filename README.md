@@ -158,30 +158,52 @@ features/{feature-name}/
 
 ## Repository Structure
 
-`skills/` is both the skill source of truth and the npm package root. `.agent/skills/` holds symlinks into it. Root `AGENTS.md` / `GEMINI.md` / `.cursorrules` and their `skills/` twins are kept byte-identical.
+This repo follows [`docs/multi-session-repo-playbook.md`](docs/multi-session-repo-playbook.md): rules in
+`CLAUDE.md`, specification split into `PRD.md` (meaning) and `ARCHITECTURE.md` (mechanism), status on a board,
+and both asserted by tests.
+
+`skills/` is both the skill source of truth and the npm package root. `.agent/skills/` holds symlinks into it.
+Root `AGENTS.md` / `GEMINI.md` / `.cursorrules` and their `skills/` twins are kept byte-identical.
 
 ```
 ai-ready-product-workflow-v2/
-├── CLAUDE.md                   # Claude Code framework rulebook
-├── AGENTS.md                   # OpenAI Codex / Agents skill index
-├── GEMINI.md                   # Gemini Code Assist skill index
-├── .cursorrules                # Cursor rules file
+├── CLAUDE.md                   # always-on rules (rules, not knowledge)
+├── PRD.md                      # specification: what artifacts MEAN
+├── ARCHITECTURE.md             # specification: how the repo WORKS
+├── AGENTS.md GEMINI.md .cursorrules   # per-agent skill indexes
 │
-├── skills/                     # Agent-agnostic skill source of truth (17 skills)
-│   ├── install.sh              # Mac/Linux installer
-│   ├── install.ps1             # Windows installer
-│   ├── cli.js + package.json   # npx ai-ready-workflow install
+├── docs/
+│   ├── INDEX.md                # task → the exact sections it needs
+│   ├── STATE.md                # done · in flight · next · blocked · waiting on owner
+│   ├── decisions/              # NNNN-*.md, one per decision
+│   ├── history/                # superseded plans, kept as record
+│   └── multi-session-repo-playbook.md
+├── tasks/
+│   ├── BACKLOG.md              # the plan, one row per unit of work
+│   ├── cards/                  # one file per unit, authored just-in-time
+│   └── lessons.md              # corrections, so they are not repeated
+├── tests/                      # test_docs.py · test_prohibitions.py
+│
+├── skills/                     # skill source of truth + npm package (17 skills)
+│   ├── install.sh install.ps1  # installers
+│   ├── cli.js mcp-server.js    # npx ai-ready-workflow
 │   └── {skill-name}/SKILL.md
-│
 ├── .agent/skills/              # Claude Code entry point (symlinks → skills/)
-├── .claude/commands/           # Claude Code slash commands (6 pipeline commands)
+├── .claude/commands/           # 6 pipeline slash commands
 │
 ├── pm-framework/               # PM methodology knowledge base
 ├── po-framework/               # PO pipeline knowledge base
-├── design-framework/           # Design system knowledge base
+├── design-framework/           # design system knowledge base
 ├── codebase-framework/         # Next.js 15 implementation patterns
-└── features/                   # Generated feature artifacts
+└── features/                   # generated feature artifacts
 ```
+
+Run the checks before and after any change:
+
+```bash
+python3 tests/test_docs.py && python3 tests/test_prohibitions.py
+```
+
 
 ---
 
@@ -218,7 +240,7 @@ downstream: usm.md
 ```
 
 The `artifact-sync` skill additionally defines five **sync fields**. They are specified in
-[`documentation/artifact-sync-plan.md`](documentation/artifact-sync-plan.md) but are **not yet applied to any
+[`docs/history/artifact-sync-plan.md`](docs/history/artifact-sync-plan.md) but are **not yet applied to any
 artifact on disk** — treat them as the target state, not an existing convention:
 
 ```yaml

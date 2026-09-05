@@ -259,7 +259,7 @@ downstream: usm.md
 ```
 
 The `artifact-sync` skill additionally defines five **sync fields**. They are specified in
-[`documentation/artifact-sync-plan.md`](documentation/artifact-sync-plan.md) but are **not yet applied to any
+[the artifact-sync plan](https://github.com/karlng279/ai-ready-product-workflow-v2/blob/main/docs/history/artifact-sync-plan.md) but are **not yet applied to any
 artifact on disk** — treat them as the target state, not an existing convention:
 
 ```yaml

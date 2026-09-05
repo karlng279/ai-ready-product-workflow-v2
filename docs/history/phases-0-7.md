@@ -1,8 +1,8 @@
-# Restructure Backlog — AI-Ready Product Workflow v2
+# Phases 0–7 — completed build-out
 
-Tracks implementation progress of the restructure plan defined in [restructure-plan-v2.md](restructure-plan-v2.md).
-
-**Legend:** ✅ Done | 🔄 In Progress | ⬜ Not Started
+Record only. Superseded by `tasks/BACKLOG.md`, which tracks current work as cards.
+These phases delivered the four frameworks, 16 skills, 5 slash commands, the distribution layer
+and the v0.1.1 multi-agent fix. Kept for the reasoning, not as a plan.
 
 ---
 
@@ -214,58 +214,3 @@ Tracks implementation progress of the restructure plan defined in [restructure-p
 | 7e.12 | Verify: `npx ai-ready-workflow install` copies entry points for all 4 agents | ✅ Done |
 
 ---
-
-## Phase 8 — Artifact Sync + v0.2.0
-
-**Goal:** Add change-propagation to the framework (17th skill + 6th slash command), then publish as `0.2.0`.
-**Plan:** [artifact-sync-plan.md](artifact-sync-plan.md)
-**Commit:** `feat: add artifact-sync skill and update agent docs (16->17 skills)` (`e498c31`)
-
-| # | Task | Status |
-|---|------|--------|
-| 8.1 | `skills/artifact-sync/SKILL.md` — staleness detection + surgical patch generation | ✅ Done |
-| 8.2 | `.agent/skills/artifact-sync` symlink | ✅ Done |
-| 8.3 | `.claude/commands/sync-check.md` — 6th slash command | ✅ Done |
-| 8.4 | `skills/AGENTS.md`, `skills/GEMINI.md`, `skills/.cursorrules` — add artifact-sync + `/sync-check` | ✅ Done |
-| 8.5 | Root `AGENTS.md`, `GEMINI.md`, `.cursorrules` — sync with the `skills/` twins | ✅ Done |
-| 8.6 | Root `CLAUDE.md` — rewrite as session rulebook (topology, contracts, gotchas) | ✅ Done |
-| 8.7 | Correct the wireframe output path across all agent docs and slash commands (`design/WF-XXX.md` → `design/wireframes.md`) | ✅ Done |
-| 8.8 | `skills/install.sh` + `skills/install.ps1` — add `artifact-sync` to the hardcoded CLAUDE.md registry block | ✅ Done |
-| 8.9 | `skills/cli.js` — help banner 16 → 17 skills | ✅ Done |
-| 8.10 | `skills/ui-ux-pro-max/SKILL.md` — correct stale frontmatter database counts | ✅ Done |
-| 8.11 | `skills/package.json` — bump to `0.2.0` | ✅ Done |
-| 8.12 | Apply the 5 `artifact-sync` frontmatter fields to newly generated artifacts | ⬜ Not Started |
-| 8.13 | `landing-page/index.html` — 16 → 17 skills, 5 → 6 slash commands (8 occurrences) | ⬜ Not Started |
-| 8.14 | Tag `v0.2.0` and push to trigger `.github/workflows/npm-publish.yml` | ⬜ Not Started |
-
----
-
-## Known Gaps (not yet scheduled)
-
-| # | Gap | Note |
-|---|-----|------|
-| G.1 | `po-framework/stage2-usm/template.md` missing | Every other PO stage has a template |
-| G.2 | No `design-interactions` skill | `design-framework/stage3-interactions/` has full rules + templates, but stage 3 is manual; artifacts on disk are stamped `generated-by: design-interactions` |
-| G.3 | 65 committed claude-mem stub `CLAUDE.md` files | 169-byte `<claude-mem-context>` blocks in nearly every directory; not gitignored. 66 `CLAUDE.md` files are tracked; only the root one is real |
-| G.4 | Junk directories | `skills/documentation/`, `skills/skills/`, `.agent/skills/documentation/`, `.agent/skills/.agent/skills/`, `design-framework/design-framework/design-rules/` — each holds only a claude-mem stub |
-| G.5 | `codebase-framework/templates/` and `testing-patterns/` empty | `.gitkeep` only |
-| G.6 | npm package does not ship the framework knowledge bases | Every `SKILL.md` points at `po-framework/…`, `pm-framework/…` etc., but `package.json` `files` ships only `*/SKILL.md` + the ui-ux-pro-max assets. In an installed project those paths do not exist |
-| G.7 | `skills/package-lock.json` still says `0.1.2` | `skills/package.json` says `0.2.0`; both must be bumped before tagging |
-| G.8 | USD → wireframe traceability is unresolved | All 12 `po/usd/ST-XXX.md` files carry the literal placeholder `WF-XXX` in their Design Reference column |
-| G.9 | `codebase-framework/README.md` contradicts itself on Next.js version | `:42` says "Next.js 15 with App Router"; `:401` is titled "Why Next.js 14?" |
-
----
-
-## Summary
-
-| Phase | Description | Status |
-|-------|-------------|--------|
-| 0 | Foundation (CLAUDE.md, skills/, agent indexes, pm-framework scaffold) | ✅ Done |
-| 1 | PM Framework knowledge base (rules, templates, examples) | ✅ Done |
-| 2 | PM Skills (6 SKILL.md files) | ✅ Done |
-| 3 | PO Automation Skills (7 SKILL.md files) | ✅ Done |
-| 4 | Design Skills (2 SKILL.md files) | ✅ Done |
-| 5 | Slash Commands (5 pipeline commands) | ✅ Done |
-| 6 | Distribution Layer (install.sh, package.json) | ✅ Done |
-| 7 | Documentation & Agent Index Updates | ✅ Done |
-| 8 | Artifact Sync + v0.2.0 (skill, `/sync-check`, agent doc refresh) | 🔄 In Progress — publish pending |

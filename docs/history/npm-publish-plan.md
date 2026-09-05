@@ -37,7 +37,7 @@ Root cause: `skills/package.json` existed locally but was never published. Two a
 
 Full fix scope is in [npm-docs-plan.md](npm-docs-plan.md).
 
-**0.1.1 will fix this** — see Phase 7e in [backlog.md](backlog.md).
+**0.1.1 will fix this** — see Phase 7e in [backlog.md](../../tasks/BACKLOG.md).
 
 ---
 

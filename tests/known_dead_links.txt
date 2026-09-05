@@ -1,0 +1,50 @@
+# Known dead links — allowlisted, with a reason each
+#
+# Format:  <source md>  ->  <link target>  # reason
+# tests/test_docs.py skips these, and FAILS if an entry stops being dead —
+# so the list cannot rot silently. Never add a row without fixing or tracking it.
+#
+# 'rot' entries are tracked as card M9-11 in tasks/BACKLOG.md.
+
+codebase-framework/component-patterns/animations.md -> ../../design-framework/design-rules/animation-system.md  # rot — target was planned or removed; see M9-11
+design-framework/QUICK_START.md -> UI_UX_PROMAX_INTEGRATION.md  # rot — target was planned or removed; see M9-11
+design-framework/README.md -> UI_UX_PROMAX_INTEGRATION.md  # rot — target was planned or removed; see M9-11
+design-framework/design-rules/README.md -> ../../documentation/design-framework-uiux-promax-integration-plan.md  # rot — target was planned or removed; see M9-11
+design-framework/design-rules/README.md -> ../UI_UX_PROMAX_INTEGRATION.md  # rot — target was planned or removed; see M9-11
+design-framework/design-rules/README.md -> ../design-rules-archive/  # rot — target was planned or removed; see M9-11
+design-framework/design-rules/naming-conventions.md -> ../../TRACEABILITY_SYSTEM.md  # rot — target was planned or removed; see M9-11
+design-framework/design-rules/naming-conventions.md -> component-standards.md  # rot — target was planned or removed; see M9-11
+design-framework/design-rules/responsive.md -> layout-system.md  # rot — target was planned or removed; see M9-11
+design-framework/design-rules/responsive.md -> spacing-system.md  # rot — target was planned or removed; see M9-11
+design-framework/design-rules/responsive.md -> typography.md  # rot — target was planned or removed; see M9-11
+design-framework/patterns/README.md -> ../UI_UX_PROMAX_INTEGRATION.md  # rot — target was planned or removed; see M9-11
+design-framework/patterns/data-display-patterns.md -> ../design-rules/component-standards.md  # rot — target was planned or removed; see M9-11
+design-framework/patterns/data-display-patterns.md -> ../design-rules/responsive-design.md  # rot — target was planned or removed; see M9-11
+design-framework/patterns/feedback-patterns.md -> ../design-rules/component-standards.md  # rot — target was planned or removed; see M9-11
+design-framework/patterns/form-patterns.md -> ../design-rules/component-standards.md  # rot — target was planned or removed; see M9-11
+design-framework/patterns/navigation-patterns.md -> ../UI_UX_PROMAX_INTEGRATION.md  # rot — target was planned or removed; see M9-11
+design-framework/patterns/navigation-patterns.md -> ../stage2-component-specs/COMP-AUTH-001-login-modal.md  # rot — target was planned or removed; see M9-11
+design-framework/patterns/navigation-patterns.md -> ../stage2-component-specs/COMP-AUTH-002-user-menu.md  # rot — target was planned or removed; see M9-11
+design-framework/patterns/responsive-patterns.md -> ../design-rules/component-standards.md  # rot — target was planned or removed; see M9-11
+design-framework/patterns/responsive-patterns.md -> ../design-rules/layout-system.md  # rot — target was planned or removed; see M9-11
+design-framework/patterns/responsive-patterns.md -> ../design-rules/responsive-design.md  # rot — target was planned or removed; see M9-11
+design-framework/templates/dashboard-template.md -> ../design-rules/component-standards.md  # rot — target was planned or removed; see M9-11
+design-framework/templates/dashboard-template.md -> ../design-rules/layout-system.md  # rot — target was planned or removed; see M9-11
+design-framework/templates/detail-view-template.md -> ../design-rules/component-standards.md  # rot — target was planned or removed; see M9-11
+design-framework/templates/detail-view-template.md -> ../design-rules/layout-system.md  # rot — target was planned or removed; see M9-11
+design-framework/templates/form-layout-template.md -> ../design-rules/component-standards.md  # rot — target was planned or removed; see M9-11
+design-framework/templates/modal-template.md -> ../design-rules/component-standards.md  # rot — target was planned or removed; see M9-11
+design-framework/themes/corporate.md -> ../../documentation/design-framework-uiux-promax-integration-plan.md  # rot — target was planned or removed; see M9-11
+design-framework/themes/corporate.md -> ../UI_UX_PROMAX_INTEGRATION.md  # rot — target was planned or removed; see M9-11
+design-framework/themes/ecommerce.md -> ../../documentation/design-framework-uiux-promax-integration-plan.md  # rot — target was planned or removed; see M9-11
+design-framework/themes/ecommerce.md -> ../UI_UX_PROMAX_INTEGRATION.md  # rot — target was planned or removed; see M9-11
+design-framework/themes/erp.md -> ../../documentation/design-framework-uiux-promax-integration-plan.md  # rot — target was planned or removed; see M9-11
+design-framework/themes/erp.md -> ../UI_UX_PROMAX_INTEGRATION.md  # rot — target was planned or removed; see M9-11
+design-framework/themes/mds.md -> ../../documentation/design-framework-uiux-promax-integration-plan.md  # rot — target was planned or removed; see M9-11
+design-framework/themes/mds.md -> ../UI_UX_PROMAX_INTEGRATION.md  # rot — target was planned or removed; see M9-11
+po-framework/README.md -> ../features/one-api-portal-mvp  # rot — target was planned or removed; see M9-11
+po-framework/README.md -> po-knowledge-hub/  # rot — target was planned or removed; see M9-11
+po-framework/stage4-usd/example.md -> ../usl.md#st-001-open-shipment-overview-page  # illustrative — resolves only once copied into a feature folder
+po-framework/stage4-usd/template.md -> ../usl.md#st-xxx-story-summary  # illustrative — resolves only once copied into a feature folder
+po-framework/stage5-uat/example.md -> ../usd/ST-001.md  # illustrative — resolves only once copied into a feature folder
+po-framework/stage5-uat/template.md -> ../usd/ST-XXX.md  # illustrative — resolves only once copied into a feature folder

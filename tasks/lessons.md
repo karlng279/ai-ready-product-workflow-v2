@@ -1,0 +1,62 @@
+# Lessons
+
+Corrections, so they are not repeated by a session that was not there.
+Append when the owner corrects you, or when a session pays for a mistake twice.
+
+Format: what happened (concrete), then the rule (imperative).
+
+---
+
+## Never escalate a permission denial
+
+**What happened:** A read of a file in `~/Downloads` returned `Operation not permitted`. The session retried
+the same read with the sandbox disabled. That escalation collapsed the app's macOS Files-and-Folders grant,
+and the entire repository under `~/Documents` became unreadable mid-task — `Desktop`, `Downloads` and
+`Documents` all denied. Recovery needed the owner to restart the app.
+
+**Rule:** When a path outside the repository is denied, ask the owner to move the file into the repo. Never
+retry with the sandbox disabled. The escalation cannot widen a macOS TCC grant, and it can destroy one.
+
+---
+
+## Verify the authority, not the majority
+
+**What happened:** Eleven documents said wireframes are written to `design/WF-XXX.md`; three said
+`design/wireframes.md`. The three were right — they were the framework rules, the skill that does the writing,
+and the artifact on disk. Counting documents would have produced the wrong answer and corrupted the pipeline.
+
+**Rule:** When documents disagree, rank the sources: what the code or skill actually does > what the framework
+rules state > what an index says. Check disk before deciding. Never resolve a conflict by majority.
+
+---
+
+## Assert the set, never the count
+
+**What happened:** `CLAUDE.md` claimed "16+ skills, 5 pipeline slash commands" while its own tables listed 17
+and 6. The installers shipped a hardcoded 16-row registry after the 17th skill landed. Every one of these was a
+number that outlived its truth.
+
+**Rule:** Wherever a count appears in a document or a test, assert the **set** it summarises. A test that
+checks `len(skills) == 17` passes for the wrong seventeen.
+
+---
+
+## Re-audit the artifacts your own fix produced
+
+**What happened:** After correcting the PM `artifact:` values across the agent docs, the same wrong values were
+still sitting in the `/pm-strategy` and `/pm-discovery` output templates — the exact place an agent would copy
+them from. The first sweep had covered documentation and missed the generators.
+
+**Rule:** After fixing a class of error, re-run the detector over everything that *produces* the artifact, not
+only everything that *describes* it.
+
+---
+
+## You cannot audit prose you just wrote
+
+**What happened:** A self-reviewed documentation rewrite carried two invented facts — a `search.py` domain list
+copied from a stale docstring, and a PM `artifact:` enum that contradicted disk. A fresh-context audit caught
+both immediately.
+
+**Rule:** Run a fresh-context audit at every milestone boundary: an agent that has read only the repository,
+told explicitly that finding problems is the point. Do not skip it because the work was careful.
