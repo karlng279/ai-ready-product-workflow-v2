@@ -18,8 +18,8 @@ Executes the 2-stage design artifact pipeline for a feature. Each stage produces
 
 | Stage | Skill | Input | Output |
 |-------|-------|-------|--------|
-| 1 | `design-wireframe` | `usd/ST-XXX.md` (AC-XXX) | `design/WF-XXX.md` per screen |
-| 2 | `design-component-spec` | `design/WF-XXX.md` | `design/COMP-XXX.md` per component |
+| 1 | `design-wireframe` | `usd/ST-XXX.md` (AC-XXX) | `design/wireframes.md` — one file, one `## WF-XXX` section per screen |
+| 2 | `design-component-spec` | `design/wireframes.md` | `design/COMP-XXX.md` per component |
 
 ---
 
@@ -46,16 +46,15 @@ For each selected story:
 2. Activate `design-wireframe` skill
 3. Identify the screens implied by the ACs (one wireframe per distinct screen or major view)
 4. Assign sequential WF-XXX IDs across all stories in this feature
-5. Generate `features/{feature-name}/design/WF-XXX.md` for each screen
+5. Write all screens into a single `features/{feature-name}/design/wireframes.md`, one `## WF-XXX: [Screen Name]` section per screen
 
-Each WF-XXX file must include:
+The file carries one YAML frontmatter block at the top, and each WF-XXX section must include:
 - Metadata header (ID, screen name, story, ACs, theme)
 - Text description (purpose, layout structure, key elements, interactions)
 - ASCII wireframe (60–80 chars wide, using standard symbol set)
 - Component list (ShadCN + custom + Tanstack if table present)
 - Responsive behavior (desktop, tablet, mobile)
 - AC Mapping table (every AC from the USD accounted for)
-- YAML frontmatter
 
 After all wireframes are written, show a summary:
 ```
@@ -66,9 +65,9 @@ Pause and ask: "Wireframes look good? Proceed to component specs?"
 
 ### Step 2 — Component Specs (`design-component-spec`)
 
-For each WF-XXX artifact:
+For each WF-XXX section in `design/wireframes.md`:
 
-1. Read `features/{feature-name}/design/WF-XXX.md`
+1. Read `features/{feature-name}/design/wireframes.md`
 2. Read the corresponding USD for AC traceability
 3. Activate `design-component-spec` skill
 4. Identify logical component groupings from the wireframe (one COMP-XXX per form / table / modal / card group)
@@ -96,8 +95,8 @@ After all stages complete, print:
 ## Design Pipeline Complete — {feature-name}
 
 Artifacts created:
-- features/{feature-name}/design/WF-001.md   (Login Screen → ST-001: AC-001–AC-005)
-- features/{feature-name}/design/WF-002.md   (Dashboard → ST-002: AC-006–AC-012)
+- features/{feature-name}/design/wireframes.md  (WF-001 Login Screen → ST-001: AC-001–AC-005;
+                                                 WF-002 Dashboard → ST-002: AC-006–AC-012)
 - features/{feature-name}/design/COMP-001.md (Login Form → WF-001)
 - features/{feature-name}/design/COMP-002.md (Dashboard Header → WF-002)
 - features/{feature-name}/design/COMP-003.md (Activity Table → WF-002)

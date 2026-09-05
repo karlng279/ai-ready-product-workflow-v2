@@ -29,7 +29,7 @@ Two skills enforce format conventions so AI agents produce correctly structured,
 
 | Skill | Purpose | Output |
 |-------|---------|--------|
-| `design-wireframe` | Enforces WF-XXX ID format, ASCII symbol conventions, AC mapping, responsive sections | `features/{name}/design/WF-XXX.md` |
+| `design-wireframe` | Enforces WF-XXX ID format, ASCII symbol conventions, AC mapping, responsive sections | `features/{name}/design/wireframes.md` (one file, one `## WF-XXX` section per screen) |
 | `design-component-spec` | Enforces COMP-XXX format, ShadCN component mapping, TanStack Table config, AC traceability | `features/{name}/design/COMP-XXX.md` |
 
 These skills enforce **format** — not design aesthetics. For palette, typography, and UX reasoning use `ui-ux-pro-max` first.

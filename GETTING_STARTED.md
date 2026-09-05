@@ -58,7 +58,7 @@ Use when: You have a validated idea or feature brief and need to write specs.
 ```
 
 1. Read [`po-framework/README.md`](po-framework/README.md)
-2. Write a brief in `features/{name}/brief.md` (or have it ready in your message)
+2. Write a brief in `features/{name}/po/brief.md` (or have it ready in your message)
 3. Run `/po-pipeline {feature-name}` — runs all 5 stages automatically
 4. Review at the two pause points (after PRD, after USL)
 5. When UAT files are written, move to Path 3
@@ -72,7 +72,7 @@ Use when: You have a validated idea or feature brief and need to write specs.
 Use when: USD acceptance criteria files exist and you need design artifacts for implementation.
 
 ```
-/design-pipeline → WF-XXX wireframes → COMP-XXX component specs
+/design-pipeline → wireframes.md (WF-XXX sections) → COMP-XXX component specs
 ```
 
 1. Read [`design-framework/README.md`](design-framework/README.md)
@@ -80,6 +80,8 @@ Use when: USD acceptance criteria files exist and you need design artifacts for 
 3. Run `/design-pipeline {feature-name}` — generates wireframes then component specs
 4. Review wireframes at the pause point before component specs are generated
 5. Hand `COMP-XXX.md` files to engineers for implementation
+
+Wireframes are written as `## WF-XXX` sections inside a single `design/wireframes.md`; component specs get one file each.
 
 **Relevant skills:** `ui-ux-pro-max` (design intelligence), `design-wireframe` (WF-XXX format), `design-component-spec` (COMP-XXX format)
 
@@ -93,7 +95,7 @@ Use when: Design artifacts (COMP-XXX) exist and you are ready to implement.
 2. Reference `features/{name}/design/COMP-XXX.md` for component definitions
 3. Reference `features/{name}/po/uat/ST-XXX.md` for acceptance criteria to validate against
 
-**Stack:** Next.js 15 App Router + ShadCN UI + TanStack Query + React Hook Form + Zod
+**Stack:** Next.js 15 App Router + ShadCN UI + TanStack Table + React Hook Form + Zod. Server state is native `fetch` with Next.js caching — there is no TanStack Query in this framework.
 
 ---
 
@@ -155,7 +157,7 @@ PM Discovery (/pm-discovery)
     ↓
 PO Pipeline (/po-pipeline): Brief → PRD → USM → USL → USD → UAT
     ↓
-Design Pipeline (/design-pipeline): USD → WF-XXX → COMP-XXX
+Design Pipeline (/design-pipeline): USD → wireframes.md (WF-XXX) → COMP-XXX
     ↓                                        ↕  changed your mind?
 Code Implementation (codebase-framework)    /sync-check propagates
     ↓                                        changes forward + backward

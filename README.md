@@ -24,7 +24,7 @@ A multi-framework knowledge base that gives AI agents (Claude Code, Codex, Gemin
 | **PM Framework** | `pm-framework/` | Strategy, discovery, research, analytics, growth, GTM | Strategy → Discovery → Research → Analytics → Growth → GTM |
 | **PO Framework** | `po-framework/` | Product requirements to testable specs | PRD → USM → USL → USD → UAT |
 | **Design Framework** | `design-framework/` | Text-based UI/UX design | Wireframes → Component Specs → Interactions |
-| **Codebase Framework** | `codebase-framework/` | Next.js 15 implementation patterns | Next.js 15 + ShadCN UI + TanStack Query |
+| **Codebase Framework** | `codebase-framework/` | Next.js 15 implementation patterns | Next.js 15 App Router + ShadCN UI + TanStack Table + React Hook Form + Zod |
 
 ---
 
@@ -45,13 +45,14 @@ npx ai-ready-workflow install
 
 | File / Folder | Used by |
 |---|---|
-| `.agent/skills/` (17 skill folders) | Claude Code (auto-loaded) |
+| `.agent/skills/` (one folder per skill) | Claude Code (auto-loaded) |
 | `AGENTS.md` | OpenAI Codex |
 | `GEMINI.md` | Gemini Code Assist |
 | `.cursorrules` | Cursor (auto-loaded on project open) |
 | `GETTING_STARTED.md` | All agents — per-agent setup guide |
+| `CLAUDE.md` | Claude Code — a Skills Registry table is **appended** to an existing `CLAUDE.md`; the installer never creates one |
 
-Safe to re-run — existing files are skipped.
+Safe to re-run — existing skills and files are skipped, and the registry is not appended twice.
 
 → See [`skills/README.md`](skills/README.md) for the full skill catalogue and [`GETTING_STARTED.md`](GETTING_STARTED.md) for per-agent setup.
 
@@ -116,10 +117,15 @@ Safe to re-run — existing files are skipped.
 | User Story | `ST-XXX` | `features/{name}/po/usl.md` |
 | Acceptance Criteria | `AC-XXX` | `features/{name}/po/usd/ST-XXX.md` |
 | UAT Test Case | `TC-XXX` | `features/{name}/po/uat/ST-XXX.md` |
-| Wireframe | `WF-XXX` | `features/{name}/design/WF-XXX.md` |
+| Wireframe | `WF-XXX` | `features/{name}/design/wireframes.md` (all wireframes in one file) |
 | Component Spec | `COMP-XXX` | `features/{name}/design/COMP-XXX.md` |
-| PM Strategy | `PM-STRATEGY` | `features/{name}/pm/strategy.md` |
-| PM Discovery | `PM-DISCOVERY` | `features/{name}/pm/discovery.md` |
+| Interaction Flow | `INT-XXX` | `features/{name}/design/interactions.md` (all flows in one file; `artifact: INT`) |
+| PM Strategy | `artifact: STRATEGY` | `features/{name}/pm/strategy.md` |
+| PM Discovery | `artifact: OST` | `features/{name}/pm/discovery.md` |
+| PM Market Research | `artifact: MARKET-RESEARCH` | `features/{name}/pm/market-research.md` |
+| PM Analytics | `artifact: NSM` | `features/{name}/pm/analytics.md` |
+| PM Growth | `artifact: GROWTH-LOOP` | `features/{name}/pm/growth.md` |
+| PM GTM | `artifact: GTM-PLAN` | `features/{name}/pm/gtm.md` |
 
 ---
 
@@ -127,25 +133,32 @@ Safe to re-run — existing files are skipped.
 
 ```
 features/{feature-name}/
-├── pm/                    # PM artifacts
+├── pm/                    # PM artifacts (six)
 │   ├── strategy.md
 │   ├── discovery.md
+│   ├── market-research.md
+│   ├── analytics.md
+│   ├── growth.md
 │   └── gtm.md
 ├── po/
+│   ├── brief.md           # human-written pipeline input
 │   ├── prd.md
 │   ├── usm.md
 │   ├── usl.md
 │   ├── usd/               # ST-XXX.md per story
 │   └── uat/               # ST-XXX.md per story
 ├── design/
-│   ├── WF-XXX.md          # per screen
-│   └── COMP-XXX.md        # per component
+│   ├── wireframes.md      # ALL WF-XXX sections for the feature
+│   ├── COMP-XXX.md        # one file per component
+│   └── interactions.md    # ALL interaction flows for the feature
 └── code/
 ```
 
 ---
 
 ## Repository Structure
+
+`skills/` is both the skill source of truth and the npm package root. `.agent/skills/` holds symlinks into it. Root `AGENTS.md` / `GEMINI.md` / `.cursorrules` and their `skills/` twins are kept byte-identical.
 
 ```
 ai-ready-product-workflow-v2/
@@ -161,7 +174,7 @@ ai-ready-product-workflow-v2/
 │   └── {skill-name}/SKILL.md
 │
 ├── .agent/skills/              # Claude Code entry point (symlinks → skills/)
-├── .claude/commands/           # Claude Code slash commands (5 pipeline commands)
+├── .claude/commands/           # Claude Code slash commands (6 pipeline commands)
 │
 ├── pm-framework/               # PM methodology knowledge base
 ├── po-framework/               # PO pipeline knowledge base
@@ -201,13 +214,19 @@ status: draft
 generated-by: po-brief-to-prd
 upstream: brief.md
 downstream: usm.md
-# Sync fields (tracked by artifact-sync skill)
+---
+```
+
+The `artifact-sync` skill additionally defines five **sync fields**. They are specified in
+[`documentation/artifact-sync-plan.md`](documentation/artifact-sync-plan.md) but are **not yet applied to any
+artifact on disk** — treat them as the target state, not an existing convention:
+
+```yaml
 last_modified: 2026-05-22
 change_summary: "One-sentence description of what changed"
 change_type: additive        # additive | reductive | interface | structural
 sync_status: in_sync         # in_sync | stale | pending_review | diverged
 based_on_upstream_version: 0.1
----
 ```
 
 ---

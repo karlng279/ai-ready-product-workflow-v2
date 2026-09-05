@@ -7,21 +7,23 @@ Skills are in `skills/*/SKILL.md`. Read the relevant SKILL.md before generating 
 
 ## Framework Overview
 
+- **PM Framework** (`pm-framework/`): Strategy → Discovery → Research → Analytics → Growth → GTM
 - **PO Framework** (`po-framework/`): 5-stage pipeline — PRD → USM → USL → USD → UAT
 - **Design Framework** (`design-framework/`): 3-stage pipeline — Wireframes → Component Specs → Interactions
-- **Codebase Framework** (`codebase-framework/`): Next.js 15 + ShadCN UI + TanStack Query
-- **PM Framework** (`pm-framework/`): Strategy → Discovery → Research → Analytics → Growth → GTM
+- **Codebase Framework** (`codebase-framework/`): Next.js 15 App Router + ShadCN UI + TanStack **Table** + React Hook Form + Zod (no TanStack Query — server state is native fetch + Next.js caching)
+
+Framework directories are reference material you read. `skills/` directories are instructions you follow.
 
 ---
 
-## Skills
+## Skills (17)
 
 ### UI/UX
-- `skills/ui-ux-pro-max/SKILL.md` — UI/UX design intelligence. Run `python3 skills/ui-ux-pro-max/scripts/search.py "<query>"` for database lookup.
+- `skills/ui-ux-pro-max/SKILL.md` — UI/UX design intelligence. Run `python3 skills/ui-ux-pro-max/scripts/search.py "<query>"` for database lookup (67 styles, 96 palettes, 57 font pairings, 25 charts, 13 stacks).
 
 ### PO Pipeline (in order)
 - `skills/po-brief-to-prd/SKILL.md` — Convert a feature brief to a PRD (PRD-XXX)
-- `skills/po-prd-to-usm/SKILL.md` — PRD to User Story Map (USM)
+- `skills/po-prd-to-usm/SKILL.md` — PRD to User Story Map (USM-XXX)
 - `skills/po-usm-to-usl/SKILL.md` — USM to User Story List with MoSCoW prioritization (ST-XXX)
 - `skills/po-usl-to-usd/SKILL.md` — USL stories to User Story Details / Acceptance Criteria (AC-XXX)
 - `skills/po-usd-to-uat/SKILL.md` — USD acceptance criteria to UAT BDD test cases (TC-XXX)
@@ -33,7 +35,7 @@ Skills are in `skills/*/SKILL.md`. Read the relevant SKILL.md before generating 
 
 ### Design
 - `skills/design-wireframe/SKILL.md` — WF-XXX wireframe format, ASCII conventions, AC mapping
-- `skills/design-component-spec/SKILL.md` — COMP-XXX component spec, ShadCN reference
+- `skills/design-component-spec/SKILL.md` — COMP-XXX component spec, ShadCN reference, TanStack Table config
 
 ### PM Framework
 - `skills/pm-product-strategy/SKILL.md` — Product strategy, OKRs, SWOT, competitive analysis
@@ -47,6 +49,8 @@ Skills are in `skills/*/SKILL.md`. Read the relevant SKILL.md before generating 
 
 ## Artifact ID System
 
+`WF-XXX` and interaction flows are **section headings inside one shared file per feature**, not one file each. Everything else is one file per ID.
+
 | Type | Format | Location |
 |---|---|---|
 | PRD | PRD-XXX | `features/{name}/po/prd.md` |
@@ -54,10 +58,17 @@ Skills are in `skills/*/SKILL.md`. Read the relevant SKILL.md before generating 
 | User Story | ST-XXX | `features/{name}/po/usl.md` |
 | Acceptance Criteria | AC-XXX | `features/{name}/po/usd/ST-XXX.md` |
 | UAT Test Case | TC-XXX | `features/{name}/po/uat/ST-XXX.md` |
-| Wireframe | WF-XXX | `features/{name}/design/WF-XXX.md` |
+| Wireframe | WF-XXX | `features/{name}/design/wireframes.md` (all wireframes in one file) |
 | Component Spec | COMP-XXX | `features/{name}/design/COMP-XXX.md` |
-| PM Strategy | PM-STRATEGY | `features/{name}/pm/strategy.md` |
-| PM Discovery | PM-DISCOVERY | `features/{name}/pm/discovery.md` |
+| Component Element | COMP-XXX-EL-YYY | inside the parent `COMP-XXX.md` |
+| Interaction Flow | INT-XXX | `features/{name}/design/interactions.md` (all flows in one file) |
+| PM Strategy | `artifact: STRATEGY` | `features/{name}/pm/strategy.md` |
+| PM Discovery | `artifact: OST` | `features/{name}/pm/discovery.md` |
+| PM Market Research | `artifact: MARKET-RESEARCH` | `features/{name}/pm/market-research.md` |
+| PM Analytics | `artifact: NSM` | `features/{name}/pm/analytics.md` |
+| PM Growth | `artifact: GROWTH-LOOP` | `features/{name}/pm/growth.md` |
+| PM GTM | `artifact: GTM-PLAN` | `features/{name}/pm/gtm.md` |
+| Feature Brief | `artifact: BRIEF` | `features/{name}/po/brief.md` |
 
 ---
 
@@ -65,21 +76,28 @@ Skills are in `skills/*/SKILL.md`. Read the relevant SKILL.md before generating 
 
 ```
 features/{feature-name}/
-├── pm/                    # PM artifacts (strategy, discovery, GTM)
+├── pm/                    # PM artifacts
 │   ├── strategy.md
 │   ├── discovery.md
+│   ├── market-research.md
+│   ├── analytics.md
+│   ├── growth.md
 │   └── gtm.md
 ├── po/
+│   ├── brief.md           # human-written pipeline input
 │   ├── prd.md
 │   ├── usm.md
 │   ├── usl.md
 │   ├── usd/               # One file per story: ST-XXX.md
 │   └── uat/               # One file per story: ST-XXX.md
 ├── design/
-│   ├── WF-XXX.md          # One file per screen
-│   └── COMP-XXX.md        # One file per component
+│   ├── wireframes.md      # ALL WF-XXX sections for the feature
+│   ├── COMP-XXX.md        # One file per component
+│   └── interactions.md    # ALL interaction flows for the feature
 └── code/
 ```
+
+`features/Export Customs Clearances/` is the fully-worked reference implementation — read it to see the conventions applied end to end.
 
 ---
 
@@ -99,11 +117,15 @@ downstream: usm.md
 ---
 ```
 
+The `artifact-sync` skill also defines `last_modified`, `change_summary`, `change_type`, `sync_status` and `based_on_upstream_version`. These are specified but not yet applied to existing artifacts.
+
+The `artifact:` frontmatter value is not always the ID prefix. PM artifacts use framework codes: `pm/strategy.md` → `STRATEGY`, `pm/discovery.md` → `OST`, `pm/market-research.md` → `MARKET-RESEARCH`, `pm/analytics.md` → `NSM`, `pm/growth.md` → `GROWTH-LOOP`, `pm/gtm.md` → `GTM-PLAN`, `po/brief.md` → `BRIEF`. PO and design artifacts use `PRD`, `USM`, `USL`, `USD`, `UAT`, `WF`, `COMP`, `INT`.
+
 ---
 
 ## Slash Commands (Claude Code only)
 
-When working in Claude Code, these pipeline commands are available in `.claude/commands/`:
+These pipeline commands are defined in `.claude/commands/` and are available in Claude Code:
 
 | Command | Purpose |
 |---|---|
@@ -131,4 +153,4 @@ npx ai-ready-workflow install
 .\skills\install.ps1
 ```
 
-All three options copy every skill folder to `.agent/skills/` in the target directory and optionally append the skill registry to `CLAUDE.md`.
+All three options copy every skill folder to `.agent/skills/` in the target directory, copy `AGENTS.md`, `GEMINI.md`, `.cursorrules` and `GETTING_STARTED.md` to the target root, and optionally append the skill registry to `CLAUDE.md`.

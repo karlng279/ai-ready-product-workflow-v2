@@ -79,6 +79,7 @@ Skills are auto-loaded from `.agent/skills/*/SKILL.md`. Activate by using a trig
 | ``po-usd-to-uat`` | UAT, test cases, BDD, given-when-then, test scenarios |
 | ``validate-prd`` | validate PRD, PRD quality gate, PRD completeness |
 | ``validate-usd`` | validate USD, acceptance criteria check, AC completeness |
+| ``artifact-sync`` | sync check, stale artifacts, ripple impact, upstream changed, downstream stale, artifact drift, propagate changes |
 | ``design-wireframe`` | wireframe, WF-XXX, ASCII wireframe, screen layout |
 | ``design-component-spec`` | component spec, COMP-XXX, ShadCN component, design to code |
 | ``pm-product-strategy`` | product strategy, vision, OKRs, SWOT, competitive analysis |

@@ -23,8 +23,8 @@ function printUsage() {
   console.log('    npx ai-ready-workflow mcp                  # start MCP server for Claude Desktop');
   console.log('');
   console.log('  What it does:');
-  console.log('    • install        — copies 16 skills to <target>/.agent/skills/ (Claude Code, Cursor, Codex)');
-  console.log('    • install-cowork — copies 16 skills to Claude Desktop Local Agent / Cowork skills folder');
+  console.log('    • install        — copies 17 skills to <target>/.agent/skills/ (Claude Code, Cursor, Codex)');
+  console.log('    • install-cowork — copies 17 skills to Claude Desktop Local Agent / Cowork skills folder');
   console.log('    • mcp            — starts the MCP server for Claude Desktop regular chat');
   console.log('');
   console.log('  Supports: Claude Code, Claude Desktop (chat + Cowork), OpenAI Codex, Gemini, Cursor');

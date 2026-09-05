@@ -27,7 +27,7 @@ Reads all existing artifacts for a feature and runs the quality gate checks defi
 | `po/usl.md` | `po-framework/stage3-usl/rules.md` | — |
 | `po/usd/ST-XXX.md` (each) | `po-framework/stage4-usd/rules.md` | `validate-usd` |
 | `po/uat/ST-XXX.md` (each) | `po-framework/stage5-uat/rules.md` | — |
-| `design/WF-XXX.md` (each) | `design-framework/stage1-wireframes/quality-gate.md` | `design-wireframe` |
+| `design/wireframes.md` (each WF-XXX section) | `design-framework/stage1-wireframes/quality-gate.md` | `design-wireframe` |
 | `design/COMP-XXX.md` (each) | `design-framework/stage2-component-specs/quality-gate.md` | `design-component-spec` |
 
 ---
@@ -46,7 +46,7 @@ USD:  po/usd/ST-001.md             ✅ found
       po/usd/ST-002.md             ✅ found
 UAT:  po/uat/ST-001.md             ⚠️  missing
       po/uat/ST-002.md             ⚠️  missing
-WF:   design/WF-001.md             ✅ found
+WF:   design/wireframes.md         ✅ found (WF-001, WF-002)
 COMP: design/COMP-001.md           ✅ found
 ```
 
@@ -79,7 +79,7 @@ For each `usd/ST-XXX.md`, activate `validate-usd` skill. Check:
 
 ### Step 4 — Wireframe Validation
 
-For each `design/WF-XXX.md`, check:
+For each `## WF-XXX` section in `design/wireframes.md`, check:
 
 - [ ] WF-XXX ID assigned and in header
 - [ ] Story and AC IDs referenced in header
@@ -87,7 +87,7 @@ For each `design/WF-XXX.md`, check:
 - [ ] Component list provided
 - [ ] Responsive behavior described (all 3 breakpoints)
 - [ ] AC Mapping table present — every AC from the linked USD accounted for
-- [ ] YAML frontmatter present with upstream/downstream
+- [ ] `design/wireframes.md` carries YAML frontmatter with upstream/downstream
 
 ### Step 5 — Component Spec Validation
 

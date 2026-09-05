@@ -117,13 +117,12 @@ Save to `features/{feature-name}/pm/discovery.md` with frontmatter:
 
 ```yaml
 ---
-artifact: PM-DISCOVERY
+artifact: OST
 feature: [feature-name]
 version: 0.1
 status: draft
 generated-by: pm-product-discovery
-session-date: YYYY-MM-DD
-upstream: pm/strategy.md
+upstream: strategy.md
 downstream: po/prd.md
 ---
 ```

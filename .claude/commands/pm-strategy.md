@@ -84,12 +84,13 @@ Save to `features/{feature-name}/pm/strategy.md` (create folder if needed) with 
 
 ```yaml
 ---
-artifact: PM-STRATEGY
+artifact: STRATEGY
 feature: [feature-name]
 version: 0.1
 status: draft
 generated-by: pm-product-strategy
-session-date: YYYY-MM-DD
+upstream: user-idea
+downstream: discovery.md
 ---
 ```
 

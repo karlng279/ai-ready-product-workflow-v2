@@ -18,7 +18,7 @@ Skills are pure markdown — any AI agent that can read a file can use them.
 
 ## Claude Desktop
 
-Add all 16 skills to Claude Desktop — no cloning required.
+Add all 17 skills to Claude Desktop — no cloning required.
 
 **1. Edit your Claude Desktop config:**
 
@@ -142,8 +142,8 @@ Sync check: `/sync-check {feature-name} {changed-artifact-path}` detects and pat
 
 | Skill | Trigger Keywords | Input → Output |
 |-------|-----------------|----------------|
-| `design-wireframe` | wireframe, WF-XXX, ASCII wireframe, screen layout, create wireframe, wireframe for story | `usd/ST-XXX.md` → `design/WF-XXX.md` |
-| `design-component-spec` | component spec, COMP-XXX, ShadCN component, design to code, component handoff | `design/WF-XXX.md` → `design/COMP-XXX.md` |
+| `design-wireframe` | wireframe, WF-XXX, ASCII wireframe, screen layout, create wireframe, wireframe for story | `usd/ST-XXX.md` → `design/wireframes.md` (one `## WF-XXX` section per screen) |
+| `design-component-spec` | component spec, COMP-XXX, ShadCN component, design to code, component handoff | `design/wireframes.md` → `design/COMP-XXX.md` |
 
 Full design pipeline: `/design-pipeline` slash command chains both stages.
 
@@ -173,10 +173,15 @@ Full design pipeline: `/design-pipeline` slash command chains both stages.
 | User Story (List) | `ST-XXX` | `features/{name}/po/usl.md` |
 | Acceptance Criteria | `AC-XXX` | `features/{name}/po/usd/ST-XXX.md` |
 | UAT Test Case | `TC-XXX` | `features/{name}/po/uat/ST-XXX.md` |
-| Wireframe | `WF-XXX` | `features/{name}/design/WF-XXX.md` |
+| Wireframe | `WF-XXX` | `features/{name}/design/wireframes.md` (all wireframes in one file) |
 | Component Spec | `COMP-XXX` | `features/{name}/design/COMP-XXX.md` |
-| PM Strategy | `PM-STRATEGY` | `features/{name}/pm/strategy.md` |
-| PM Discovery | `PM-DISCOVERY` | `features/{name}/pm/discovery.md` |
+| Interaction Flow | `INT-XXX` | `features/{name}/design/interactions.md` (all flows in one file; `artifact: INT`) |
+| PM Strategy | `artifact: STRATEGY` | `features/{name}/pm/strategy.md` |
+| PM Discovery | `artifact: OST` | `features/{name}/pm/discovery.md` |
+| PM Market Research | `artifact: MARKET-RESEARCH` | `features/{name}/pm/market-research.md` |
+| PM Analytics | `artifact: NSM` | `features/{name}/pm/analytics.md` |
+| PM Growth | `artifact: GROWTH-LOOP` | `features/{name}/pm/growth.md` |
+| PM GTM | `artifact: GTM-PLAN` | `features/{name}/pm/gtm.md` |
 
 ---
 
@@ -184,19 +189,24 @@ Full design pipeline: `/design-pipeline` slash command chains both stages.
 
 ```
 features/{feature-name}/
-├── pm/                    # PM artifacts (strategy, discovery, GTM)
+├── pm/                    # PM artifacts (six)
 │   ├── strategy.md
 │   ├── discovery.md
+│   ├── market-research.md
+│   ├── analytics.md
+│   ├── growth.md
 │   └── gtm.md
 ├── po/
+│   ├── brief.md           # human-written pipeline input
 │   ├── prd.md
 │   ├── usm.md
 │   ├── usl.md
 │   ├── usd/               # One file per story: ST-XXX.md
 │   └── uat/               # One file per story: ST-XXX.md
 ├── design/
-│   ├── WF-XXX.md          # One file per screen
-│   └── COMP-XXX.md        # One file per component
+│   ├── wireframes.md      # ALL WF-XXX sections for the feature
+│   ├── COMP-XXX.md        # One file per component
+│   └── interactions.md    # ALL interaction flows for the feature
 └── code/
 ```
 
@@ -245,13 +255,19 @@ status: draft
 generated-by: po-brief-to-prd
 upstream: brief.md
 downstream: usm.md
-# Sync fields (tracked by artifact-sync skill)
+---
+```
+
+The `artifact-sync` skill additionally defines five **sync fields**. They are specified in
+[`documentation/artifact-sync-plan.md`](documentation/artifact-sync-plan.md) but are **not yet applied to any
+artifact on disk** — treat them as the target state, not an existing convention:
+
+```yaml
 last_modified: 2026-05-22
 change_summary: "One-sentence description of what changed"
 change_type: additive        # additive | reductive | interface | structural
 sync_status: in_sync         # in_sync | stale | pending_review | diverged
 based_on_upstream_version: 0.1
----
 ```
 
 When an artifact is modified mid-pipeline, run `/sync-check` to detect all stale downstream and upstream artifacts and apply surgical patches.
