@@ -10,7 +10,7 @@ Run artifact synchronization analysis for a feature after an artifact has change
 
 **Examples:**
 ```
-/sync-check export-customs-clearances design/wireframes.md
+/sync-check "Export Customs Clearances" design/wireframes.md
 /sync-check my-feature po/usd/ST-003.md
 /sync-check my-feature po/prd.md
 /sync-check my-feature                   # will ask which artifact changed

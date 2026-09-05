@@ -90,6 +90,8 @@ def check_artifact_frontmatter():
         for field in REQUIRED_FIELDS:
             if field not in fm:
                 fail("frontmatter", f"{rel(path)} is missing '{field}:'")
+            elif not fm[field]:
+                fail("frontmatter", f"{rel(path)} has an empty '{field}:'")
 
 
 def check_artifact_values():
@@ -134,15 +136,21 @@ def check_feature_matches_folder():
                  f"{rel(path)} says 'feature: {value}' but lives in '{folder}'")
 
 
-def check_no_per_screen_wireframe_files():
-    """PRD 3.2 / decision 0001 — wireframes are sections in one wireframes.md."""
+# PRD 3.2 gives wireframes and interactions the same rule: sections in one shared
+# file, never one file per ID. Any WF-*.md or INT-*.md under a design/ folder is a defect.
+PER_ID_FILE = re.compile(r"^(WF|INT)-[A-Za-z0-9-]+\.md$")
+
+
+def check_no_per_id_design_files():
+    """PRD 3.2 / decision 0001 — wireframes and interactions live in one file each."""
     for dirpath, dirnames, filenames in os.walk(os.path.join(ROOT, "features")):
         if os.path.basename(dirpath) != "design":
             continue
         for fn in filenames:
-            if re.match(r"^WF-\d+\.md$", fn):
-                fail("wireframes",
-                     f"{rel(os.path.join(dirpath, fn))} — wireframes belong in design/wireframes.md")
+            if PER_ID_FILE.match(fn):
+                kind = "wireframes.md" if fn.startswith("WF") else "interactions.md"
+                fail("design-files",
+                     f"{rel(os.path.join(dirpath, fn))} — belongs in design/{kind} (PRD 3.2)")
 
 
 def check_skill_frontmatter():
@@ -173,10 +181,15 @@ def self_probe():
         fail("self-probe", "frontmatter() parsed the wrong value")
     if frontmatter(bad_none) is not None:
         fail("self-probe", "frontmatter() accepted a file with no frontmatter")
-    if not re.match(r"^WF-\d+\.md$", "WF-001.md"):
-        fail("self-probe", "wireframe detector does not match a known-bad name")
-    if re.match(r"^WF-\d+\.md$", "wireframes.md"):
-        fail("self-probe", "wireframe detector fires on the correct filename")
+    for bad in ("WF-001.md", "WF-XXX.md", "WF-AUTH-001.md", "INT-001.md", "INT-XXX.md"):
+        if not PER_ID_FILE.match(bad):
+            fail("self-probe", f"design-file detector does not match known-bad {bad!r}")
+    for good in ("wireframes.md", "interactions.md", "COMP-001.md"):
+        if PER_ID_FILE.match(good):
+            fail("self-probe", f"design-file detector fires on correct filename {good!r}")
+    empty = "---\nartifact: PRD\nfeature:\n---\nbody"
+    if frontmatter(empty).get("feature") != "":
+        fail("self-probe", "frontmatter() does not surface an empty value as empty")
     if not skill_names():
         fail("self-probe", "skill_names() found nothing — the detector is blind")
     if not artifact_files():

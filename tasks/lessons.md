@@ -60,3 +60,40 @@ both immediately.
 
 **Rule:** Run a fresh-context audit at every milestone boundary: an agent that has read only the repository,
 told explicitly that finding problems is the point. Do not skip it because the work was careful.
+
+---
+
+## Renumbering a section silently repoints every citation to it
+
+**What happened:** Inserting a new `ARCHITECTURE 6.3` (CI checks) pushed the release contract to 6.4. Six
+citations across `CLAUDE.md`, `docs/INDEX.md` and `docs/STATE.md` still said 6.3 — and the citation checker
+passed, because 6.3 still *existed*. The references were not broken, they were silently pointing at the wrong
+section, which is worse.
+
+**Rule:** Renumbering is a breaking change even when the suite stays green. Before inserting or removing a
+numbered section, grep for every citation of that number and each one after it. The test proves a citation
+*resolves*, never that it resolves to what the author meant.
+
+---
+
+## Do not claim a test asserts something without opening the test
+
+**What happened:** `ARCHITECTURE 3.3` claimed "`test_docs.py` covers items 1–9" and `CLAUDE.md` said "Nine are
+asserted". Six were. The `cli.js` banner and both `GETTING_STARTED` files were asserted by nothing, and item 1
+was asserted by the *other* test file. This was written in the same commit that added a prohibition against
+claiming an enforcement mechanism you have not written.
+
+**Rule:** When writing that something is enforced, open the test file and find the line. Then name the check
+(`check_cli_banner`), not a count of checks — a named function can be verified, "nine" cannot.
+
+---
+
+## A count in prose is a bug waiting to happen — including in a card title
+
+**What happened:** New documents written in the same session claimed "65 of 66 tracked `CLAUDE.md` files"
+(really 64 of 65), "4 dead links" (really 6 files), and "8 occurrences" on the landing page (really 13). Each
+was a number typed once and never re-derived.
+
+**Rule:** In a document, prefer the predicate and the command that yields it — "every tracked `CLAUDE.md`
+except the root, verifiable with `git ls-files | xargs grep -l claude-mem-context`" — over a number. If a
+number must appear, it belongs in a test that derives it from disk.

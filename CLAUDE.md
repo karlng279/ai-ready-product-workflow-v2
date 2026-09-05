@@ -35,7 +35,7 @@ Each is something a context-free session does by default because it is locally t
 | Write a count of skills or commands as a number in a test or assertion | Assert the **set**. Counts outlive their truth (`ARCHITECTURE 7.1`) |
 | Edit `AGENTS.md`, `GEMINI.md` or `.cursorrules` without editing its `skills/` twin | They must stay byte-identical (`ARCHITECTURE 2.2`) |
 | Sync `README.md` or `GETTING_STARTED.md` with its `skills/` twin | These two pairs differ **by design** (`ARCHITECTURE 2.2`) |
-| Add a skill without walking all 11 surfaces | `ARCHITECTURE 3.3`. Nine are asserted; two are on discipline |
+| Add a skill without walking all 11 surfaces | `ARCHITECTURE 3.3`. Items 7, 10 and 11 are caught by **no test** |
 | Say the stack uses TanStack Query | It uses TanStack **Table** + native fetch (`PRD 2.4`) |
 | Invent a ShadCN component name | Check `design-framework/stage2-component-specs/shadcn-component-catalog.md` |
 | Regenerate an artifact wholesale to fix a small change | That is what `artifact-sync` / `/sync-check` are for |
@@ -53,7 +53,7 @@ Each is something a context-free session does by default because it is locally t
 | A `SKILL.md` name or description | Walk `ARCHITECTURE 3.3` |
 | A section number in `PRD.md` / `ARCHITECTURE.md` | Run `test_docs.py`; it lists every citation you broke |
 | Anything under `features/` | Re-run `test_prohibitions.py` |
-| A version number | Bump `skills/package.json` **and** `skills/package-lock.json` (`ARCHITECTURE 6.3`) |
+| A version number | Bump all **three**: `skills/package.json`, `skills/package-lock.json`, `skills/mcp-server.js` (`ARCHITECTURE 6.4`) |
 | A skill or command count | Sweep `README.md` and `landing-page/index.html` (`ARCHITECTURE 1.2`) |
 | Anything, after a correction from the owner | Append to `tasks/lessons.md` |
 | Anything decided in conversation | Write it to `docs/decisions/` — a decision not written there did not happen |
@@ -72,7 +72,14 @@ citation that does not name its source cannot be machine-checked.
 **Commits.** Card ID in the subject. One card, one commit, clean tree.
 **Never leave a dirty tree for the next session to find.**
 
-**Do not commit or push unless asked.**
+**Commits.** Two commits are part of the protocol and need no permission: the claim line (step 5) and the
+single card commit at Definition of done. **Anything else — and every push — needs the owner to ask.**
+
+**Branch.** Work on a branch named for the milestone (`docs/multi-session-playbook`), not on `main`. A push to
+`main` republishes the landing page immediately (`ARCHITECTURE 6.2`), so merging is the owner's call.
+
+**This repo supersedes the global `tasks/todo.md` instruction.** Plans live in `tasks/BACKLOG.md` and
+`tasks/cards/`; a shared todo file conflicts the moment two sessions run. Pending owner confirmation (STATE Q9).
 
 ---
 
@@ -102,7 +109,7 @@ skill. `/validate-artifacts` runs those gates inline.
 | The artifact chain or frontmatter | `PRD 3`, `PRD 5` |
 | Repo layout, twins, symlinks | `ARCHITECTURE 2` |
 | The npm package or installers | `ARCHITECTURE 4` |
-| Releasing | `ARCHITECTURE 6.3` |
+| Releasing | `ARCHITECTURE 6.4` |
 | Why something is the way it is | `docs/decisions/`, then `docs/history/` |
 | A new feature's artifacts | `features/Export Customs Clearances/` (`PRD 7.2`) |
 

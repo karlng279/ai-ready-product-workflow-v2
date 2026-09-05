@@ -33,4 +33,6 @@ All eleven documents and both slash commands were corrected to match.
 
 - The wireframe artifact cannot be split per screen without breaking `design-component-spec`'s upstream path.
 - A wireframe has no frontmatter of its own; the file carries one block for all of them.
-- Enforced by `tests/test_prohibitions.py`, which fails if any `features/*/design/WF-*.md` file exists.
+- Enforced by `tests/test_prohibitions.py` (`check_no_per_id_design_files`), which fails on any
+  `features/*/design/WF-*.md` **or** `INT-*.md`. The first implementation matched only `WF-<digits>.md` and
+  would have missed `WF-XXX.md`; a fresh-context audit caught the gap and the pattern was widened.

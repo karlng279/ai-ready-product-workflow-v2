@@ -37,15 +37,17 @@ Phases 0–7 are complete; their detail is in [`docs/history/phases-0-7.md`](../
 | ID | Title | Status | Blocked by | File set |
 |---|---|---|---|---|
 | M9-01 | Adopt the playbook layout: `PRD`/`ARCHITECTURE` split, `docs/`, `tasks/`, `tests/` | done | — | `CLAUDE.md`, `PRD.md`, `ARCHITECTURE.md`, `docs/**`, `tasks/**`, `tests/**` |
-| M9-02 | Sweep `landing-page/index.html` — 16→17 skills, 5→6 commands (8 occurrences) | blocked | owner Q3 | `landing-page/index.html` |
-| M9-03 | Delete the 65 claude-mem stub `CLAUDE.md` files; gitignore them | blocked | owner Q5 | 65 `**/CLAUDE.md`, `.gitignore` |
-| M9-04 | Fix 4 dead links to a plan file that never existed | blocked | owner Q8 | `design-framework/design-rules/README.md`, `design-framework/themes/*.md` |
+| M9-02 | Landing page figures corrected (counts, TanStack Table, artifact-sync card) — unpublished until merged to `main` | done | — | `landing-page/index.html` |
+| M9-03 | Delete every tracked `CLAUDE.md` containing `<claude-mem-context>` (64 of 65 — all but the root) and gitignore them | blocked | owner Q5 | `**/CLAUDE.md` except the root, `.gitignore` |
+| M9-04 | Fix the 6 references to `design-framework-uiux-promax-integration-plan.md`, which never existed | blocked | owner Q8 | `design-framework/design-rules/README.md`, `design-framework/themes/README.md`, `design-framework/themes/{corporate,ecommerce,erp,mds}.md` |
 | M9-05 | Write `po-framework/stage2-usm/template.md` | todo | — | `po-framework/stage2-usm/template.md` |
 | M9-06 | Resolve `WF-XXX` placeholders in 12 USD Design Reference tables | blocked | owner Q4 | `features/Export Customs Clearances/po/usd/*.md` |
 | M9-07 | Publish `0.2.0` — bump `package-lock.json`, sweep sites, tag `v0.2.0` | blocked | owner Q2 | `skills/package{.json,-lock.json}`, `README.md`, `landing-page/` |
 | M9-08 | Decide the npm knowledge-base gap: ship framework dirs, or degrade gracefully | blocked | owner Q1 | `skills/package.json` or all 17 `SKILL.md` |
 | M9-09 | Build a `design-interactions` skill, or document stage 3 as permanently manual | blocked | owner Q6 | `skills/design-interactions/` or `ARCHITECTURE 5.2` |
 | M9-10 | Apply the five `artifact-sync` sync fields to artifacts, or drop them from the spec | blocked | owner Q7 | `PRD 5.4`, `features/**` |
-| M9-11 | Clear the 38 rotted links allowlisted in `tests/known_dead_links.txt` | todo | — | `design-framework/**`, `po-framework/README.md`, `codebase-framework/component-patterns/animations.md` |
+| M9-11 | Clear the rotted links allowlisted in `tests/known_dead_links.txt`, **excluding the 5 owned by M9-04** | todo | — | `design-framework/patterns/**`, `design-framework/templates/**`, `design-framework/design-rules/{naming-conventions,responsive}.md`, `design-framework/QUICK_START.md`, `po-framework/README.md`, `codebase-framework/component-patterns/animations.md` |
+| M9-12 | Correct the enforcement claims and detector gaps found by the fresh-context audit | done | — | `ARCHITECTURE.md`, `CLAUDE.md`, `docs/INDEX.md`, `docs/decisions/0001-wireframes-single-file.md`, `tests/**` |
+| M9-13 | Rewrite the shipped agent indexes and `ui-ux-pro-max` paths to be installed-project-agnostic | blocked | owner Q1 | `skills/AGENTS.md`, `skills/GEMINI.md`, `skills/.cursorrules`, `AGENTS.md`, `GEMINI.md`, `.cursorrules`, `skills/ui-ux-pro-max/SKILL.md`, `skills/README.md`, `skills/GETTING_STARTED.md` |
 
 Owner questions Q1–Q9 are in [`docs/STATE.md`](../docs/STATE.md) → Waiting on owner.

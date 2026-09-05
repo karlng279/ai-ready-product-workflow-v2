@@ -40,6 +40,10 @@ def command_set():
     return {n[:-3] for n in os.listdir(d) if n.endswith(".md") and n != "CLAUDE.md"}
 
 
+# Files that are not .md but are still agent-facing surfaces.
+EXTRA_SURFACES = [".cursorrules", "skills/.cursorrules", "landing-page/index.html"]
+
+
 def markdown_files(skip=("/.git/", "/node_modules/", "/__pycache__/")):
     out = []
     for dirpath, dirnames, filenames in os.walk(ROOT):
@@ -127,12 +131,19 @@ def check_readme_skill_set():
         found = set(re.findall(r"^\| `([a-z0-9-]+)` \|", read(rel), re.M))
         for missing in sorted(skills - found):
             fail("readme-skills", f"{rel} does not list skill '{missing}'")
+        # the READMEs also table non-skills (commands, artifacts); only flag rows that
+        # look like a skill name but are not one
+        for extra in sorted(found - skills):
+            if re.match(r"^(pm|po|design|validate|artifact|ui)-", extra):
+                fail("readme-skills", f"{rel} lists '{extra}', which is not a skill on disk")
 
 
 def check_command_set():
     """ARCHITECTURE 5.1 — documented commands must match .claude/commands/."""
     commands = command_set()
-    for rel in ("CLAUDE.md", "AGENTS.md", "README.md"):
+    for rel in ("CLAUDE.md", "AGENTS.md", "GEMINI.md", ".cursorrules", "README.md",
+                "skills/AGENTS.md", "skills/GEMINI.md", "skills/.cursorrules",
+                "skills/README.md", "skills/GETTING_STARTED.md"):
         found = set(re.findall(r"`/([a-z-]+)`", read(rel)))
         found = {c for c in found if c in commands or c.startswith(("po-", "pm-", "design-", "validate-", "sync-"))}
         for missing in sorted(commands - found):
@@ -224,7 +235,11 @@ def check_backlog_and_state_cards():
             fail("cards", f"tasks/cards/{fn} has no BACKLOG row")
         row = re.search(rf"^\| {re.escape(cid)} \| [^|]* \| (\S+) \|", backlog, re.M)
         card = re.search(r"\*\*Status:\*\* (\S+)", read(f"tasks/cards/{fn}"))
-        if row and card and row.group(1) != card.group(1):
+        if row is None:
+            fail("cards", f"{cid}: could not parse a status from its BACKLOG row")
+        elif card is None:
+            fail("cards", f"tasks/cards/{fn}: could not parse '**Status:** <value>'")
+        elif row.group(1) != card.group(1):
             fail("cards", f"{cid}: BACKLOG says '{row.group(1)}', card says '{card.group(1)}'")
 
 
@@ -247,7 +262,8 @@ BANNED = [
 ]
 # Operational surfaces only — an agent acts on these. The meta-documents
 # (CLAUDE.md, PRD, ARCHITECTURE, docs/, tasks/) discuss the bans by name.
-BANNED_SCOPE = ("AGENTS.md", "GEMINI.md", ".cursorrules", "README.md", "GETTING_STARTED.md")
+BANNED_SCOPE = ("AGENTS.md", "GEMINI.md", ".cursorrules", "README.md", "GETTING_STARTED.md",
+                "landing-page/index.html")
 
 
 def _in_banned_scope(rel):
@@ -259,18 +275,48 @@ def _in_banned_scope(rel):
 
 
 def check_banned_strings():
-    for rel in markdown_files():
+    scanned = 0
+    for rel in markdown_files() + [f for f in EXTRA_SURFACES if exists(f)]:
         if not _in_banned_scope(rel):
             continue
+        scanned += 1
         text = read(rel)
         for pattern, why in BANNED:
             for m in re.finditer(pattern, text):
                 line = text[:m.start()].count("\n") + 1
                 # allow explicit negations, e.g. "no TanStack Query"
-                ctx = text[max(0, m.start() - 40):m.start()].lower()
-                if any(w in ctx for w in ("no ", "not ", "never ", "instead of ")):
+                ctx = text[max(0, m.start() - 30):m.start()].lower()
+                # a negation must be an adjacent word, not merely somewhere nearby
+                if re.search(r"\b(no|not|never|instead of)\b[^.]{0,12}$", ctx):
                     continue
                 fail("banned", f"{rel}:{line} '{m.group(0)}' — {why}")
+    if scanned == 0:
+        fail("banned", "check_banned_strings scanned no files — the sweep is blind")
+
+
+def check_cli_banner():
+    """ARCHITECTURE 3.3 item 9 — the cli.js help banner states a skill count."""
+    text = read("skills/cli.js")
+    real = len(skill_set())
+    claimed = set(int(n) for n in re.findall(r"copies (\d+) skills", text))
+    if not claimed:
+        fail("cli-banner", "skills/cli.js has no 'copies N skills' banner line to check")
+    for n in sorted(claimed - {real}):
+        fail("cli-banner", f"skills/cli.js says 'copies {n} skills'; there are {real}")
+
+
+def check_claimable_cards_are_unblocked():
+    """docs/STATE.md 'Next up' must not list a card the BACKLOG says is blocked."""
+    state = read("docs/STATE.md")
+    m = re.search(r"## Next up[^\n]*\n(.*?)(?=\n## |\n---)", state, re.S)
+    if not m:
+        fail("state", "docs/STATE.md has no 'Next up' section")
+        return
+    backlog = read("tasks/BACKLOG.md")
+    for cid in re.findall(r"^\| (M\d+-\d+) \|", m.group(1), re.M):
+        row = re.search(rf"^\| {re.escape(cid)} \| [^|]* \| (\S+) \|", backlog, re.M)
+        if row and row.group(1) == "blocked":
+            fail("state", f"docs/STATE.md lists {cid} as claimable, but BACKLOG says blocked")
 
 
 def check_state_freshness():

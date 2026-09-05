@@ -54,8 +54,9 @@ Because `skills/` is simultaneously the skill source of truth and the npm payloa
 
 `README.md` and `landing-page/index.html` summarise figures they do not own — skill counts, command counts,
 framework names. This duplication is deliberate: a front door has to orient a reader. **Both are sweep
-sites — change the source, change them.** `tests/test_docs.py` asserts the README's sets; the landing page is
-on discipline (`ARCHITECTURE 6.2`).
+sites — change the source, change them.** `tests/test_docs.py` asserts the READMEs' skill sets in both directions (`check_readme_skill_set`) and sweeps
+`landing-page/index.html` for banned strings, but nothing ties the landing page's skill grid to the real set
+(`ARCHITECTURE 6.2`).
 
 There is no `.env.example` and no `src/`. This repo has no environment variables of its own; the only secret is
 the GitHub Actions `NPM_TOKEN` (`ARCHITECTURE 6.1`). Creating an empty `.env.example` would claim a mechanism
@@ -117,7 +118,8 @@ Two places are **hand-maintained** and will silently go stale:
 1. The `## Skills Registry` table inside `install.sh` and `install.ps1`, appended to a user's `CLAUDE.md`.
 2. The skill count in the `skills/cli.js` help banner.
 
-`tests/test_docs.py` asserts both against the real skill set.
+`tests/test_docs.py` asserts both: `check_skill_set_across_surfaces` for the registry tables and
+`check_cli_banner` for the banner, each derived from the real skill set on disk.
 
 ### 3.2 Per-agent loading
 
@@ -136,7 +138,11 @@ A skill's `description:` frontmatter is the trigger text. Trigger keywords belon
 
 Eleven surfaces. Miss one and the skill either fails to load or is invisible to three of the four agents.
 `CLAUDE.md` is deliberately **not** one of them — it holds rules, not the registry.
-`tests/test_docs.py` covers items 1–9; 10 and 11 are on discipline.
+
+**Items 7, 10 and 11 are asserted by nothing — they are on discipline.** Item 1 is asserted by
+`tests/test_prohibitions.py` (`check_skill_frontmatter`); items 2–6, 8 and 9 by `tests/test_docs.py`.
+Item 11 is partially covered: the banned-string sweep reads `landing-page/index.html`, but nothing ties its
+skill grid to the real set.
 
 1. `skills/{name}/SKILL.md` with `name:` and `description:` frontmatter
 2. `ln -s ../../skills/{name} .agent/skills/{name}` — relative symlink, not a copy
@@ -157,8 +163,9 @@ Eleven surfaces. Miss one and the skill either fails to load or is invisible to 
 
 ### 4.1 Identity and contents
 
-`skills/package.json` — name `ai-ready-workflow`, bin `ai-ready-workflow` → `cli.js`, one dependency
-(`@modelcontextprotocol/sdk`), Node >= 18.
+`skills/package.json` — name `ai-ready-workflow`, bin `ai-ready-workflow` → `cli.js`, one **declared** dependency
+(`@modelcontextprotocol/sdk`), Node >= 18. `mcp-server.js` also does `require('zod')`, which is undeclared —
+it resolves today only as a transitive dependency of the SDK. A hoisting change would break `npx … mcp`.
 
 The `files` array ships: `cli.js`, `mcp-server.js`, `smithery.yaml`, `install.sh`, `install.ps1`, `AGENTS.md`,
 `GEMINI.md`, `.cursorrules`, `GETTING_STARTED.md`, `*/SKILL.md`, `ui-ux-pro-max/scripts/`,
@@ -177,8 +184,13 @@ Three commands, dispatched in `skills/cli.js`:
 ### 4.3 The MCP server
 
 `skills/mcp-server.js` enumerates skills at startup and exposes each as an MCP **resource** (`skill://<name>`)
-and as a prompt, plus a `list_skills` tool. Consumed by Claude Desktop's regular chat via a
-`claude_desktop_config.json` entry running `npx -y ai-ready-workflow mcp`.
+and as a prompt, plus **three** tools: `list_skills`, `get_skill` and `search_ui_ux`. The last spawns
+`python3 ui-ux-pro-max/scripts/search.py`, so **Python 3 is a runtime requirement of the MCP server**, not
+only of the skill. Consumed by Claude Desktop's regular chat via a `claude_desktop_config.json` entry running
+`npx -y ai-ready-workflow mcp`.
+
+Its server banner hardcodes a version (`mcp-server.js:35`) — the third place a version lives
+(`ARCHITECTURE 6.4`).
 
 ### 4.4 The installers
 
@@ -252,9 +264,15 @@ runs `npm publish --access public` with the `NPM_TOKEN` secret. Nothing publishe
 `.github/workflows/deploy-landing.yml` fires on **every push to `main`**, with no paths filter, and uploads all
 of `landing-page/`. Any commit to main republishes the site, so stale figures there go live immediately.
 
-### 6.3 Release contract
+### 6.3 Documentation checks
 
-1. Bump the version in **`skills/package.json` and `skills/package-lock.json`** — both
+`.github/workflows/tests.yml` runs both test files on every push to any branch and on every pull request.
+`npm-publish.yml` will not publish unless they pass. Nothing else gates on them.
+
+### 6.4 Release contract
+
+1. Bump the version in **three** places: `skills/package.json`, `skills/package-lock.json`, and the
+   hardcoded banner at `skills/mcp-server.js:35`
 2. Sweep `landing-page/index.html` and `README.md` (`ARCHITECTURE 1.2`)
 3. Commit, `git tag v<version>`, push the tag
 
@@ -274,11 +292,28 @@ is ever added.
 
 ### 7.1 `tests/test_docs.py` — documentation freshness
 
-Asserts the twins are byte-identical, that the skill **set** (never a number) agrees across every surface in
-`ARCHITECTURE 3.3`, that symlinks and skill directories correspond one-to-one, that the slash-command set
-matches `.claude/commands/`, that every markdown link and every `PRD n.n` / `ARCHITECTURE n.n` citation
-resolves, that `tasks/BACKLOG.md` and the card files agree on status, that `docs/STATE.md` names only cards
-that exist, and that banned strings stay banned.
+One `check_*` function per rule:
+
+| Check | Asserts |
+|---|---|
+| `check_twins_byte_identical` | the three agent indexes equal their `skills/` copies |
+| `check_readme_pair_differs` | `README.md` / `GETTING_STARTED.md` are **not** synced with their twins |
+| `check_symlinks_match_skills` | one relative symlink per skill, both directions |
+| `check_skill_set_across_surfaces` | the skill **set** in six indexes and both installer tables, both directions |
+| `check_readme_skill_set` | the skill set in both READMEs, both directions |
+| `check_cli_banner` | the `cli.js` count, derived from disk |
+| `check_command_set` | the command set across ten surfaces |
+| `check_citations_resolve` | every `PRD n.n` / `ARCHITECTURE n.n` names a real section |
+| `check_links_resolve` | every relative link, minus the allowlist |
+| `check_backlog_and_state_cards` | card IDs and statuses agree across BACKLOG, STATE and card files |
+| `check_claimable_cards_are_unblocked` | nothing under STATE 'Next up' is blocked in BACKLOG |
+| `check_decision_index` | `docs/decisions/` and its README index match |
+| `check_banned_strings` | banned strings stay banned, across `.md`, `.cursorrules` and the landing page |
+| `check_state_freshness` | `docs/STATE.md` carries a Last-updated date |
+| `check_claude_md_is_rules_only` | `CLAUDE.md` stays under 150 lines |
+
+Citation checking skips `docs/history/`, `features/` and the playbook itself — history must be allowed to
+cite sections that have since been renumbered.
 
 Links already dead when the checker was introduced are listed in `tests/known_dead_links.txt`, one row per
 link with a reason. The allowlist is asserted **both ways**: an entry that starts resolving fails, so the
@@ -286,12 +321,27 @@ list cannot rot. Never add a row without tracking the fix.
 
 ### 7.2 `tests/test_prohibitions.py` — content rules
 
-Asserts that every artifact under `features/` carries the seven required frontmatter fields (`PRD 5.1`), that
-its `artifact:` value is one of the documented set (`PRD 5.2`), that `generated-by:` names a real skill or a
-declared exception, that every `SKILL.md` has `name:` and `description:`, and that no feature writes
-`design/WF-XXX.md` files (`PRD 3.2`).
+One `check_*` function per rule:
+
+| Check | Asserts |
+|---|---|
+| `check_artifact_frontmatter` | all seven fields present **and non-empty** (`PRD 5.1`) |
+| `check_artifact_values` | `artifact:` is in the `PRD 5.2` set |
+| `check_status_values` | `status:` is `draft`, `review` or `approved` (`PRD 5.3`) |
+| `check_generated_by_names_a_skill` | `generated-by:` is a real skill, or one of two declared exceptions |
+| `check_feature_matches_folder` | `feature:` mirrors the folder name exactly |
+| `check_no_per_id_design_files` | no `WF-*.md` or `INT-*.md` under any `design/` (`PRD 3.2`) |
+| `check_skill_frontmatter` | every `SKILL.md` has `name:` and `description:`, and `name` matches its directory |
+
+The two declared `generated-by` exceptions are `design-interactions` and `pm-to-po-handoff`; both are listed
+in `docs/STATE.md` under Known broken.
 
 ### 7.3 Detectors must bite
 
-Each file ends with a self-probe that runs its detectors against known-bad and known-good strings and fails if
-a detector does not fire. A test that passes vacuously is worse than no test.
+Each file ends with a self-probe. It exercises the **pattern-matching** detectors — the banned-string regexes
+and the `WF-*`/`INT-*` filename matcher — against known-bad and known-good inputs, checks that the frontmatter
+parser accepts a valid block and rejects a missing one, and asserts that the skill, command, section and file
+enumerators return something rather than silently nothing.
+
+It does **not** prove every `check_*` function would fail on a real defect. That is what the mutation pass in
+the M9-01 card log did, and it is worth repeating when a detector changes.

@@ -22,13 +22,13 @@ Reads all existing artifacts for a feature and runs the quality gate checks defi
 
 | Artifact | Quality Gate Source | Skill |
 |----------|--------------------|----|
-| `po/prd.md` | `po-framework/stage1-prd/rules.md` | `validate-prd` |
-| `po/usm.md` | `po-framework/stage2-usm/rules.md` | — |
-| `po/usl.md` | `po-framework/stage3-usl/rules.md` | — |
-| `po/usd/ST-XXX.md` (each) | `po-framework/stage4-usd/rules.md` | `validate-usd` |
-| `po/uat/ST-XXX.md` (each) | `po-framework/stage5-uat/rules.md` | — |
-| `design/wireframes.md` (each WF-XXX section) | `design-framework/stage1-wireframes/quality-gate.md` | `design-wireframe` |
-| `design/COMP-XXX.md` (each) | `design-framework/stage2-component-specs/quality-gate.md` | `design-component-spec` |
+| `po/prd.md` | `po-framework/stage1-prd/quality-gate.md` | `validate-prd` |
+| `po/usm.md` | `po-framework/stage2-usm/quality-gate.md` | — |
+| `po/usl.md` | `po-framework/stage3-usl/quality-gate.md` | — |
+| `po/usd/ST-XXX.md` (each) | `po-framework/stage4-usd/quality-gate.md` | `validate-usd` |
+| `po/uat/ST-XXX.md` (each) | `po-framework/stage5-uat/quality-gate.md` | — |
+| `design/wireframes.md` (each WF-XXX section) | `design-framework/stage1-wireframes/quality-gate.md` | — (checked inline; no validator skill exists) |
+| `design/COMP-XXX.md` (each) | `design-framework/stage2-component-specs/quality-gate.md` | — (checked inline; no validator skill exists) |
 
 ---
 

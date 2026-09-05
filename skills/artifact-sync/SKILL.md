@@ -15,7 +15,11 @@ This skill does **NOT** regenerate artifacts wholesale. It produces a structured
 
 - `po-framework/` — artifact structure rules for PRD, USM, USL, USD, UAT
 - `design-framework/` — artifact structure rules for WF, COMP
-- `CLAUDE.md` — full artifact frontmatter schema including sync fields
+- `PRD.md` sections 5.1, 5.4 and 5.5 — the frontmatter schema, the sync fields and the propagation rule
+
+If those paths do not exist you are in an installed project rather than the source repository: the Extended
+Frontmatter Schema below is complete and authoritative on its own. Do not read the host project's `CLAUDE.md`
+for it — there, that file is the user's own rulebook, not this framework's.
 
 ---
 

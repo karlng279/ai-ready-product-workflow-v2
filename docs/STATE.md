@@ -24,13 +24,36 @@ Your card's file set must be disjoint from every other row.
 |---|---|
 | M8-01…M8-11 | artifact-sync skill, `/sync-check`, and the agent-doc reconciliation (17 skills, 6 commands) |
 | M9-01 | Playbook layout adopted: `PRD`/`ARCHITECTURE` split, `docs/`, `tasks/`, `tests/`, `CLAUDE.md` cut to rules |
+| M9-02 | Landing page figures corrected — 17 skills, 6 commands, TanStack Table, artifact-sync card. **Unpublished until merged to `main`** |
+| M9-12 | Fresh-context audit corrections: enforcement claims made true, 4 vacuous detectors fixed, CI added |
 
 ---
 
 ## Next up — claimable now
 
+Nothing here is blocked. Claim one, add it to In flight, commit that line.
+
+| Card | Title |
+|---|---|
+| M9-05 | Write `po-framework/stage2-usm/template.md` |
+| M9-11 | Clear the rotted links allowlisted in `tests/known_dead_links.txt` |
+
+## Blocked on owner
+
+Not claimable until the linked question is answered.
+
 | Card | Title | Blocked by |
 |---|---|---|
+| M9-03 | Delete the claude-mem stub `CLAUDE.md` files and gitignore them | Q5 |
+| M9-04 | Fix the references to `design-framework-uiux-promax-integration-plan.md`, a plan file that never existed — 6 files | Q8 |
+| M9-06 | Resolve the `WF-XXX` placeholders in the USD Design Reference tables | Q4 |
+| M9-07 | Publish `0.2.0` — bump `package-lock.json`, tag `v0.2.0` | Q2 |
+| M9-08 | Decide the npm knowledge-base gap | Q1 |
+| M9-09 | `design-interactions` skill, or declare stage 3 manual | Q6 |
+| M9-10 | Apply the sync fields, or drop them from the spec | Q7 |
+| M9-13 | Rewrite the shipped agent indexes to be path-agnostic | Q1 |
+
+---|---|---|
 | M9-02 | Sweep `landing-page/index.html` — 16→17 skills, 5→6 commands (8 occurrences) | owner decision Q3 |
 | M9-03 | Delete the 65 claude-mem stub `CLAUDE.md` files and gitignore them | owner decision Q5 |
 | M9-04 | Fix 4 dead links to `documentation/design-framework-uiux-promax-integration-plan.md` | owner decision Q8 |
@@ -46,14 +69,14 @@ Your card's file set must be disjoint from every other row.
 | What | Detail |
 |---|---|
 | **npm package ships no knowledge base** | Every `SKILL.md` cites `po-framework/…` etc.; those dirs are not in `files`. In an installed project the path does not exist. `ARCHITECTURE 4.5`. Needs decision Q1 |
-| **Version split three ways** | `package.json` `0.2.0`, `package-lock.json` `0.1.2`, no `v0.2.0` tag → 0.2.0 unpublished; npm serves `0.1.2`. `ARCHITECTURE 6.3` |
+| **Version split three ways** | `package.json` `0.2.0`, `package-lock.json` `0.1.2`, and `mcp-server.js:35` `0.1.2`; no `v0.2.0` tag → 0.2.0 unpublished; npm serves `0.1.2`. `ARCHITECTURE 6.4` |
 | **USD → wireframe traceability dead** | All 12 USD files carry the literal `WF-XXX` placeholder. `PRD 7.2` |
 | **`design-interactions` skill does not exist** | Artifacts are stamped `generated-by: design-interactions`; stage 3 is manual. Allowlisted in `test_prohibitions.py` |
 | **`pm-to-po-handoff` does not exist** | Appears as a `generated-by` value on disk. Allowlisted |
 | **`po-framework/stage2-usm/template.md` missing** | Every other PO stage has one |
 | **42 dead links** | Allowlisted in `tests/known_dead_links.txt` with a reason each: 38 rotted targets (card M9-11) and 4 illustrative template paths. The link checker guards against **new** ones |
 | **Empty dirs** | `codebase-framework/templates/`, `codebase-framework/testing-patterns/` — `.gitkeep` only |
-| **65 claude-mem stubs** | 65 of 66 tracked `CLAUDE.md` files are 169-byte `<claude-mem-context>` noise, not gitignored |
+| **claude-mem stubs** | Every tracked `CLAUDE.md` except the root one is claude-mem output — 64 of 65, verifiable with `git ls-files \| grep 'CLAUDE.md$' \| xargs grep -l claude-mem-context`. Not gitignored |
 
 ---
 
