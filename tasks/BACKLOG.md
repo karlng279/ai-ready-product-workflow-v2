@@ -50,5 +50,6 @@ Phases 0–7 are complete; their detail is in [`docs/history/phases-0-7.md`](../
 | M9-12 | Correct the enforcement claims and detector gaps found by the fresh-context audit | done | — | `ARCHITECTURE.md`, `CLAUDE.md`, `docs/INDEX.md`, `docs/decisions/0001-wireframes-single-file.md`, `tests/**` |
 | M9-13 | Rewrite the shipped agent indexes and `ui-ux-pro-max` paths to be installed-project-agnostic | blocked | owner Q1 | `skills/AGENTS.md`, `skills/GEMINI.md`, `skills/.cursorrules`, `AGENTS.md`, `GEMINI.md`, `.cursorrules`, `skills/ui-ux-pro-max/SKILL.md`, `skills/README.md`, `skills/GETTING_STARTED.md` |
 | M9-14 | Draw the as-is Archify diagrams: agent collaboration, end-user adoption, framework internals | done | — | `docs/diagrams/**`, `docs/decisions/0006-diagrams-are-snapshots.md`, `docs/decisions/README.md`, `docs/INDEX.md`, `ARCHITECTURE.md` (1.1 map), `README.md` (tree), `docs/STATE.md`, `tasks/BACKLOG.md`, `tasks/cards/M9-14-as-is-diagrams.md` |
+| M9-15 | Add a browsable hub page for the diagrams (`docs/diagrams/index.html`) | in-flight | M9-14 | `docs/diagrams/index.html`, `docs/diagrams/README.md`, `README.md` (tree), `docs/STATE.md`, `tasks/BACKLOG.md`, `tasks/cards/M9-15-diagram-hub.md` |
 
 Owner questions Q1–Q9 are in [`docs/STATE.md`](../docs/STATE.md) → Waiting on owner.

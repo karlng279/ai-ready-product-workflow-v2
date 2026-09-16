@@ -14,7 +14,7 @@ Your card's file set must be disjoint from every other row.
 
 | Card | Claimed by | Since | File set |
 |---|---|---|---|
-| — | — | — | — |
+| M9-15 | Claude Code (Opus 5) | 2026-09-16 | `docs/diagrams/index.html`, `docs/diagrams/README.md`, `README.md` (tree), `docs/STATE.md`, `tasks/BACKLOG.md`, card file |
 
 ---
 
