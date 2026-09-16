@@ -1,0 +1,330 @@
+{
+ "schema_version": 1,
+ "diagram_type": "architecture",
+ "meta": {
+  "title": "What Each Agent Picks Up",
+  "locale": "en",
+  "quality_profile": "showcase",
+  "views": [
+   {
+    "id": "claude-code",
+    "label": "Claude Code",
+    "focus": [
+     "claude_code",
+     "claude_md",
+     "skills_dir"
+    ],
+    "note": "Docs promise auto-loading from .agent/skills; Claude Code discovers project skills under .claude/skills."
+   },
+   {
+    "id": "index-agents",
+    "label": "Codex, Gemini, Cursor",
+    "focus": [
+     "codex",
+     "gemini",
+     "cursor",
+     "indexes",
+     "skills_dir"
+    ],
+    "note": "Index files point at skills/… paths that an installed project does not have."
+   },
+   {
+    "id": "fork-only",
+    "label": "Fork or clone only",
+    "focus": [
+     "skills_dir",
+     "kb",
+     "commands"
+    ],
+    "note": "Every framework SKILL.md cites knowledge-base files that npm never ships."
+   }
+  ],
+  "legend": {
+   "mode": "auto",
+   "entries": {
+    "external": {
+     "label": "Agent"
+    },
+    "frontend": {
+     "label": "Entry file"
+    },
+    "backend": {
+     "label": "Skill files"
+    },
+    "database": {
+     "label": "Knowledge base"
+    },
+    "cloud": {
+     "label": "Slash commands"
+    },
+    "messagebus": {
+     "label": "MCP server"
+    }
+   }
+  }
+ },
+ "components": [
+  {
+   "id": "claude_code",
+   "type": "external",
+   "brand": "claude",
+   "label": "Claude Code",
+   "sublabel": "reads CLAUDE.md",
+   "pos": [
+    40,
+    40
+   ],
+   "size": [
+    160,
+    60
+   ]
+  },
+  {
+   "id": "codex",
+   "type": "external",
+   "brand": "openai",
+   "label": "Codex",
+   "sublabel": "told: read AGENTS.md",
+   "pos": [
+    40,
+    170
+   ],
+   "size": [
+    160,
+    60
+   ]
+  },
+  {
+   "id": "gemini",
+   "type": "external",
+   "brand": "google-gemini",
+   "label": "Gemini",
+   "sublabel": "told: read GEMINI.md",
+   "pos": [
+    40,
+    270
+   ],
+   "size": [
+    160,
+    60
+   ]
+  },
+  {
+   "id": "cursor",
+   "type": "external",
+   "label": "Cursor",
+   "sublabel": ".cursorrules on open",
+   "pos": [
+    40,
+    370
+   ],
+   "size": [
+    160,
+    60
+   ]
+  },
+  {
+   "id": "desktop",
+   "type": "external",
+   "brand": "claude",
+   "label": "Claude Desktop",
+   "sublabel": "chat, no project files",
+   "pos": [
+    40,
+    480
+   ],
+   "size": [
+    160,
+    60
+   ]
+  },
+  {
+   "id": "claude_md",
+   "type": "frontend",
+   "label": "CLAUDE.md registry",
+   "sublabel": "only if file existed",
+   "pos": [
+    400,
+    40
+   ],
+   "size": [
+    220,
+    60
+   ]
+  },
+  {
+   "id": "skills_dir",
+   "type": "backend",
+   "label": ".agent/skills/",
+   "sublabel": "copied SKILL.md folders",
+   "pos": [
+    400,
+    160
+   ],
+   "size": [
+    220,
+    60
+   ]
+  },
+  {
+   "id": "indexes",
+   "type": "frontend",
+   "label": "Agent indexes",
+   "sublabel": "AGENTS.md, GEMINI.md, .cursorrules",
+   "pos": [
+    400,
+    270
+   ],
+   "size": [
+    220,
+    60
+   ]
+  },
+  {
+   "id": "mcp",
+   "type": "messagebus",
+   "label": "MCP server",
+   "sublabel": "npx cache, read-only",
+   "pos": [
+    400,
+    480
+   ],
+   "size": [
+    220,
+    60
+   ]
+  },
+  {
+   "id": "kb",
+   "type": "database",
+   "label": "Knowledge bases",
+   "sublabel": "pm, po, design, codebase",
+   "pos": [
+    800,
+    160
+   ],
+   "size": [
+    210,
+    60
+   ]
+  },
+  {
+   "id": "commands",
+   "type": "cloud",
+   "label": "Slash commands",
+   "sublabel": ".claude/commands pipelines",
+   "pos": [
+    800,
+    40
+   ],
+   "size": [
+    210,
+    60
+   ]
+  }
+ ],
+ "boundaries": [
+  {
+   "kind": "region",
+   "label": "Written by npx install",
+   "wraps": [
+    "claude_md",
+    "skills_dir",
+    "indexes"
+   ],
+   "pad": 18
+  },
+  {
+   "kind": "security-group",
+   "label": "Only in a fork or clone",
+   "wraps": [
+    "commands",
+    "kb"
+   ],
+   "pad": 18
+  }
+ ],
+ "connections": [
+  {
+   "id": "cc-registry",
+   "from": "claude_code",
+   "to": "claude_md",
+   "label": "loads",
+   "variant": "emphasis"
+  },
+  {
+   "id": "registry-skills",
+   "from": "claude_md",
+   "to": "skills_dir",
+   "label": "says auto-loaded",
+   "variant": "security",
+   "labelDy": 24
+  },
+  {
+   "id": "codex-index",
+   "from": "codex",
+   "to": "indexes",
+   "label": "read AGENTS.md",
+   "variant": "default"
+  },
+  {
+   "id": "gemini-index",
+   "from": "gemini",
+   "to": "indexes",
+   "label": "read GEMINI.md",
+   "labelDx": -50
+  },
+  {
+   "id": "cursor-index",
+   "from": "cursor",
+   "to": "indexes",
+   "label": "auto-loads"
+  },
+  {
+   "id": "index-skills",
+   "from": "indexes",
+   "to": "skills_dir",
+   "label": "cites skills/, wrong path",
+   "variant": "security"
+  },
+  {
+   "id": "desktop-mcp",
+   "from": "desktop",
+   "to": "mcp",
+   "label": "prompts, tools"
+  },
+  {
+   "id": "skills-kb",
+   "from": "skills_dir",
+   "to": "kb",
+   "label": "cites, missing on npm",
+   "variant": "security"
+  }
+ ],
+ "cards": [
+  {
+   "dot": "rose",
+   "title": "Broken after npm install",
+   "items": [
+    "Claude Code finds project skills in .claude/skills, not .agent/skills",
+    "SKILL.md cites po-framework/… files that are not shipped"
+   ]
+  },
+  {
+   "dot": "amber",
+   "title": "Fork or clone gets more",
+   "items": [
+    "Knowledge bases, slash commands, the example feature",
+    "Plus the maintainer CLAUDE.md protocol, with no reset guide"
+   ]
+  },
+  {
+   "dot": "slate",
+   "title": "Evidence at d04f47d",
+   "items": [
+    "install.sh registry text; skills/AGENTS.md line 4",
+    "skills/GETTING_STARTED.md; ARCHITECTURE 3.2, 4.5"
+   ]
+  }
+ ]
+}

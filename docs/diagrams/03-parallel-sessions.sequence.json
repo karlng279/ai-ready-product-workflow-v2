@@ -1,0 +1,205 @@
+{
+ "schema_version": 1,
+ "diagram_type": "sequence",
+ "meta": {
+  "title": "Two Agent Sessions Sharing One Repo",
+  "locale": "en",
+  "quality_profile": "showcase",
+  "column_fit": "spread",
+  "viewBox": [
+   1040,
+   600
+  ],
+  "views": [
+   {
+    "id": "claude-claims",
+    "label": "Claude claims a card",
+    "focus": [
+     "owner",
+     "claude",
+     "repo"
+    ],
+    "note": "The protocol arrives automatically through CLAUDE.md."
+   },
+   {
+    "id": "second-session",
+    "label": "A second agent joins",
+    "focus": [
+     "owner",
+     "other",
+     "repo"
+    ],
+    "note": "The second agent learns the protocol only from the owner."
+   },
+   {
+    "id": "landing",
+    "label": "Landing the card",
+    "focus": [
+     "claude",
+     "owner",
+     "github",
+     "repo"
+    ],
+    "note": "Only the owner pushes; CI runs on the push."
+   }
+  ]
+ },
+ "participants": [
+  {
+   "id": "owner",
+   "type": "external",
+   "label": "Owner",
+   "sublabel": "the human"
+  },
+  {
+   "id": "claude",
+   "type": "backend",
+   "brand": "claude",
+   "label": "Claude Code",
+   "sublabel": "session A"
+  },
+  {
+   "id": "other",
+   "type": "backend",
+   "label": "Codex, Gemini, Cursor",
+   "sublabel": "session B"
+  },
+  {
+   "id": "repo",
+   "type": "database",
+   "label": "Local clone",
+   "sublabel": "feature branch"
+  },
+  {
+   "id": "github",
+   "type": "cloud",
+   "label": "GitHub",
+   "sublabel": "origin + Actions"
+  }
+ ],
+ "segments": [
+  {
+   "from": 150,
+   "to": 228,
+   "label": "Session A claims"
+  },
+  {
+   "from": 242,
+   "to": 386,
+   "label": "Session B joins"
+  },
+  {
+   "from": 400,
+   "to": 512,
+   "label": "Land"
+  }
+ ],
+ "messages": [
+  {
+   "from": "claude",
+   "to": "repo",
+   "y": 172,
+   "label": "auto-load CLAUDE.md, read STATE",
+   "variant": "emphasis"
+  },
+  {
+   "from": "claude",
+   "to": "repo",
+   "y": 207,
+   "label": "commit claim row: the lock",
+   "variant": "emphasis"
+  },
+  {
+   "from": "other",
+   "to": "repo",
+   "y": 267,
+   "label": "auto-load AGENTS.md or GEMINI.md",
+   "variant": "dashed"
+  },
+  {
+   "from": "repo",
+   "to": "other",
+   "y": 302,
+   "label": "skill index, no protocol",
+   "variant": "return"
+  },
+  {
+   "from": "owner",
+   "to": "other",
+   "y": 337,
+   "label": "tell it: read CLAUDE.md",
+   "variant": "security"
+  },
+  {
+   "from": "other",
+   "to": "repo",
+   "y": 372,
+   "label": "read STATE, skip claimed card",
+   "note": "visible only in this clone"
+  },
+  {
+   "from": "claude",
+   "to": "repo",
+   "y": 427,
+   "label": "card commit",
+   "variant": "emphasis"
+  },
+  {
+   "from": "claude",
+   "to": "owner",
+   "y": 462,
+   "label": "done; push is yours",
+   "variant": "return"
+  },
+  {
+   "from": "owner",
+   "to": "github",
+   "y": 497,
+   "label": "push branch, tests.yml runs",
+   "variant": "emphasis"
+  }
+ ],
+ "activations": [
+  {
+   "participant": "claude",
+   "from": 166,
+   "to": 215
+  },
+  {
+   "participant": "other",
+   "from": 261,
+   "to": 380
+  },
+  {
+   "participant": "claude",
+   "from": 421,
+   "to": 470
+  }
+ ],
+ "cards": [
+  {
+   "dot": "cyan",
+   "title": "What coordinates them",
+   "items": [
+    "Both sessions read the same committed STATE",
+    "No messages, no hooks: only commits"
+   ]
+  },
+  {
+   "dot": "rose",
+   "title": "Where it breaks today",
+   "items": [
+    "Session B gets no protocol unless told",
+    "Claims are unpushed; other clones and cloud agents can't see them"
+   ]
+  },
+  {
+   "dot": "slate",
+   "title": "Evidence at d04f47d",
+   "items": [
+    "Branch is 4 commits ahead of origin/main, never pushed",
+    "CLAUDE.md Conventions: every push needs the owner"
+   ]
+  }
+ ]
+}

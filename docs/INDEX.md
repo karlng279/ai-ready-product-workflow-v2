@@ -56,6 +56,7 @@ still misses the detail that mattered. Find your row, read those sections, stop.
 | What am I (the owner) blocking? | `docs/STATE.md` → Waiting on owner |
 | Why was X decided? | `docs/decisions/` |
 | What was the old plan? | `docs/history/` — record only, **not specification** |
+| Is there a picture of how X works? | `docs/diagrams/README.md` — a dated snapshot; the cited section wins (decision 0006) |
 | How do I cite a section? | `CLAUDE.md` → Conventions |
 | What does a card look like? | `tasks/cards/TEMPLATE.md` |
 

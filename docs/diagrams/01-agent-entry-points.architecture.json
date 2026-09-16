@@ -1,0 +1,340 @@
+{
+ "schema_version": 1,
+ "diagram_type": "architecture",
+ "meta": {
+  "title": "Which Rules Reach Each Maintainer Agent",
+  "locale": "en",
+  "quality_profile": "showcase",
+  "views": [
+   {
+    "id": "claude-path",
+    "label": "Claude Code path",
+    "focus": [
+     "claude",
+     "claude_md",
+     "board",
+     "tests"
+    ],
+    "note": "The only agent whose auto-loaded file carries the session protocol."
+   },
+   {
+    "id": "other-agents",
+    "label": "Codex, Gemini, Cursor",
+    "focus": [
+     "codex",
+     "gemini",
+     "cursor",
+     "indexes",
+     "twins",
+     "owner"
+    ],
+    "note": "Their entry files are end-user skill indexes; the protocol reaches them only through the owner."
+   },
+   {
+    "id": "channel",
+    "label": "Coordination channel",
+    "focus": [
+     "claude_md",
+     "owner",
+     "board",
+     "tests",
+     "claude_mem"
+    ],
+    "note": "Committed files are the shared channel; claude-mem is a private side channel."
+   }
+  ],
+  "legend": {
+   "mode": "auto",
+   "entries": {
+    "external": {
+     "label": "Agent or owner"
+    },
+    "frontend": {
+     "label": "Skill index"
+    },
+    "security": {
+     "label": "Rules or checks"
+    },
+    "database": {
+     "label": "Shared state"
+    },
+    "cloud": {
+     "label": "npm-shipped copy"
+    }
+   }
+  }
+ },
+ "components": [
+  {
+   "id": "claude_mem",
+   "type": "database",
+   "label": "claude-mem",
+   "sublabel": "Claude-only memory",
+   "pos": [
+    40,
+    30
+   ],
+   "size": [
+    150,
+    60
+   ]
+  },
+  {
+   "id": "claude",
+   "type": "external",
+   "brand": "claude",
+   "label": "Claude Code",
+   "sublabel": "maintainer session",
+   "pos": [
+    40,
+    160
+   ],
+   "size": [
+    150,
+    60
+   ]
+  },
+  {
+   "id": "codex",
+   "type": "external",
+   "brand": "openai",
+   "label": "Codex",
+   "sublabel": "maintainer session",
+   "pos": [
+    40,
+    290
+   ],
+   "size": [
+    150,
+    60
+   ]
+  },
+  {
+   "id": "gemini",
+   "type": "external",
+   "brand": "google-gemini",
+   "label": "Gemini",
+   "sublabel": "maintainer session",
+   "pos": [
+    40,
+    390
+   ],
+   "size": [
+    150,
+    60
+   ]
+  },
+  {
+   "id": "cursor",
+   "type": "external",
+   "label": "Cursor",
+   "sublabel": "maintainer session",
+   "pos": [
+    40,
+    490
+   ],
+   "size": [
+    150,
+    60
+   ]
+  },
+  {
+   "id": "claude_md",
+   "type": "security",
+   "label": "CLAUDE.md",
+   "sublabel": "session protocol + DoD",
+   "tag": "maintainer rules",
+   "pos": [
+    340,
+    158
+   ],
+   "size": [
+    200,
+    64
+   ]
+  },
+  {
+   "id": "owner",
+   "type": "external",
+   "label": "Owner",
+   "sublabel": "the human",
+   "pos": [
+    340,
+    30
+   ],
+   "size": [
+    200,
+    60
+   ]
+  },
+  {
+   "id": "indexes",
+   "type": "frontend",
+   "label": "Agent skill indexes",
+   "sublabel": "AGENTS.md, GEMINI.md, .cursorrules",
+   "tag": "no protocol",
+   "pos": [
+    340,
+    388
+   ],
+   "size": [
+    200,
+    64
+   ]
+  },
+  {
+   "id": "board",
+   "type": "database",
+   "label": "Shared board",
+   "sublabel": "STATE, BACKLOG, cards",
+   "tag": "committed files",
+   "pos": [
+    680,
+    158
+   ],
+   "size": [
+    200,
+    64
+   ]
+  },
+  {
+   "id": "twins",
+   "type": "cloud",
+   "label": "skills/ twins",
+   "sublabel": "shipped in npm package",
+   "pos": [
+    680,
+    388
+   ],
+   "size": [
+    200,
+    64
+   ]
+  },
+  {
+   "id": "tests",
+   "type": "security",
+   "label": "Tests + CI",
+   "sublabel": "test_docs, test_prohibitions",
+   "pos": [
+    1010,
+    158
+   ],
+   "size": [
+    200,
+    64
+   ]
+  }
+ ],
+ "boundaries": [
+  {
+   "kind": "region",
+   "label": "Auto-loaded",
+   "wraps": [
+    "claude_md",
+    "indexes"
+   ],
+   "pad": 18
+  }
+ ],
+ "connections": [
+  {
+   "id": "claude-loads",
+   "from": "claude",
+   "to": "claude_md",
+   "label": "auto-loads",
+   "variant": "emphasis"
+  },
+  {
+   "id": "codex-loads",
+   "from": "codex",
+   "to": "indexes",
+   "label": "AGENTS.md"
+  },
+  {
+   "id": "gemini-loads",
+   "from": "gemini",
+   "to": "indexes",
+   "label": "GEMINI.md",
+   "labelDx": -38
+  },
+  {
+   "id": "cursor-loads",
+   "from": "cursor",
+   "to": "indexes",
+   "label": ".cursorrules"
+  },
+  {
+   "id": "indexes-twins",
+   "from": "indexes",
+   "to": "twins",
+   "label": "byte-identical",
+   "variant": "dashed"
+  },
+  {
+   "id": "protocol-board",
+   "from": "claude_md",
+   "to": "board",
+   "label": "read STATE, claim",
+   "variant": "emphasis"
+  },
+  {
+   "id": "board-tests",
+   "from": "board",
+   "to": "tests",
+   "label": "on push"
+  },
+  {
+   "id": "claude-memory",
+   "from": "claude",
+   "to": "claude_mem",
+   "label": "private",
+   "variant": "dashed"
+  },
+  {
+   "id": "owner-points",
+   "from": "owner",
+   "to": "claude_md",
+   "label": "tells others",
+   "variant": "security",
+   "labelDy": 24
+  },
+  {
+   "id": "owner-board",
+   "from": "owner",
+   "to": "board",
+   "label": "answers Qs, merges",
+   "fromSide": "right",
+   "toSide": "top"
+  }
+ ],
+ "cards": [
+  {
+   "dot": "rose",
+   "title": "Who gets the protocol",
+   "items": [
+    "Claude Code auto-loads CLAUDE.md, which holds the protocol",
+    "Codex, Gemini, Cursor load skill indexes with no pointer to it",
+    "Others follow it only when the owner tells them to"
+   ]
+  },
+  {
+   "dot": "cyan",
+   "title": "The only channel",
+   "items": [
+    "Sessions share committed files, never messages",
+    "A claim is a committed STATE row; file sets stay disjoint",
+    "claude-mem is Claude-only memory, on at this commit"
+   ]
+  },
+  {
+   "dot": "slate",
+   "title": "Evidence at d04f47d",
+   "items": [
+    "CLAUDE.md: Session protocol, Definition of done",
+    "cmp: root indexes equal their skills/ copies",
+    ".claude/settings.json; playbook line 26"
+   ]
+  }
+ ]
+}

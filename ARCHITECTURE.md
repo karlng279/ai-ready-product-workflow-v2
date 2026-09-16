@@ -35,6 +35,7 @@ Because `skills/` is simultaneously the skill source of truth and the npm payloa
 │   ├── INDEX.md               # task → the exact sections it needs
 │   ├── STATE.md               # status board; includes Waiting on owner
 │   ├── decisions/             # NNNN-*.md, one per decision, + README index
+│   ├── diagrams/              # Archify JSON + HTML, a dated as-is snapshot — not specification
 │   ├── history/               # superseded plans, kept as record — not specifications
 │   └── multi-session-repo-playbook.md   # the methodology this repo follows
 ├── tasks/

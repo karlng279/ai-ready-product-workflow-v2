@@ -1,0 +1,211 @@
+{
+ "schema_version": 1,
+ "diagram_type": "lifecycle",
+ "meta": {
+  "title": "Card Lifecycle on the Repo Board",
+  "locale": "en",
+  "quality_profile": "showcase",
+  "views": [
+   {
+    "id": "rail",
+    "label": "Backlog to done",
+    "focus": [
+     "backlog",
+     "picked",
+     "gate",
+     "inflight",
+     "done"
+    ],
+    "note": "The statuses a card passes through: todo, in-flight, done."
+   },
+   {
+    "id": "blocked",
+    "label": "Blocked on owner",
+    "focus": [
+     "gate",
+     "blocked",
+     "backlog"
+    ],
+    "note": "A blocked card waits for an owner answer, then returns to todo."
+   },
+   {
+    "id": "recovery",
+    "label": "Definition of done",
+    "focus": [
+     "inflight",
+     "dod_fail",
+     "done",
+     "owner_push"
+    ],
+    "note": "The card stays in flight until the Definition of done holds."
+   }
+  ],
+  "viewBox": [
+   980,
+   566
+  ]
+ },
+ "lanes": [
+  {
+   "id": "main",
+   "label": "Card status"
+  },
+  {
+   "id": "side",
+   "label": "Waiting, recovery, and after"
+  }
+ ],
+ "states": [
+  {
+   "id": "backlog",
+   "type": "start",
+   "label": "Backlog row",
+   "sublabel": "no card file yet",
+   "lane": "main",
+   "col": 0,
+   "step": "01",
+   "tag": "todo"
+  },
+  {
+   "id": "picked",
+   "type": "active",
+   "label": "Picked",
+   "sublabel": "card file written",
+   "lane": "main",
+   "col": 1,
+   "step": "02",
+   "tag": "todo"
+  },
+  {
+   "id": "gate",
+   "type": "decision",
+   "label": "Claimable?",
+   "sublabel": "unblocked, tests green",
+   "lane": "main",
+   "col": 2,
+   "step": "03",
+   "tag": "gate"
+  },
+  {
+   "id": "inflight",
+   "type": "active",
+   "label": "In flight",
+   "sublabel": "claim commit is the lock",
+   "lane": "main",
+   "col": 3,
+   "step": "04",
+   "tag": "in-flight"
+  },
+  {
+   "id": "done",
+   "type": "success",
+   "label": "Done",
+   "sublabel": "card commit, Done row",
+   "lane": "main",
+   "col": 4,
+   "step": "05",
+   "tag": "done"
+  },
+  {
+   "id": "blocked",
+   "type": "waiting",
+   "label": "Blocked",
+   "sublabel": "owner Q in STATE",
+   "lane": "side",
+   "col": 0,
+   "tag": "blocked"
+  },
+  {
+   "id": "dod_fail",
+   "type": "failure",
+   "label": "DoD not met",
+   "sublabel": "tests red or board stale",
+   "lane": "side",
+   "col": 1,
+   "tag": "fix"
+  },
+  {
+   "id": "owner_push",
+   "type": "external",
+   "label": "Owner push",
+   "sublabel": "merge is the owner's call",
+   "lane": "side",
+   "col": 2,
+   "tag": "owner"
+  }
+ ],
+ "transitions": [
+  {
+   "id": "gate-blocked",
+   "from": "gate",
+   "to": "blocked",
+   "label": "blocked by Q",
+   "variant": "security",
+   "route": "straight",
+   "fromSide": "bottom",
+   "toSide": "top",
+   "labelDy": 24
+  },
+  {
+   "id": "blocked-answered",
+   "from": "blocked",
+   "to": "backlog",
+   "label": "answered",
+   "variant": "emphasis",
+   "fromSide": "left",
+   "toSide": "bottom"
+  },
+  {
+   "id": "inflight-dod",
+   "from": "inflight",
+   "to": "dod_fail",
+   "label": "check fails",
+   "variant": "dashed",
+   "labelDx": 45,
+   "labelDy": 24
+  },
+  {
+   "id": "dod-retry",
+   "from": "dod_fail",
+   "to": "inflight",
+   "label": "fix, re-check",
+   "variant": "emphasis",
+   "labelDx": -50
+  },
+  {
+   "id": "done-push",
+   "from": "done",
+   "to": "owner_push",
+   "variant": "dashed",
+   "route": "straight",
+   "fromSide": "bottom",
+   "toSide": "top"
+  }
+ ],
+ "cards": [
+  {
+   "dot": "cyan",
+   "title": "Status lives in three places",
+   "items": [
+    "Card file Status line, BACKLOG row, STATE section",
+    "test_docs checks card file against BACKLOG only"
+   ]
+  },
+  {
+   "dot": "amber",
+   "title": "Owner gates",
+   "items": [
+    "Blocked cards wait on a Q row in STATE",
+    "Push and merge stay with the owner"
+   ]
+  },
+  {
+   "dot": "slate",
+   "title": "Evidence at d04f47d",
+   "items": [
+    "BACKLOG statuses: todo, in-flight, done, blocked",
+    "CLAUDE.md Session protocol and Definition of done"
+   ]
+  }
+ ]
+}

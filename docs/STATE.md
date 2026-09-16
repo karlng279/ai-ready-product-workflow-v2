@@ -14,7 +14,7 @@ Your card's file set must be disjoint from every other row.
 
 | Card | Claimed by | Since | File set |
 |---|---|---|---|
-| M9-14 | Claude Code (Opus 5) | 2026-09-16 | `docs/diagrams/**`, `docs/decisions/0006-*`, `docs/decisions/README.md`, `docs/INDEX.md`, `ARCHITECTURE.md` (1.1 map), `README.md` (tree), `docs/STATE.md`, `tasks/BACKLOG.md`, card file |
+| — | — | — | — |
 
 ---
 
@@ -26,6 +26,7 @@ Your card's file set must be disjoint from every other row.
 | M9-01 | Playbook layout adopted: `PRD`/`ARCHITECTURE` split, `docs/`, `tasks/`, `tests/`, `CLAUDE.md` cut to rules |
 | M9-02 | Landing page figures corrected — 17 skills, 6 commands, TanStack Table, artifact-sync card. **Unpublished until merged to `main`** |
 | M9-12 | Fresh-context audit corrections: enforcement claims made true, 4 vacuous detectors fixed, CI added |
+| M9-14 | As-is Archify diagrams in `docs/diagrams/`, snapshot of `d04f47d` (decision 0006). Its card Log lists six on-disk findings not yet on this board |
 
 ---
 

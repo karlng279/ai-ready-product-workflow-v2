@@ -1,0 +1,294 @@
+{
+ "schema_version": 1,
+ "diagram_type": "dataflow",
+ "meta": {
+  "title": "Artifact Chain From PM to Design",
+  "locale": "en",
+  "quality_profile": "showcase",
+  "views": [
+   {
+    "id": "pm-to-brief",
+    "label": "PM into the brief",
+    "focus": [
+     "strategy",
+     "research",
+     "brief",
+     "prd"
+    ],
+    "note": "The brief is upstream of the PRD; discovery also names the PRD downstream."
+   },
+   {
+    "id": "po-chain",
+    "label": "PO chain",
+    "focus": [
+     "prd",
+     "usm",
+     "usl",
+     "usd",
+     "uat"
+    ],
+    "note": "Each PO stage has a skill, a rules folder, and a quality gate."
+   },
+   {
+    "id": "design-chain",
+    "label": "Design chain",
+    "focus": [
+     "usd",
+     "wf",
+     "comp",
+     "inter"
+    ],
+    "note": "Wireframes derive from USD; stage 3 interactions are manual."
+   }
+  ],
+  "legend": {
+   "mode": "auto",
+   "entries": {
+    "emphasis": {
+     "label": "Artifact to artifact"
+    },
+    "security": {
+     "label": "Unresolved link"
+    },
+    "dashed": {
+     "label": "No skill, or extra edge"
+    },
+    "database": {
+     "label": "Design artifact"
+    }
+   }
+  },
+  "viewBox": [
+   1080,
+   520
+  ]
+ },
+ "stages": [
+  {
+   "label": "PM"
+  },
+  {
+   "label": "Brief to PRD"
+  },
+  {
+   "label": "Story map"
+  },
+  {
+   "label": "Story detail"
+  },
+  {
+   "label": "Design"
+  }
+ ],
+ "nodes": [
+  {
+   "id": "strategy",
+   "type": "external",
+   "label": "Strategy, discovery",
+   "sublabel": "STRATEGY, OST",
+   "stage": 0,
+   "row": 0,
+   "width": 124
+  },
+  {
+   "id": "research",
+   "type": "external",
+   "label": "Research to GTM",
+   "sublabel": "research … GTM-PLAN",
+   "stage": 0,
+   "row": 1,
+   "width": 124
+  },
+  {
+   "id": "prd",
+   "type": "backend",
+   "label": "PRD",
+   "sublabel": "po/prd.md",
+   "stage": 1,
+   "row": 0,
+   "width": 124
+  },
+  {
+   "id": "brief",
+   "type": "messagebus",
+   "label": "Brief",
+   "sublabel": "BRIEF, no skill",
+   "stage": 1,
+   "row": 1,
+   "width": 124
+  },
+  {
+   "id": "usm",
+   "type": "backend",
+   "label": "USM",
+   "sublabel": "po/usm.md",
+   "stage": 2,
+   "row": 0,
+   "width": 124
+  },
+  {
+   "id": "usl",
+   "type": "backend",
+   "label": "USL",
+   "sublabel": "po/usl.md, MoSCoW",
+   "stage": 2,
+   "row": 1,
+   "width": 124
+  },
+  {
+   "id": "usd",
+   "type": "backend",
+   "label": "USD",
+   "sublabel": "po/usd/ST-XXX.md",
+   "stage": 3,
+   "row": 0,
+   "width": 124
+  },
+  {
+   "id": "uat",
+   "type": "backend",
+   "label": "UAT",
+   "sublabel": "po/uat/ST-XXX.md",
+   "stage": 3,
+   "row": 1,
+   "width": 124
+  },
+  {
+   "id": "wf",
+   "type": "database",
+   "label": "WF",
+   "sublabel": "design/wireframes.md",
+   "stage": 4,
+   "row": 0,
+   "width": 124
+  },
+  {
+   "id": "comp",
+   "type": "database",
+   "label": "COMP",
+   "sublabel": "design/COMP-XXX.md",
+   "stage": 4,
+   "row": 1,
+   "width": 124
+  },
+  {
+   "id": "inter",
+   "type": "database",
+   "label": "INT",
+   "sublabel": "interactions.md, manual",
+   "stage": 4,
+   "row": 2,
+   "width": 124
+  }
+ ],
+ "flows": [
+  {
+   "id": "ost-research",
+   "from": "strategy",
+   "to": "research",
+   "label": "OST feeds research",
+   "variant": "emphasis",
+   "labelDy": 24
+  },
+  {
+   "id": "gtm-brief",
+   "from": "research",
+   "to": "brief",
+   "label": "GTM-PLAN",
+   "variant": "emphasis"
+  },
+  {
+   "id": "discovery-prd",
+   "from": "strategy",
+   "to": "prd",
+   "label": "extra edge",
+   "variant": "dashed"
+  },
+  {
+   "id": "brief-prd",
+   "from": "brief",
+   "to": "prd",
+   "label": "po-brief-to-prd",
+   "variant": "emphasis"
+  },
+  {
+   "id": "prd-usm",
+   "from": "prd",
+   "to": "usm",
+   "label": "po-prd-to-usm",
+   "variant": "emphasis"
+  },
+  {
+   "id": "usm-usl",
+   "from": "usm",
+   "to": "usl",
+   "label": "po-usm-to-usl",
+   "variant": "emphasis",
+   "labelDy": 24
+  },
+  {
+   "id": "usl-usd",
+   "from": "usl",
+   "to": "usd",
+   "label": "Must-have only",
+   "variant": "emphasis"
+  },
+  {
+   "id": "usd-uat",
+   "from": "usd",
+   "to": "uat",
+   "label": "po-usd-to-uat",
+   "variant": "emphasis",
+   "labelDy": 24
+  },
+  {
+   "id": "usd-wf",
+   "from": "usd",
+   "to": "wf",
+   "label": "WF-XXX refs",
+   "variant": "security"
+  },
+  {
+   "id": "wf-comp",
+   "from": "wf",
+   "to": "comp",
+   "label": "COMP specs",
+   "variant": "emphasis",
+   "labelDy": 24
+  },
+  {
+   "id": "comp-int",
+   "from": "comp",
+   "to": "inter",
+   "label": "no skill",
+   "variant": "dashed",
+   "labelDy": 24
+  }
+ ],
+ "cards": [
+  {
+   "dot": "emerald",
+   "title": "Quality gates",
+   "items": [
+    "PO and design stage folders each hold a quality-gate.md",
+    "PM pillars use inline SKILL.md checklists instead"
+   ]
+  },
+  {
+   "dot": "rose",
+   "title": "Gaps on disk",
+   "items": [
+    "Brief is stamped pm-to-po-handoff, which is not a skill",
+    "codebase-framework is read by no skill or command"
+   ]
+  },
+  {
+   "dot": "slate",
+   "title": "Evidence at d04f47d",
+   "items": [
+    "Frontmatter in features/Export Customs Clearances",
+    "Artifact values per PRD 5.2; /po-pipeline, /design-pipeline"
+   ]
+  }
+ ]
+}

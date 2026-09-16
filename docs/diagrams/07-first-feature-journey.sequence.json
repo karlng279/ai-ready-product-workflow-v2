@@ -1,0 +1,196 @@
+{
+ "schema_version": 1,
+ "diagram_type": "sequence",
+ "meta": {
+  "title": "A New User's First Feature",
+  "locale": "en",
+  "quality_profile": "showcase",
+  "column_fit": "spread",
+  "viewBox": [
+   1040,
+   600
+  ],
+  "views": [
+   {
+    "id": "clone-route",
+    "label": "Clone + /po-pipeline",
+    "focus": [
+     "user",
+     "agent",
+     "skill",
+     "kb",
+     "feature"
+    ],
+    "note": "The chained route exists only where .claude/commands exists."
+   },
+   {
+    "id": "npm-route",
+    "label": "npm install, any agent",
+    "focus": [
+     "agent",
+     "skill",
+     "kb"
+    ],
+    "note": "The skill asks for knowledge-base files the package never shipped."
+   }
+  ]
+ },
+ "participants": [
+  {
+   "id": "user",
+   "type": "external",
+   "label": "User",
+   "sublabel": "first feature"
+  },
+  {
+   "id": "agent",
+   "type": "backend",
+   "label": "Their agent",
+   "sublabel": "Claude Code for /cmds"
+  },
+  {
+   "id": "skill",
+   "type": "backend",
+   "label": "PO skills",
+   "sublabel": "SKILL.md per stage"
+  },
+  {
+   "id": "kb",
+   "type": "database",
+   "label": "po-framework/",
+   "sublabel": "rules, quality gates"
+  },
+  {
+   "id": "feature",
+   "type": "database",
+   "label": "features/<name>/",
+   "sublabel": "written artifacts"
+  }
+ ],
+ "segments": [
+  {
+   "from": 150,
+   "to": 360,
+   "label": "Fork or clone, Claude Code"
+  },
+  {
+   "from": 372,
+   "to": 512,
+   "label": "npm install, any agent"
+  }
+ ],
+ "messages": [
+  {
+   "from": "user",
+   "to": "agent",
+   "y": 172,
+   "label": "/po-pipeline <name>",
+   "variant": "emphasis"
+  },
+  {
+   "from": "agent",
+   "to": "feature",
+   "y": 206,
+   "label": "read <name>/brief.md",
+   "variant": "dashed",
+   "note": "docs and example use po/brief.md"
+  },
+  {
+   "from": "agent",
+   "to": "skill",
+   "y": 240,
+   "label": "run PO skills in order",
+   "variant": "emphasis"
+  },
+  {
+   "from": "skill",
+   "to": "kb",
+   "y": 274,
+   "label": "read rules + quality gate"
+  },
+  {
+   "from": "skill",
+   "to": "feature",
+   "y": 308,
+   "label": "write prd, usm, usl, usd/, uat/",
+   "variant": "emphasis"
+  },
+  {
+   "from": "agent",
+   "to": "user",
+   "y": 342,
+   "label": "pause after PRD, then USL",
+   "variant": "return"
+  },
+  {
+   "from": "user",
+   "to": "agent",
+   "y": 394,
+   "label": "Create a PRD for …"
+  },
+  {
+   "from": "agent",
+   "to": "skill",
+   "y": 428,
+   "label": "match SKILL.md description"
+  },
+  {
+   "from": "skill",
+   "to": "kb",
+   "y": 462,
+   "label": "read stage1-prd/rules.md: missing",
+   "variant": "security",
+   "note": "npm ships no po-framework/"
+  },
+  {
+   "from": "skill",
+   "to": "feature",
+   "y": 496,
+   "label": "write po/prd.md; next stage, new prompt",
+   "variant": "dashed"
+  }
+ ],
+ "activations": [
+  {
+   "participant": "agent",
+   "from": 166,
+   "to": 350
+  },
+  {
+   "participant": "skill",
+   "from": 234,
+   "to": 316
+  },
+  {
+   "participant": "skill",
+   "from": 422,
+   "to": 504
+  }
+ ],
+ "cards": [
+  {
+   "dot": "cyan",
+   "title": "Clone route",
+   "items": [
+    "PO skills chained brief to UAT, two review pauses",
+    "Then /design-pipeline and /validate-artifacts"
+   ]
+  },
+  {
+   "dot": "rose",
+   "title": "npm route",
+   "items": [
+    "Skills cite po-framework/ that is not there",
+    "No command chains the stages"
+   ]
+  },
+  {
+   "dot": "slate",
+   "title": "Evidence at d04f47d",
+   "items": [
+    ".claude/commands/po-pipeline.md lines 44, 110",
+    "skills/po-brief-to-prd/SKILL.md line 17"
+   ]
+  }
+ ]
+}

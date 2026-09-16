@@ -1,0 +1,353 @@
+{
+ "schema_version": 1,
+ "diagram_type": "architecture",
+ "meta": {
+  "title": "Repository Layout and What Ships",
+  "locale": "en",
+  "quality_profile": "showcase",
+  "views": [
+   {
+    "id": "package",
+    "label": "The npm package",
+    "focus": [
+     "skills",
+     "symlinks",
+     "root_indexes",
+     "readme",
+     "actions",
+     "npm"
+    ],
+    "note": "skills/ is both the skill source of truth and the package root."
+   },
+   {
+    "id": "repo-only",
+    "label": "Repo only",
+    "focus": [
+     "commands",
+     "kb",
+     "features",
+     "maint",
+     "landing"
+    ],
+    "note": "None of these reach an npm user."
+   },
+   {
+    "id": "ci",
+    "label": "CI and publishing",
+    "focus": [
+     "maint",
+     "landing",
+     "actions",
+     "npm",
+     "pages"
+    ],
+    "note": "Tests on every push, landing page on main, npm on a v* tag."
+   }
+  ],
+  "legend": {
+   "mode": "auto",
+   "entries": {
+    "frontend": {
+     "label": "Root copy or link"
+    },
+    "backend": {
+     "label": "Package root"
+    },
+    "database": {
+     "label": "Repo-only content"
+    },
+    "cloud": {
+     "label": "Hosting"
+    },
+    "messagebus": {
+     "label": "CI"
+    }
+   }
+  }
+ },
+ "components": [
+  {
+   "id": "symlinks",
+   "type": "frontend",
+   "label": ".agent/skills/",
+   "sublabel": "one symlink per skill",
+   "pos": [
+    40,
+    80
+   ],
+   "size": [
+    200,
+    62
+   ]
+  },
+  {
+   "id": "root_indexes",
+   "type": "frontend",
+   "label": "Root agent indexes",
+   "sublabel": "AGENTS, GEMINI, .cursorrules",
+   "pos": [
+    40,
+    220
+   ],
+   "size": [
+    200,
+    62
+   ]
+  },
+  {
+   "id": "readme",
+   "type": "frontend",
+   "label": "Root README pair",
+   "sublabel": "README, GETTING_STARTED",
+   "pos": [
+    40,
+    360
+   ],
+   "size": [
+    200,
+    62
+   ]
+  },
+  {
+   "id": "skills",
+   "type": "backend",
+   "label": "skills/",
+   "sublabel": "SKILL.md, cli, MCP, installers",
+   "pos": [
+    340,
+    220
+   ],
+   "size": [
+    210,
+    62
+   ]
+  },
+  {
+   "id": "commands",
+   "type": "database",
+   "label": ".claude/commands/",
+   "sublabel": "pipeline slash commands",
+   "pos": [
+    340,
+    80
+   ],
+   "size": [
+    210,
+    62
+   ]
+  },
+  {
+   "id": "kb",
+   "type": "database",
+   "label": "Framework folders",
+   "sublabel": "pm, po, design, codebase",
+   "pos": [
+    650,
+    220
+   ],
+   "size": [
+    200,
+    62
+   ]
+  },
+  {
+   "id": "features",
+   "type": "database",
+   "label": "features/",
+   "sublabel": "example artifacts",
+   "pos": [
+    650,
+    360
+   ],
+   "size": [
+    200,
+    62
+   ]
+  },
+  {
+   "id": "maint",
+   "type": "database",
+   "label": "Maintainer layer",
+   "sublabel": "CLAUDE, PRD, docs, tests",
+   "pos": [
+    650,
+    80
+   ],
+   "size": [
+    210,
+    62
+   ]
+  },
+  {
+   "id": "landing",
+   "type": "database",
+   "label": "landing-page/",
+   "sublabel": "index.html",
+   "pos": [
+    950,
+    360
+   ],
+   "size": [
+    210,
+    62
+   ]
+  },
+  {
+   "id": "npm",
+   "type": "cloud",
+   "label": "npm registry",
+   "sublabel": "ai-ready-workflow",
+   "pos": [
+    340,
+    520
+   ],
+   "size": [
+    210,
+    62
+   ]
+  },
+  {
+   "id": "actions",
+   "type": "messagebus",
+   "label": "GitHub Actions",
+   "sublabel": "tests.yml on every push",
+   "pos": [
+    650,
+    520
+   ],
+   "size": [
+    200,
+    62
+   ]
+  },
+  {
+   "id": "pages",
+   "type": "cloud",
+   "label": "GitHub Pages",
+   "sublabel": "landing site",
+   "pos": [
+    950,
+    520
+   ],
+   "size": [
+    210,
+    62
+   ]
+  }
+ ],
+ "boundaries": [
+  {
+   "kind": "region",
+   "label": "npm package root",
+   "wraps": [
+    "skills"
+   ],
+   "pad": 16
+  },
+  {
+   "kind": "security-group",
+   "label": "Repo only",
+   "wraps": [
+    "commands"
+   ],
+   "pad": 16
+  },
+  {
+   "kind": "security-group",
+   "label": "Repo only, never shipped",
+   "wraps": [
+    "maint",
+    "kb",
+    "features",
+    "landing"
+   ],
+   "pad": 16
+  }
+ ],
+ "connections": [
+  {
+   "id": "symlinks-skills",
+   "from": "symlinks",
+   "to": "skills"
+  },
+  {
+   "id": "indexes-skills",
+   "from": "root_indexes",
+   "to": "skills",
+   "label": "byte-identical",
+   "variant": "emphasis",
+   "labelDy": 10
+  },
+  {
+   "id": "readme-skills",
+   "from": "readme",
+   "to": "skills",
+   "label": "differ by design",
+   "variant": "dashed"
+  },
+  {
+   "id": "commands-skills",
+   "from": "commands",
+   "to": "skills",
+   "label": "chain skills",
+   "fromSide": "bottom",
+   "toSide": "top",
+   "route": "straight",
+   "labelDy": 24
+  },
+  {
+   "id": "skills-kb",
+   "from": "skills",
+   "to": "kb",
+   "label": "cites",
+   "variant": "security"
+  },
+  {
+   "id": "skills-features",
+   "from": "skills",
+   "to": "features",
+   "label": "write"
+  },
+  {
+   "id": "landing-pages",
+   "from": "landing",
+   "to": "pages",
+   "label": "on main push",
+   "variant": "emphasis",
+   "labelDy": 24
+  },
+  {
+   "id": "actions-npm",
+   "from": "actions",
+   "to": "npm",
+   "label": "v* tag",
+   "variant": "emphasis"
+  }
+ ],
+ "cards": [
+  {
+   "dot": "cyan",
+   "title": "Twins",
+   "items": [
+    "Agent indexes: byte-identical, tested by test_docs",
+    "README pair: must differ, also tested"
+   ]
+  },
+  {
+   "dot": "rose",
+   "title": "Ship gap",
+   "items": [
+    "SKILL.md cites framework folders npm never ships",
+    "No v* tag exists, so the Action has never published"
+   ]
+  },
+  {
+   "dot": "slate",
+   "title": "Evidence at d04f47d",
+   "items": [
+    "skills/package.json files; .github/workflows/*",
+    "ARCHITECTURE 2.1, 2.2, 4.1"
+   ]
+  }
+ ]
+}

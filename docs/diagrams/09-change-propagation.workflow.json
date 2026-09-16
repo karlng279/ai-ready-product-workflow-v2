@@ -1,0 +1,261 @@
+{
+ "schema_version": 2,
+ "diagram_type": "workflow",
+ "meta": {
+  "title": "What /sync-check Does After an Edit",
+  "locale": "en",
+  "quality_profile": "showcase",
+  "views": [
+   {
+    "id": "detect",
+    "label": "Detect impact",
+    "focus": [
+     "edit",
+     "run",
+     "classify",
+     "forward",
+     "backward",
+     "report"
+    ],
+    "note": "Classify the change, then walk the artifact graph forward and, when needed, backward."
+   },
+   {
+    "id": "apply",
+    "label": "Patch with consent",
+    "focus": [
+     "report",
+     "flag",
+     "approve",
+     "apply"
+    ],
+    "note": "Nothing is written until the author answers."
+   }
+  ],
+  "legend": {
+   "mode": "auto",
+   "entries": {
+    "external": {
+     "label": "Author action"
+    },
+    "backend": {
+     "label": "artifact-sync step"
+    },
+    "database": {
+     "label": "Artifact on disk"
+    },
+    "security": {
+     "label": "Consent gate"
+    }
+   }
+  }
+ },
+ "lanes": [
+  {
+   "id": "author",
+   "label": "Author"
+  },
+  {
+   "id": "skill",
+   "label": "artifact-sync skill"
+  },
+  {
+   "id": "disk",
+   "label": "Artifacts in features/"
+  }
+ ],
+ "phases": [
+  {
+   "id": "trigger",
+   "label": "Trigger",
+   "fromCol": 0,
+   "toCol": 1
+  },
+  {
+   "id": "walk",
+   "label": "Walk the graph",
+   "fromCol": 2,
+   "toCol": 3,
+   "variant": "emphasis"
+  },
+  {
+   "id": "patch",
+   "label": "Report and patch",
+   "fromCol": 4,
+   "toCol": 5,
+   "variant": "dashed"
+  }
+ ],
+ "mainPath": [
+  "edit",
+  "run",
+  "classify",
+  "forward",
+  "backward",
+  "report",
+  "approve",
+  "apply"
+ ],
+ "nodes": [
+  {
+   "id": "edit",
+   "lane": "author",
+   "col": 0,
+   "type": "external",
+   "label": "Edit an artifact",
+   "sublabel": "any stage file",
+   "width": 140
+  },
+  {
+   "id": "run",
+   "lane": "author",
+   "col": 1,
+   "type": "external",
+   "label": "/sync-check",
+   "sublabel": "runs artifact-sync",
+   "width": 140
+  },
+  {
+   "id": "classify",
+   "lane": "skill",
+   "col": 1,
+   "type": "backend",
+   "label": "Classify change",
+   "sublabel": "worst change_type wins",
+   "width": 150
+  },
+  {
+   "id": "forward",
+   "lane": "skill",
+   "col": 2,
+   "type": "backend",
+   "label": "Walk downstream",
+   "sublabel": "every change type",
+   "width": 140
+  },
+  {
+   "id": "backward",
+   "lane": "skill",
+   "col": 3,
+   "type": "backend",
+   "label": "Walk upstream",
+   "sublabel": "not for additive",
+   "width": 140
+  },
+  {
+   "id": "report",
+   "lane": "skill",
+   "col": 4,
+   "type": "backend",
+   "label": "Stale Impact Report",
+   "sublabel": "HIGH, MEDIUM, LOW patches",
+   "width": 170
+  },
+  {
+   "id": "approve",
+   "lane": "author",
+   "col": 5,
+   "type": "security",
+   "label": "Approve patches",
+   "sublabel": "MED/LOW once, HIGH each",
+   "width": 160
+  },
+  {
+   "id": "flag",
+   "lane": "disk",
+   "col": 3,
+   "type": "database",
+   "label": "Flagged files",
+   "sublabel": "[!SYNC], pending_review",
+   "width": 160
+  },
+  {
+   "id": "apply",
+   "lane": "disk",
+   "col": 5,
+   "type": "database",
+   "label": "Patched artifacts",
+   "sublabel": "version, sync fields",
+   "width": 150
+  }
+ ],
+ "edges": [
+  {
+   "id": "edit-run",
+   "from": "edit",
+   "to": "run"
+  },
+  {
+   "id": "run-classify",
+   "from": "run",
+   "to": "classify",
+   "variant": "emphasis"
+  },
+  {
+   "id": "classify-forward",
+   "from": "classify",
+   "to": "forward",
+   "variant": "emphasis"
+  },
+  {
+   "id": "forward-backward",
+   "from": "forward",
+   "to": "backward",
+   "label": "non-additive",
+   "variant": "emphasis"
+  },
+  {
+   "id": "backward-report",
+   "from": "backward",
+   "to": "report",
+   "variant": "emphasis"
+  },
+  {
+   "id": "report-approve",
+   "from": "report",
+   "to": "approve",
+   "label": "ask first",
+   "variant": "security"
+  },
+  {
+   "id": "approve-apply",
+   "from": "approve",
+   "to": "apply",
+   "label": "write",
+   "variant": "emphasis"
+  },
+  {
+   "id": "report-flag",
+   "from": "report",
+   "to": "flag",
+   "label": "mark stale",
+   "variant": "dashed",
+   "role": "branch"
+  }
+ ],
+ "cards": [
+  {
+   "dot": "cyan",
+   "title": "Rules",
+   "items": [
+    "additive < reductive < interface < structural",
+    "code/ is never patched, only flagged"
+   ]
+  },
+  {
+   "dot": "rose",
+   "title": "Not true on disk yet",
+   "items": [
+    "No artifact carries the sync fields (Q7)",
+    "Skill graph says UAT to WF; disk says USD to WF"
+   ]
+  },
+  {
+   "dot": "slate",
+   "title": "Evidence at d04f47d",
+   "items": [
+    "skills/artifact-sync/SKILL.md lines 113-165",
+    ".claude/commands/sync-check.md lines 49-84"
+   ]
+  }
+ ]
+}

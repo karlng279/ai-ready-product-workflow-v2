@@ -1,0 +1,280 @@
+{
+ "schema_version": 2,
+ "diagram_type": "workflow",
+ "meta": {
+  "title": "One Maintainer Session, Start to Finish",
+  "locale": "en",
+  "quality_profile": "showcase",
+  "views": [
+   {
+    "id": "happy-path",
+    "label": "Claim to card commit",
+    "focus": [
+     "pick_card",
+     "baseline",
+     "claim",
+     "work",
+     "dod",
+     "card_commit"
+    ],
+    "note": "The protocol CLAUDE.md gives every session."
+   },
+   {
+    "id": "owner-gates",
+    "label": "Owner gates",
+    "focus": [
+     "waiting",
+     "merge",
+     "ci"
+    ],
+    "note": "Where the session stops and the human decides."
+   }
+  ],
+  "legend": {
+   "mode": "auto",
+   "entries": {
+    "frontend": {
+     "label": "Orient step"
+    },
+    "security": {
+     "label": "Check"
+    },
+    "database": {
+     "label": "Commit"
+    },
+    "backend": {
+     "label": "Work"
+    },
+    "external": {
+     "label": "Owner action"
+    },
+    "cloud": {
+     "label": "CI"
+    }
+   }
+  }
+ },
+ "lanes": [
+  {
+   "id": "agent",
+   "label": "Agent session, working through the repo board"
+  },
+  {
+   "id": "owner",
+   "label": "Owner",
+   "variant": "exception"
+  },
+  {
+   "id": "github",
+   "label": "GitHub"
+  }
+ ],
+ "phases": [
+  {
+   "id": "orient",
+   "label": "Orient",
+   "fromCol": 0,
+   "toCol": 1
+  },
+  {
+   "id": "lock",
+   "label": "Lock",
+   "fromCol": 2,
+   "toCol": 2,
+   "variant": "emphasis"
+  },
+  {
+   "id": "build",
+   "label": "Work",
+   "fromCol": 3,
+   "toCol": 3
+  },
+  {
+   "id": "land",
+   "label": "Land",
+   "fromCol": 4,
+   "toCol": 5,
+   "variant": "dashed"
+  }
+ ],
+ "mainPath": [
+  "pick_card",
+  "baseline",
+  "claim",
+  "work",
+  "dod",
+  "card_commit"
+ ],
+ "nodes": [
+  {
+   "id": "pick_card",
+   "lane": "agent",
+   "col": 0,
+   "type": "frontend",
+   "label": "Pick one card",
+   "sublabel": "from STATE; write card file",
+   "width": 175
+  },
+  {
+   "id": "baseline",
+   "lane": "agent",
+   "col": 1,
+   "type": "security",
+   "label": "Baseline tests",
+   "sublabel": "both files first",
+   "tag": "discipline",
+   "width": 140
+  },
+  {
+   "id": "claim",
+   "lane": "agent",
+   "col": 2,
+   "type": "database",
+   "label": "Claim commit",
+   "sublabel": "STATE In flight row",
+   "tag": "the lock",
+   "width": 140
+  },
+  {
+   "id": "work",
+   "lane": "agent",
+   "col": 3,
+   "type": "backend",
+   "label": "Do the card",
+   "sublabel": "its file set only",
+   "tag": "discipline",
+   "width": 130
+  },
+  {
+   "id": "dod",
+   "lane": "agent",
+   "col": 4,
+   "type": "security",
+   "label": "Definition of done",
+   "sublabel": "tests, log, STATE",
+   "tag": "partly tested",
+   "width": 165
+  },
+  {
+   "id": "card_commit",
+   "lane": "agent",
+   "col": 5,
+   "type": "database",
+   "label": "Card commit",
+   "sublabel": "card ID in subject",
+   "tag": "discipline",
+   "width": 140
+  },
+  {
+   "id": "waiting",
+   "lane": "owner",
+   "col": 0,
+   "type": "external",
+   "label": "Waiting on owner",
+   "sublabel": "Q row in STATE",
+   "width": 150
+  },
+  {
+   "id": "merge",
+   "lane": "owner",
+   "col": 5,
+   "type": "external",
+   "label": "Push or merge",
+   "sublabel": "owner only",
+   "width": 140
+  },
+  {
+   "id": "ci",
+   "lane": "github",
+   "col": 5,
+   "type": "cloud",
+   "label": "tests.yml",
+   "sublabel": "every push and PR",
+   "width": 140
+  }
+ ],
+ "edges": [
+  {
+   "id": "card-to-baseline",
+   "from": "pick_card",
+   "to": "baseline",
+   "fromSide": "right",
+   "toSide": "left"
+  },
+  {
+   "id": "baseline-to-claim",
+   "from": "baseline",
+   "to": "claim",
+   "label": "green",
+   "variant": "emphasis"
+  },
+  {
+   "id": "claim-to-work",
+   "from": "claim",
+   "to": "work",
+   "variant": "emphasis"
+  },
+  {
+   "id": "work-to-dod",
+   "from": "work",
+   "to": "dod"
+  },
+  {
+   "id": "dod-to-commit",
+   "from": "dod",
+   "to": "card_commit",
+   "label": "all pass",
+   "variant": "emphasis"
+  },
+  {
+   "id": "card-blocked",
+   "from": "pick_card",
+   "to": "waiting",
+   "label": "blocked",
+   "variant": "dashed",
+   "role": "branch",
+   "fromSide": "bottom"
+  },
+  {
+   "id": "commit-to-merge",
+   "from": "card_commit",
+   "to": "merge",
+   "label": "owner decides",
+   "variant": "dashed",
+   "role": "branch"
+  },
+  {
+   "id": "merge-to-ci",
+   "from": "merge",
+   "to": "ci",
+   "label": "push",
+   "role": "async"
+  }
+ ],
+ "cards": [
+  {
+   "dot": "emerald",
+   "title": "Enforced by code",
+   "items": [
+    "test_docs: BACKLOG and card status agree, twins, links",
+    "Nothing checks claim rows, file sets, or commit subjects"
+   ]
+  },
+  {
+   "dot": "amber",
+   "title": "Owner only",
+   "items": [
+    "Every push, and any commit beyond claim + card",
+    "Merge to main redeploys the landing page"
+   ]
+  },
+  {
+   "dot": "slate",
+   "title": "Evidence at d04f47d",
+   "items": [
+    "CLAUDE.md protocol; tests.yml; no git or Claude hooks",
+    "No commit before M9-14 added an In flight row"
+   ]
+  }
+ ]
+}

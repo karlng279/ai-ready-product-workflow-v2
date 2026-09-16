@@ -1,0 +1,297 @@
+{
+ "schema_version": 2,
+ "diagram_type": "workflow",
+ "meta": {
+  "title": "How an End User Installs the Framework",
+  "locale": "en",
+  "quality_profile": "showcase",
+  "views": [
+   {
+    "id": "npx-install",
+    "label": "npx install",
+    "focus": [
+     "npx",
+     "cli",
+     "install_sh",
+     "skills_dir",
+     "claude_reg",
+     "indexes"
+    ],
+    "note": "The route the landing page and README lead with."
+   },
+   {
+    "id": "clone-install",
+    "label": "Clone and install",
+    "focus": [
+     "clone",
+     "install_sh",
+     "skills_dir"
+    ],
+    "note": "Same installer, run straight from a clone."
+   },
+   {
+    "id": "claude-desktop",
+    "label": "Claude Desktop routes",
+    "focus": [
+     "mcp",
+     "mcp_server",
+     "cowork",
+     "cowork_dir"
+    ],
+    "note": "Neither route writes into the user's project."
+   }
+  ],
+  "legend": {
+   "mode": "auto",
+   "entries": {
+    "external": {
+     "label": "User command"
+    },
+    "backend": {
+     "label": "Installer code"
+    },
+    "messagebus": {
+     "label": "Server"
+    },
+    "database": {
+     "label": "File in project"
+    },
+    "cloud": {
+     "label": "Outside project"
+    }
+   }
+  }
+ },
+ "lanes": [
+  {
+   "id": "entry",
+   "label": "User runs"
+  },
+  {
+   "id": "runs",
+   "label": "What runs"
+  },
+  {
+   "id": "files",
+   "label": "Where files land"
+  }
+ ],
+ "phases": [
+  {
+   "id": "enter",
+   "label": "Entry",
+   "fromCol": 0,
+   "toCol": 1
+  },
+  {
+   "id": "install",
+   "label": "Install",
+   "fromCol": 2,
+   "toCol": 3,
+   "variant": "emphasis"
+  },
+  {
+   "id": "desktop",
+   "label": "Claude Desktop",
+   "fromCol": 4,
+   "toCol": 5,
+   "variant": "dashed"
+  }
+ ],
+ "mainPath": [
+  "npx",
+  "cli",
+  "install_sh",
+  "skills_dir",
+  "claude_reg",
+  "indexes"
+ ],
+ "nodes": [
+  {
+   "id": "npx",
+   "lane": "entry",
+   "col": 0,
+   "type": "external",
+   "label": "npx … install",
+   "sublabel": "target dir must exist",
+   "width": 150
+  },
+  {
+   "id": "clone",
+   "lane": "entry",
+   "col": 1,
+   "type": "external",
+   "label": "git clone",
+   "sublabel": "./skills/install.sh",
+   "width": 140
+  },
+  {
+   "id": "mcp",
+   "lane": "entry",
+   "col": 4,
+   "type": "external",
+   "label": "npx … mcp",
+   "sublabel": "in Desktop config",
+   "width": 140
+  },
+  {
+   "id": "cowork",
+   "lane": "entry",
+   "col": 5,
+   "type": "external",
+   "label": "install-cowork",
+   "sublabel": "macOS only",
+   "width": 140
+  },
+  {
+   "id": "cli",
+   "lane": "runs",
+   "col": 1,
+   "type": "backend",
+   "label": "cli.js",
+   "sublabel": "no agent detection",
+   "width": 140
+  },
+  {
+   "id": "install_sh",
+   "lane": "runs",
+   "col": 2,
+   "type": "backend",
+   "label": "install.sh",
+   "sublabel": "install.ps1 on Windows",
+   "width": 150
+  },
+  {
+   "id": "mcp_server",
+   "lane": "runs",
+   "col": 4,
+   "type": "messagebus",
+   "label": "MCP server",
+   "sublabel": "serves SKILL.md, writes nothing",
+   "tag": "writes nothing",
+   "width": 170
+  },
+  {
+   "id": "skills_dir",
+   "lane": "files",
+   "col": 3,
+   "type": "database",
+   "label": ".agent/skills/",
+   "sublabel": "SKILL.md folders, skip if present",
+   "tag": "skips existing",
+   "width": 170
+  },
+  {
+   "id": "claude_reg",
+   "lane": "files",
+   "col": 4,
+   "type": "database",
+   "label": "CLAUDE.md",
+   "sublabel": "table appended if file exists",
+   "tag": "only if file exists",
+   "width": 170
+  },
+  {
+   "id": "indexes",
+   "lane": "files",
+   "col": 5,
+   "type": "database",
+   "label": "Agent indexes",
+   "sublabel": "AGENTS, GEMINI, .cursorrules if missing",
+   "tag": "only if missing",
+   "width": 190
+  },
+  {
+   "id": "cowork_dir",
+   "lane": "runs",
+   "col": 5,
+   "type": "cloud",
+   "label": "Desktop skills folder",
+   "sublabel": "first match of find",
+   "width": 170
+  }
+ ],
+ "edges": [
+  {
+   "id": "npx-cli",
+   "from": "npx",
+   "to": "cli",
+   "variant": "emphasis"
+  },
+  {
+   "id": "cli-install",
+   "from": "cli",
+   "to": "install_sh",
+   "label": "dispatch",
+   "variant": "emphasis"
+  },
+  {
+   "id": "install-skills",
+   "from": "install_sh",
+   "to": "skills_dir",
+   "label": "copy",
+   "variant": "emphasis"
+  },
+  {
+   "id": "skills-registry",
+   "from": "skills_dir",
+   "to": "claude_reg",
+   "label": "patch"
+  },
+  {
+   "id": "registry-indexes",
+   "from": "claude_reg",
+   "to": "indexes",
+   "label": "copy"
+  },
+  {
+   "id": "clone-install",
+   "from": "clone",
+   "to": "install_sh",
+   "label": "runs directly",
+   "variant": "dashed",
+   "role": "branch"
+  },
+  {
+   "id": "mcp-server",
+   "from": "mcp",
+   "to": "mcp_server",
+   "variant": "dashed",
+   "role": "branch"
+  },
+  {
+   "id": "cowork-dir",
+   "from": "cowork",
+   "to": "cowork_dir",
+   "label": "copy",
+   "variant": "dashed",
+   "role": "branch"
+  }
+ ],
+ "cards": [
+  {
+   "dot": "cyan",
+   "title": "What lands in the project",
+   "items": [
+    "SKILL.md folders under .agent/skills; re-running never upgrades",
+    "Agent indexes and GETTING_STARTED.md, if missing"
+   ]
+  },
+  {
+   "dot": "rose",
+   "title": "What never ships",
+   "items": [
+    "The pm, po, design, codebase framework folders",
+    "The slash commands; nothing under .claude/"
+   ]
+  },
+  {
+   "dot": "slate",
+   "title": "Evidence at d04f47d",
+   "items": [
+    "skills/cli.js, install.sh, package.json files",
+    "npm latest is 0.1.2; package.json says 0.2.0"
+   ]
+  }
+ ]
+}

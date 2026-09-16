@@ -15,3 +15,4 @@ thinks it is new.
 | [0003](0003-agent-index-twins.md) | Agent index files are byte-identical twins; the README pair is not | 2026-09-04 | accepted |
 | [0004](0004-adopt-multi-session-playbook.md) | Adopt the Multi-Session Repo Playbook; split `CLAUDE.md` into `PRD` + `ARCHITECTURE` | 2026-09-05 | accepted |
 | [0005](0005-no-env-example-no-src.md) | No `.env.example` and no `src/` — declared absences, not omissions | 2026-09-05 | accepted |
+| [0006](0006-diagrams-are-snapshots.md) | Diagrams are dated as-is snapshots in `docs/diagrams/`, not specification | 2026-09-16 | accepted |

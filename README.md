@@ -176,6 +176,7 @@ ai-ready-product-workflow-v2/
 │   ├── INDEX.md                # task → the exact sections it needs
 │   ├── STATE.md                # done · in flight · next · blocked · waiting on owner
 │   ├── decisions/              # NNNN-*.md, one per decision
+│   ├── diagrams/               # as-is diagrams (open the .html files)
 │   ├── history/                # superseded plans, kept as record
 │   └── multi-session-repo-playbook.md
 ├── tasks/

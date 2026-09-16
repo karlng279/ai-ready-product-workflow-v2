@@ -1,0 +1,51 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "How a Change Reaches Users",
+    "locale": "en",
+    "quality_profile": "showcase",
+    "views": [
+      { "id": "npm-release", "label": "npm release", "focus": ["bump", "push_branch", "tests", "merge", "tag", "publish", "npm"], "note": "The publish Action runs only for a v* tag, after both test files pass." },
+      { "id": "landing", "label": "Landing page", "focus": ["merge", "deploy", "pages"], "note": "Any push to main redeploys the site, with no path filter." }
+    ],
+    "legend": { "mode": "auto", "entries": { "external": { "label": "Owner action" }, "messagebus": { "label": "GitHub Action" }, "cloud": { "label": "Published surface" } } }
+  },
+  "lanes": [
+    { "id": "owner", "label": "Owner" },
+    { "id": "actions", "label": "GitHub Actions" },
+    { "id": "hosts", "label": "Where users see it" }
+  ],
+  "phases": [
+    { "id": "prepare", "label": "Prepare", "fromCol": 0, "toCol": 1 },
+    { "id": "merge-phase", "label": "Merge", "fromCol": 2, "toCol": 3, "variant": "emphasis" },
+    { "id": "publish-phase", "label": "Publish", "fromCol": 4, "toCol": 5, "variant": "dashed" }
+  ],
+  "mainPath": ["bump", "push_branch", "tests", "merge", "tag", "publish", "npm"],
+  "nodes": [
+    { "id": "bump", "lane": "owner", "col": 0, "type": "external", "label": "Bump version", "sublabel": "3 files must agree", "width": 140 },
+    { "id": "push_branch", "lane": "owner", "col": 1, "type": "external", "label": "Push branch", "sublabel": "or open a PR", "width": 130 },
+    { "id": "tests", "lane": "actions", "col": 1, "type": "messagebus", "label": "tests.yml", "sublabel": "both test files", "width": 130 },
+    { "id": "merge", "lane": "owner", "col": 2, "type": "external", "label": "Merge to main", "sublabel": "owner's call", "width": 140 },
+    { "id": "deploy", "lane": "actions", "col": 3, "type": "messagebus", "label": "deploy-landing", "sublabel": "every push to main", "width": 150 },
+    { "id": "tag", "lane": "owner", "col": 3, "type": "external", "label": "Push v* tag", "sublabel": "none exists yet", "width": 130 },
+    { "id": "publish", "lane": "actions", "col": 4, "type": "messagebus", "label": "npm-publish", "sublabel": "tests, then publish", "width": 140 },
+    { "id": "pages", "lane": "hosts", "col": 4, "type": "cloud", "label": "GitHub Pages", "sublabel": "landing site", "width": 140 },
+    { "id": "npm", "lane": "hosts", "col": 5, "type": "cloud", "label": "npm registry", "sublabel": "latest is 0.1.2", "width": 140 }
+  ],
+  "edges": [
+    { "id": "bump-push", "from": "bump", "to": "push_branch" },
+    { "id": "push-tests", "from": "push_branch", "to": "tests", "label": "any branch", "variant": "emphasis" },
+    { "id": "tests-merge", "from": "tests", "to": "merge", "label": "green", "variant": "emphasis" },
+    { "id": "merge-tag", "from": "merge", "to": "tag", "variant": "emphasis" },
+    { "id": "tag-publish", "from": "tag", "to": "publish", "label": "v*", "variant": "emphasis" },
+    { "id": "publish-npm", "from": "publish", "to": "npm", "label": "NPM_TOKEN", "variant": "emphasis" },
+    { "id": "merge-deploy", "from": "merge", "to": "deploy", "label": "push", "variant": "dashed", "role": "branch" },
+    { "id": "deploy-pages", "from": "deploy", "to": "pages", "variant": "dashed", "role": "branch" }
+  ],
+  "cards": [
+    { "dot": "amber", "title": "Version sites", "items": ["skills/package.json, package-lock.json, mcp-server.js", "At this commit: 0.2.0, 0.1.2, 0.1.2"] },
+    { "dot": "rose", "title": "Current state", "items": ["No git tags, so 0.2.0 is unpublished (Q2)", "Branch is 4 commits ahead of main, unpushed"] },
+    { "dot": "slate", "title": "Evidence at d04f47d", "items": [".github/workflows: tests, deploy-landing, npm-publish", "ARCHITECTURE 6.1, 6.2, 6.4"] }
+  ]
+}
