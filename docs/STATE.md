@@ -3,7 +3,7 @@
 **Board, not history.** History lives in git, in `tasks/cards/*` logs, and in `docs/history/`.
 Read this first, every session. Cap: ~70 lines.
 
-**Last updated:** 2026-09-05
+**Last updated:** 2026-09-16
 
 ---
 
@@ -14,7 +14,7 @@ Your card's file set must be disjoint from every other row.
 
 | Card | Claimed by | Since | File set |
 |---|---|---|---|
-| — | — | — | — |
+| M9-14 | Claude Code (Opus 5) | 2026-09-16 | `docs/diagrams/**`, `docs/decisions/0006-*`, `docs/decisions/README.md`, `docs/INDEX.md`, `ARCHITECTURE.md` (1.1 map), `README.md` (tree), `docs/STATE.md`, `tasks/BACKLOG.md`, card file |
 
 ---
 
