@@ -8,7 +8,10 @@ diagram and `PRD.md` / `ARCHITECTURE.md` disagree, **the cited section wins** �
 [decision 0006](../decisions/0006-diagrams-are-snapshots.md). They are not sweep sites; a later card regenerates
 them rather than patching them in place.
 
-Open any `.html` file in a browser. Each one is self-contained: theme switch, pan and zoom, search, guided
+**Start at [index.html](index.html)** — one page that lists every diagram by group, previews the chosen one,
+passes the System / Light / Dark theme through, and gives each diagram a deep link (`index.html#artifact-chain`).
+
+Any diagram `.html` also opens on its own. Each one is self-contained: theme switch, pan and zoom, search, guided
 views, and export. The `.json` next to it is the Archify source, and every diagram carries an evidence card
 naming the files it was drawn from.
 
@@ -49,5 +52,6 @@ node bin/archify.mjs visual-check <name>.html --json
 ```
 
 Run `visual-check` against a copy outside the repo: it writes PNG and JSON evidence files beside the HTML.
-When regenerating, update the snapshot commit above, re-verify each evidence card against disk, and keep skill
-and command **counts** out of the diagram text — name the set instead.
+When regenerating, update the snapshot commit above and in the `index.html` footer, re-verify each evidence card
+against disk, and keep skill and command **counts** out of the diagram text — name the set instead. A diagram
+added or renamed needs its `index.html` entry too; nothing tests that the two agree.

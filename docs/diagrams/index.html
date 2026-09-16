@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI-Ready Product Workflow diagrams</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%233b6fe0'/%3E%3Cpath d='M9 10h7v12h7' fill='none' stroke='white' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='9' cy='10' r='3' fill='white'/%3E%3Ccircle cx='16' cy='16' r='3' fill='white'/%3E%3Ccircle cx='23' cy='22' r='3' fill='white'/%3E%3C/svg%3E">
+<script>
+(function () {
+  var preference = null;
+  try { preference = localStorage.getItem("arpw-diagrams-theme"); } catch (_) {}
+  var dark = preference === "dark" || (preference !== "light" && window.matchMedia("(prefers-color-scheme: dark)").matches);
+  document.documentElement.classList.toggle("dark", dark);
+})();
+</script>
+<style>
+:root {
+  --font-sans: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+  --radius: .375rem;
+  --background: oklch(100% 0 0);
+  --foreground: oklch(32.11% 0 0);
+  --muted: oklch(98.46% .0017 247.839);
+  --muted-foreground: oklch(55.1% .0234 264.364);
+  --primary: oklch(52% .188 259.8);
+  --primary-foreground: oklch(100% 0 0);
+  --border: oklch(92.76% .0058 264.531);
+  --input: oklch(92.76% .0058 264.531);
+  --ring: oklch(62.31% .188 259.8);
+  --sidebar: oklch(98.46% .0017 247.839);
+  --sidebar-foreground: oklch(32.11% 0 0);
+  --sidebar-accent: oklch(95.14% .025 236.824);
+  --sidebar-accent-foreground: oklch(37.91% .1378 265.522);
+  --sidebar-border: oklch(92.76% .0058 264.531);
+  --brand-bar: oklch(98% .003 265);
+  --brand-bar-foreground: oklch(32.11% 0 0);
+  --shadow-sm: 0 1px 3px 0 #0000001a, 0 1px 2px -1px #0000001a;
+  color-scheme: light;
+}
+.dark {
+  --background: oklch(20.46% 0 0);
+  --foreground: oklch(92.19% 0 0);
+  --muted: oklch(23.93% 0 0);
+  --muted-foreground: oklch(71.55% 0 0);
+  --primary: oklch(70% .156 259.8);
+  --primary-foreground: oklch(20.46% 0 0);
+  --border: oklch(37.15% 0 0);
+  --input: oklch(37.15% 0 0);
+  --sidebar: oklch(20.46% 0 0);
+  --sidebar-foreground: oklch(92.19% 0 0);
+  --sidebar-accent: oklch(37.91% .1378 265.522);
+  --sidebar-accent-foreground: oklch(88.23% .0571 254.128);
+  --sidebar-border: oklch(37.15% 0 0);
+  --brand-bar: oklch(13% .028 265);
+  --brand-bar-foreground: oklch(92.19% 0 0);
+  color-scheme: dark;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; border: 0 solid var(--border); }
+html, body { height: 100%; }
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
+code { font-family: var(--font-mono); font-size: .95em; }
+button { font: inherit; color: inherit; background: none; cursor: pointer; }
+
+.shell { display: flex; flex-direction: column; height: 100%; }
+.sidebar {
+  display: flex; flex-direction: column; flex-shrink: 0;
+  background: var(--sidebar); color: var(--sidebar-foreground);
+  border-bottom: 1px solid var(--sidebar-border);
+}
+.brand { display: flex; align-items: center; gap: .75rem; padding: .75rem 1rem; border-bottom: 1px solid var(--sidebar-border); }
+.brand svg { width: 2rem; height: 2rem; flex-shrink: 0; }
+.brand-name { font-size: .875rem; font-weight: 600; letter-spacing: -.025em; }
+.brand-sub { font-size: .75rem; color: var(--muted-foreground); }
+
+nav { flex: 1; max-height: 14rem; overflow-y: auto; padding: .5rem; }
+.group + .group { margin-top: .75rem; }
+.group-title {
+  padding: .25rem .75rem;
+  font-size: .6875rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+  color: var(--muted-foreground);
+}
+.group ul { display: flex; flex-direction: column; gap: .25rem; }
+.entry {
+  display: block; padding: .5rem .75rem; border-radius: calc(var(--radius) * .8);
+  transition: background-color .15s, color .15s;
+}
+.entry-title { display: block; font-size: .875rem; line-height: 1.375; font-weight: 500; }
+.entry-meta { display: block; margin-top: .125rem; font-size: .75rem; color: var(--muted-foreground); }
+.entry:focus-visible { outline: none; box-shadow: 0 0 0 2px var(--ring); }
+@media (hover: hover) {
+  .entry:hover { background: var(--sidebar-accent); color: var(--sidebar-accent-foreground); }
+  .entry:hover .entry-meta { color: var(--sidebar-accent-foreground); }
+}
+.entry[aria-current="page"] { background: var(--primary); color: var(--primary-foreground); box-shadow: var(--shadow-sm); }
+.entry[aria-current="page"] .entry-meta { color: var(--primary-foreground); }
+
+.footer { display: flex; flex-direction: column; gap: .75rem; padding: .75rem; border-top: 1px solid var(--sidebar-border); }
+.note { font-size: .75rem; line-height: 1.625; color: var(--muted-foreground); }
+.theme {
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .125rem; padding: .125rem;
+  background: var(--muted); border: 1px solid var(--sidebar-border); border-radius: calc(var(--radius) * .8);
+}
+.theme button {
+  display: inline-flex; align-items: center; justify-content: center; height: 1.75rem;
+  border-radius: min(calc(var(--radius) * .8), 12px);
+  font-size: .8rem; font-weight: 500; color: var(--muted-foreground);
+  transition: all .15s; outline: none;
+}
+.theme button:hover { color: var(--foreground); }
+.theme button:focus-visible { box-shadow: 0 0 0 3px color-mix(in oklab, var(--ring) 50%, transparent); }
+.theme button[aria-pressed="true"] { background: var(--background); color: var(--foreground); box-shadow: var(--shadow-sm); }
+
+main { display: flex; flex: 1; flex-direction: column; min-width: 0; min-height: 80vh; }
+.bar {
+  display: flex; align-items: center; justify-content: space-between; gap: .75rem;
+  padding: .5rem 1rem; background: var(--brand-bar); color: var(--brand-bar-foreground);
+  border-bottom: 1px solid var(--border);
+}
+.bar-text { min-width: 0; }
+.bar h1, .bar p { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.bar h1 { font-size: .875rem; font-weight: 500; }
+.bar p { font-size: .75rem; color: var(--muted-foreground); }
+.open {
+  display: inline-flex; flex-shrink: 0; align-items: center; justify-content: center; height: 1.75rem;
+  padding: 0 .625rem; white-space: nowrap;
+  font-size: .8rem; font-weight: 500;
+  background: var(--background); border: 1px solid var(--border);
+  border-radius: min(calc(var(--radius) * .8), 12px); transition: all .15s; outline: none;
+}
+.open:hover { background: var(--muted); }
+.open:focus-visible { border-color: var(--ring); box-shadow: 0 0 0 3px color-mix(in oklab, var(--ring) 50%, transparent); }
+.dark .open { background: color-mix(in oklab, var(--input) 30%, transparent); border-color: var(--input); }
+.dark .open:hover { background: color-mix(in oklab, var(--input) 50%, transparent); }
+iframe { flex: 1; width: 100%; min-height: 0; border: 0; background: var(--background); }
+
+@media (min-width: 48rem) {
+  .shell { flex-direction: row; }
+  .sidebar { width: 21rem; border-bottom: 0; border-right: 1px solid var(--sidebar-border); }
+  nav { max-height: none; }
+  main { min-height: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: .01ms !important; }
+}
+</style>
+</head>
+<body>
+<div class="shell">
+<aside class="sidebar">
+<div class="brand">
+<svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <defs>
+    <linearGradient id="arpw-icon" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#6b7aeb"/><stop offset="1" stop-color="#0f81ca"/>
+    </linearGradient>
+  </defs>
+  <rect width="32" height="32" rx="7" fill="url(#arpw-icon)"/>
+  <path d="M9 10h7v12h7" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="9" cy="10" r="3" fill="#fff"/><circle cx="16" cy="16" r="3" fill="#fff"/><circle cx="23" cy="22" r="3" fill="#fff"/>
+</svg>
+<div><p class="brand-name">Diagrams</p><p class="brand-sub">AI-Ready Product Workflow v2</p></div>
+</div>
+<nav aria-label="Diagrams">
+<section class="group" aria-labelledby="group-agents">
+<h2 id="group-agents" class="group-title">Agents maintaining this repo</h2>
+<ul>
+<li><a class="entry" href="01-agent-entry-points.html" target="preview" data-page="01-agent-entry-points.html" data-id="agent-entry-points" data-title="Which rules reach each maintainer agent" data-question="When Claude Code, Codex, Gemini or Cursor opens this repo, which rules reach it?"><span class="entry-title">Which rules reach each maintainer agent</span><span class="entry-meta">architecture · drawn from CLAUDE.md and the agent index twins</span></a></li>
+<li><a class="entry" href="02-maintainer-session.html" target="preview" data-page="02-maintainer-session.html" data-id="maintainer-session" data-title="One maintainer session, start to finish" data-question="What does one session do from claim to card commit, and what is enforced by code?"><span class="entry-title">One maintainer session, start to finish</span><span class="entry-meta">workflow · drawn from CLAUDE.md, Session protocol</span></a></li>
+<li><a class="entry" href="03-parallel-sessions.html" target="preview" data-page="03-parallel-sessions.html" data-id="parallel-sessions" data-title="Two agent sessions sharing one repo" data-question="How do two concurrent sessions coordinate, and where does that break today?"><span class="entry-title">Two agent sessions sharing one repo</span><span class="entry-meta">sequence · drawn from docs/multi-session-repo-playbook.md</span></a></li>
+<li><a class="entry" href="04-card-lifecycle.html" target="preview" data-page="04-card-lifecycle.html" data-id="card-lifecycle" data-title="Card lifecycle on the repo board" data-question="Which states does a card pass through, and where is its status recorded?"><span class="entry-title">Card lifecycle on the repo board</span><span class="entry-meta">lifecycle · drawn from tasks/BACKLOG.md and docs/STATE.md</span></a></li>
+</ul>
+</section>
+<section class="group" aria-labelledby="group-users">
+<h2 id="group-users" class="group-title">End user adopting the framework</h2>
+<ul>
+<li><a class="entry" href="05-install-paths.html" target="preview" data-page="05-install-paths.html" data-id="install-paths" data-title="How an end user installs the framework" data-question="What do npx install, a clone, mcp and install-cowork actually write?"><span class="entry-title">How an end user installs the framework</span><span class="entry-meta">workflow · drawn from skills/cli.js and skills/install.sh</span></a></li>
+<li><a class="entry" href="06-installed-project-per-agent.html" target="preview" data-page="06-installed-project-per-agent.html" data-id="installed-project-per-agent" data-title="What each agent picks up after install" data-question="After install, what does each agent load, and what does a fork get that npm does not?"><span class="entry-title">What each agent picks up after install</span><span class="entry-meta">architecture · drawn from ARCHITECTURE 3.2 and 4.5</span></a></li>
+<li><a class="entry" href="07-first-feature-journey.html" target="preview" data-page="07-first-feature-journey.html" data-id="first-feature-journey" data-title="A new user's first feature" data-question="What does a first feature run look like on the clone route and on the npm route?"><span class="entry-title">A new user's first feature</span><span class="entry-meta">sequence · drawn from /po-pipeline and po-brief-to-prd</span></a></li>
+</ul>
+</section>
+<section class="group" aria-labelledby="group-internals">
+<h2 id="group-internals" class="group-title">Framework internals</h2>
+<ul>
+<li><a class="entry" href="08-artifact-chain.html" target="preview" data-page="08-artifact-chain.html" data-id="artifact-chain" data-title="Artifact chain from PM to design" data-question="How do artifacts flow from PM to design, by the real frontmatter edges?"><span class="entry-title">Artifact chain from PM to design</span><span class="entry-meta">dataflow · drawn from features/ frontmatter and PRD 5.2</span></a></li>
+<li><a class="entry" href="09-change-propagation.html" target="preview" data-page="09-change-propagation.html" data-id="change-propagation" data-title="What /sync-check does after an edit" data-question="How does a change propagate, and what gets patched with consent?"><span class="entry-title">What /sync-check does after an edit</span><span class="entry-meta">workflow · drawn from skills/artifact-sync and /sync-check</span></a></li>
+<li><a class="entry" href="10-repo-topology.html" target="preview" data-page="10-repo-topology.html" data-id="repo-topology" data-title="Repository layout and what ships" data-question="What lives where, which files are twins, and what reaches npm?"><span class="entry-title">Repository layout and what ships</span><span class="entry-meta">architecture · drawn from ARCHITECTURE 2 and 4.1</span></a></li>
+<li><a class="entry" href="11-release-pipeline.html" target="preview" data-page="11-release-pipeline.html" data-id="release-pipeline" data-title="How a change reaches users" data-question="Which GitHub Actions run on a push, on main, and on a v* tag?"><span class="entry-title">How a change reaches users</span><span class="entry-meta">workflow · drawn from .github/workflows and ARCHITECTURE 6</span></a></li>
+</ul>
+</section>
+</nav>
+<div class="footer">
+<p class="note">An as-is snapshot of commit <code>d04f47d</code>, drawn with Archify. A record, never a second definition: where a diagram and <code>PRD.md</code> or <code>ARCHITECTURE.md</code> disagree, the cited section wins (decision 0006).</p>
+<div class="theme" role="group" aria-label="Theme">
+<button type="button" data-theme-choice="system" aria-pressed="false">System</button>
+<button type="button" data-theme-choice="light" aria-pressed="false">Light</button>
+<button type="button" data-theme-choice="dark" aria-pressed="false">Dark</button>
+</div>
+</div>
+</aside>
+<main>
+<div class="bar">
+<div class="bar-text"><h1 id="current">Which rules reach each maintainer agent</h1><p id="question">When Claude Code, Codex, Gemini or Cursor opens this repo, which rules reach it?</p></div>
+<a id="open" class="open" href="01-agent-entry-points.html" target="_blank" rel="noopener">Open in a new tab</a>
+</div>
+<iframe id="preview" name="preview" title="Which rules reach each maintainer agent"></iframe>
+</main>
+</div>
+<script>
+(function () {
+  var root = document.documentElement;
+  var heading = document.getElementById("current");
+  var question = document.getElementById("question");
+  var open = document.getElementById("open");
+  var links = Array.prototype.slice.call(document.querySelectorAll("a[data-page]"));
+  var choices = Array.prototype.slice.call(document.querySelectorAll("button[data-theme-choice]"));
+  var system = window.matchMedia("(prefers-color-scheme: dark)");
+  var preference = "system";
+  try {
+    var saved = localStorage.getItem("arpw-diagrams-theme");
+    if (saved === "light" || saved === "dark") preference = saved;
+  } catch (_) {}
+
+  function theme() {
+    return preference === "system" ? (system.matches ? "dark" : "light") : preference;
+  }
+
+  // An address typed by hand can hold a bad escape, and a throw here would leave the frame empty.
+  function chosen() {
+    var id = "";
+    try { id = decodeURIComponent(location.hash.slice(1)); } catch (_) {}
+    return links.filter(function (link) { return link.dataset.id === id; })[0] || links[0];
+  }
+
+  // Changing a frame's src adds a history entry beneath the hub's own, so back would step through
+  // both. A new frame's first load adds none, so a choice replaces the frame rather than steering it.
+  function show() {
+    var link = chosen();
+    var src = link.dataset.page + "?theme=" + theme();
+    root.classList.toggle("dark", theme() === "dark");
+    links.forEach(function (other) {
+      if (other === link) other.setAttribute("aria-current", "page");
+      else other.removeAttribute("aria-current");
+    });
+    choices.forEach(function (button) {
+      button.setAttribute("aria-pressed", String(button.dataset.themeChoice === preference));
+    });
+    // A deep link can name an entry below the fold of the list; keep the highlighted one in view.
+    link.scrollIntoView({ block: "nearest" });
+    heading.textContent = link.dataset.title;
+    question.textContent = link.dataset.question;
+    document.title = link.dataset.title + " · AI-Ready Product Workflow diagrams";
+    open.href = src;
+    var frame = document.getElementById("preview");
+    if (frame.getAttribute("src") === src) return;
+    var next = frame.cloneNode(false);
+    next.setAttribute("src", src);
+    next.setAttribute("title", link.dataset.title);
+    frame.replaceWith(next);
+  }
+
+  links.forEach(function (link) {
+    link.addEventListener("click", function (event) {
+      if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      event.preventDefault();
+      location.hash = link.dataset.id;
+    });
+  });
+  choices.forEach(function (button) {
+    button.addEventListener("click", function () {
+      preference = button.dataset.themeChoice;
+      try { localStorage.setItem("arpw-diagrams-theme", preference); } catch (_) {}
+      show();
+    });
+  });
+  system.addEventListener("change", show);
+  window.addEventListener("hashchange", show);
+  show();
+})();
+</script>
+</body>
+</html>
