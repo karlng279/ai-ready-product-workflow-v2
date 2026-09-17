@@ -14,7 +14,7 @@ Your card's file set must be disjoint from every other row.
 
 | Card | Claimed by | Since | File set |
 |---|---|---|---|
-| — | — | — | — |
+| M9-16 | session: merge-to-main + branch model | 2026-09-17 | `CLAUDE.md`, `AGENTS.md`, `GEMINI.md`, `.cursorrules`, `skills/AGENTS.md`, `skills/GEMINI.md`, `skills/.cursorrules`, `ARCHITECTURE.md`, `docs/INDEX.md`, `docs/STATE.md`, `tasks/BACKLOG.md`, `tests/test_docs.py`, `docs/decisions/0008-*`, `docs/decisions/README.md`, `tasks/cards/M9-16-*` |
 
 ---
 
