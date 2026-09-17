@@ -21,6 +21,7 @@ still misses the detail that mattered. Find your row, read those sections, stop.
 | **The npm package** | `ARCHITECTURE 4.1`–`4.4` | `ARCHITECTURE 4.5` | `test_docs.py` |
 | **Installers** | `ARCHITECTURE 4.4`, `3.1` | — | `test_docs.py` — registry table vs real skills |
 | **The MCP server** | `ARCHITECTURE 4.3` | `ARCHITECTURE 3.1` | — |
+| **Branching and merging** | `ARCHITECTURE 6.5` | `CLAUDE.md` → Conventions | `test_docs.py` — branch rules in every entry point |
 | **Releasing a version** | `ARCHITECTURE 6.4` | `ARCHITECTURE 6.1`, `ARCHITECTURE 6.3`, `ARCHITECTURE 1.2` | both |
 | **Slash commands** | `ARCHITECTURE 5.1` | the skills it chains | `test_docs.py` — command set |
 | **Generating a feature's artifacts** | `PRD 3`, `PRD 5` | `PRD 7.2` (reference implementation) | `test_prohibitions.py` |
@@ -49,6 +50,8 @@ still misses the detail that mattered. Find your row, read those sections, stop.
 | Why do `README.md` and `skills/README.md` differ? | `ARCHITECTURE 2.2` — by design; do not sync |
 | What ships in the npm package? | `ARCHITECTURE 4.1` |
 | Why does a skill behave differently in an installed project? | `ARCHITECTURE 4.5` |
+| Which branch do I start from, and merge into? | `ARCHITECTURE 6.5` — `develop`, both ways |
+| Can I merge into `main`? | `ARCHITECTURE 6.5` — only with the owner's explicit confirmation in this session |
 | How do I publish? | `ARCHITECTURE 6.4` |
 | What does a push to `main` trigger? | `ARCHITECTURE 6.2` — republishes the landing page, every time |
 | What is the target stack? | `PRD 2.4` — TanStack **Table**, not Query |

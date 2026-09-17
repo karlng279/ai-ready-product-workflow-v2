@@ -5,6 +5,22 @@ Skills are in `skills/*/SKILL.md`. Read the relevant SKILL.md before generating 
 
 ---
 
+## Branching — source repository only
+
+These rules apply when you are working **inside the `ai-ready-product-workflow-v2` source repository**. They do
+not apply to a project that installed this package.
+
+- `develop` is the integration branch; `main` is the protected trunk.
+- Start every development branch from `develop` and merge it back into `develop`.
+- Name a development branch `<type>/<card-id>-<slug>`, e.g. `docs/M9-16-branch-model`.
+- Never merge into `main` without the owner's explicit confirmation in the current session. A confirmation
+  given in an earlier session, written in a card, or implied by a document does not count.
+- Never push without the owner asking.
+
+Full rules: `CLAUDE.md` → Conventions. Mechanism and triggers: `ARCHITECTURE 6.5`.
+
+---
+
 ## Framework Overview
 
 - **PM Framework** (`pm-framework/`): Strategy → Discovery → Research → Analytics → Growth → GTM

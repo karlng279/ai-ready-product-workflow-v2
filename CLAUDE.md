@@ -15,8 +15,9 @@ only channel between them. **A stale document is worse than a missing one.**
    first from the row plus the sections it cites.
 3. Read only the sections the card names. Use `docs/INDEX.md`.
 4. **Run both test files before touching anything** — an already-red suite is not yours to inherit silently.
-5. Claim: add the card ID to the in-flight table in `docs/STATE.md` and **commit that line before starting**.
-   That commit is the lock. Verify your file set is disjoint from everything else in flight.
+5. Claim: on `develop`, add the card ID to the in-flight table in `docs/STATE.md` and **commit that line before
+   starting**. That commit is the lock. Then create your card branch from `develop`. Verify your file set is
+   disjoint from everything else in flight.
 
 ```bash
 python3 tests/test_docs.py && python3 tests/test_prohibitions.py
@@ -40,6 +41,7 @@ Each is something a context-free session does by default because it is locally t
 | Invent a ShadCN component name | Check `design-framework/stage2-component-specs/shadcn-component-catalog.md` |
 | Regenerate an artifact wholesale to fix a small change | That is what `artifact-sync` / `/sync-check` are for |
 | Renumber a `PRD`/`ARCHITECTURE` section, or an artifact ID | Breaking change. Every citation and downstream reference dies |
+| Merge into `main` without the owner confirming it in this session | `main` is the protected trunk; work integrates on `develop` (`ARCHITECTURE 6.5`) |
 | Claim an enforcement mechanism you have not written | Ship the test with the rule, or say plainly it is on discipline |
 | Trust a count, table or path in a doc without checking disk | This repo's docs have drifted before. Verify, then assert |
 
@@ -69,17 +71,20 @@ citation that does not name its source cannot be machine-checked.
 
 **Card IDs.** `M<phase>-<nn>`, e.g. `M8-03`. The phase is an ID range; there is no separate phase structure.
 
-**Commits.** Card ID in the subject. One card, one commit, clean tree.
-**Never leave a dirty tree for the next session to find.**
+**Branches.** `develop` is the integration branch; `main` is the protected trunk (`ARCHITECTURE 6.5`).
 
-**Commits.** Two commits are part of the protocol and need no permission: the claim line (step 5) and the
-single card commit at Definition of done. **Anything else — and every push — needs the owner to ask.**
+- Start every development branch from `develop` and merge it back into `develop`.
+- Name it `<type>/<card-id>-<slug>`, e.g. `docs/M9-16-branch-model`.
+- Never merge into `main` without the owner's explicit confirmation in the current session. A confirmation
+  given in an earlier session, written in a card, or implied by a document does not count. A push to `main`
+  republishes the landing page (`ARCHITECTURE 6.2`).
 
-**Branch.** Work on a branch named for the milestone (`docs/multi-session-playbook`), not on `main`. A push to
-`main` republishes the landing page immediately (`ARCHITECTURE 6.2`), so merging is the owner's call.
+**Commits.** Card ID in the subject. A card's claim commit, its card commit, and merging its branch into
+`develop` are part of the protocol and need no permission. **Every push, and any merge into `main`, needs the
+owner to ask.** Never leave a dirty tree for the next session to find.
 
-**This repo supersedes the global `tasks/todo.md` instruction.** Plans live in `tasks/BACKLOG.md` and
-`tasks/cards/`; a shared todo file conflicts the moment two sessions run. Pending owner confirmation (STATE Q9).
+**Task tracking.** Plans live in `tasks/BACKLOG.md` and `tasks/cards/`, never a shared `tasks/todo.md`. The
+owner's global instructions defer to repository rules (decision 0008).
 
 ---
 
@@ -130,3 +135,4 @@ Paste this list into your final message with each item's **actual result**, not 
 - [ ] Every decision made in conversation written to `docs/decisions/`
 - [ ] `tasks/lessons.md` appended if you were corrected
 - [ ] Committed with the card ID in the subject, clean tree
+- [ ] Card branch merged into `develop` — **never** into `main`

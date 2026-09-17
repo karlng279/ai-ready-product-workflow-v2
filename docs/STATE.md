@@ -14,7 +14,7 @@ Your card's file set must be disjoint from every other row.
 
 | Card | Claimed by | Since | File set |
 |---|---|---|---|
-| M9-16 | session: merge-to-main + branch model | 2026-09-17 | `CLAUDE.md`, `AGENTS.md`, `GEMINI.md`, `.cursorrules`, `skills/AGENTS.md`, `skills/GEMINI.md`, `skills/.cursorrules`, `ARCHITECTURE.md`, `docs/INDEX.md`, `docs/STATE.md`, `tasks/BACKLOG.md`, `tests/test_docs.py`, `docs/decisions/0008-*`, `docs/decisions/README.md`, `tasks/cards/M9-16-*` |
+| — | — | — | — |
 
 ---
 
@@ -24,11 +24,12 @@ Your card's file set must be disjoint from every other row.
 |---|---|
 | M8-01…M8-11 | artifact-sync skill, `/sync-check`, and the agent-doc reconciliation (17 skills, 6 commands) |
 | M9-01 | Playbook layout adopted: `PRD`/`ARCHITECTURE` split, `docs/`, `tasks/`, `tests/`, `CLAUDE.md` cut to rules |
-| M9-02 | Landing page figures corrected — 17 skills, 6 commands, TanStack Table, artifact-sync card. **Unpublished until merged to `main`** |
+| M9-02 | Landing page figures corrected — 17 skills, 6 commands, TanStack Table, artifact-sync card |
 | M9-12 | Fresh-context audit corrections: enforcement claims made true, 4 vacuous detectors fixed, CI added |
 | M9-14 | As-is Archify diagrams in `docs/diagrams/`, snapshot of `d04f47d` (decision 0006). Its card Log lists six on-disk findings not yet on this board |
 | M9-15 | `docs/diagrams/index.html` hub: every diagram by group, theme pass-through, deep links |
 | M9-03 | claude-mem disabled; 64 stub `CLAUDE.md` files and 5 stub-only directories removed; nested `CLAUDE.md` gitignored (decision 0007) |
+| M9-16 | Branch model: `develop` integrates, `main` needs owner confirmation; both rules in all four agent entry points and asserted (decision 0008) |
 
 ---
 
@@ -81,18 +82,18 @@ Every open input needed from the human, what it blocks, when asked.
 |---|---|---|---|
 | Q1 | Ship the four framework dirs in the npm package, **or** make each `SKILL.md` degrade gracefully without them? | The package's core promise | 2026-09-05 |
 | Q2 | Publish `0.2.0` now? Requires bumping `package-lock.json` and pushing a `v0.2.0` tag. | M9-07 | 2026-09-05 |
-| Q3 | The landing page figures are **already corrected on this branch**. Merging to `main` republishes the site immediately (`ARCHITECTURE 6.2`) — merge now, or hold? | publishing the fix | 2026-09-05 |
 | Q4 | Resolve the `WF-XXX` placeholders in the 12 USD files, or leave the reference feature as-is? | M9-06 | 2026-09-05 |
 | Q6 | Build a `design-interactions` skill, or document stage 3 as permanently manual? | Design stage 3 | 2026-09-05 |
 | Q7 | Apply the five `artifact-sync` sync fields to artifacts, or drop them from the spec? (`PRD 5.4`) | `artifact-sync` usefulness | 2026-09-05 |
 | Q8 | Six files reference `design-framework-uiux-promax-integration-plan.md`, which never existed. Delete the references, or write the document? | M9-04 | 2026-09-05 |
-| Q9 | Your global `~/.claude/CLAUDE.md` says "write plans to `tasks/todo.md`"; the playbook forbids a shared todo. `CLAUDE.md` currently states the playbook wins here — confirm or reverse. | Session protocol | 2026-09-05 |
 | Q10 | The shipped agent indexes and `ui-ux-pro-max/SKILL.md` hardcode repo-relative paths (`skills/...`) that are wrong in every installed project. Rewrite them path-agnostic? Depends on Q1. | M9-13 | 2026-09-05 |
+| Q11 | Protect `main` on GitHub (require a pull request, block direct pushes) and make `develop` the default branch so pull requests target it? Agents cannot enforce the `main` rule; today it is on discipline (`ARCHITECTURE 6.5`). | enforcing decision 0008 | 2026-09-17 |
 
 ---
 
 ## Environment
 
+- **Branches:** start from `develop`, merge back into `develop`. `main` only with the owner's confirmation (`ARCHITECTURE 6.5`).
 - **Python 3.11.1**, no pytest. Tests are dependency-free: `python3 tests/test_docs.py`.
 - **Node >= 18** for the npm package. `npm` not required for doc work.
 - `ui-ux-pro-max` needs Python 3 for `scripts/search.py`.

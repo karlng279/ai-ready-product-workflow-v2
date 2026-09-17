@@ -279,6 +279,29 @@ of `landing-page/`. Any commit to main republishes the site, so stale figures th
 2. Sweep `landing-page/index.html` and `README.md` (`ARCHITECTURE 1.2`)
 3. Commit, `git tag v<version>`, push the tag
 
+
+### 6.5 Branch model
+
+| Branch | Role | Merged into by | A push triggers |
+|---|---|---|---|
+| `main` | Protected trunk — what is published | Only with the owner's explicit confirmation in the current session | `deploy-landing.yml` (republishes the site) and `tests.yml` |
+| `develop` | Integration branch — where finished cards land | Any session, as the last step of a card's Definition of done | `tests.yml` only |
+| `<type>/<card-id>-<slug>` | One card's work, branched from `develop` | — | `tests.yml` only |
+
+Flow: claim the card on `develop` → create the card branch → work → merge the card branch into `develop` → the
+owner decides when `develop` is merged into `main`.
+
+Claims are committed on `develop` because every session branches from it, so every session sees them. A claim
+committed on a card branch is invisible to a session on another branch.
+
+A `v*` tag publishes to npm from whatever commit it points at (`ARCHITECTURE 6.1`), on any branch. A tag on a
+`develop` commit would publish work the owner has not merged.
+
+**Enforcement.** The restriction on merging into `main` is **on discipline** for agents.
+`tests/test_docs.py` (`check_branch_rules_in_entry_points`) asserts only that `CLAUDE.md`, `AGENTS.md`,
+`GEMINI.md` and `.cursorrules` all state the same two rules word for word — it cannot stop a merge. Real
+enforcement would be GitHub branch protection on `main`, which is an owner setting (`docs/STATE.md`, Q11).
+
 ---
 
 ## 7. The test suite

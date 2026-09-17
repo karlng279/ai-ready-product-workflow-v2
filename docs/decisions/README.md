@@ -17,3 +17,4 @@ thinks it is new.
 | [0005](0005-no-env-example-no-src.md) | No `.env.example` and no `src/` — declared absences, not omissions | 2026-09-05 | accepted |
 | [0006](0006-diagrams-are-snapshots.md) | Diagrams are dated as-is snapshots in `docs/diagrams/`, not specification | 2026-09-16 | accepted |
 | [0007](0007-remove-claude-mem-stubs.md) | Remove the claude-mem stubs; ignore nested `CLAUDE.md` | 2026-09-17 | accepted |
+| [0008](0008-develop-integration-branch.md) | `develop` integrates; merging into `main` needs the owner's confirmation | 2026-09-17 | accepted |

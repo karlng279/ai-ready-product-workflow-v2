@@ -319,6 +319,34 @@ def check_claimable_cards_are_unblocked():
             fail("state", f"docs/STATE.md lists {cid} as claimable, but BACKLOG says blocked")
 
 
+# Decision 0008 — the branching rules every agent entry point must state, word for word.
+# CLAUDE.md is read by Claude Code, AGENTS.md by Codex, GEMINI.md by Gemini, .cursorrules by Cursor.
+# The skills/ twins of the last three are covered by check_twins_byte_identical.
+BRANCH_RULES = (
+    "Start every development branch from `develop` and merge it back into `develop`.",
+    "Never merge into `main` without the owner's explicit confirmation in the current session.",
+)
+AGENT_ENTRY_POINTS = ("CLAUDE.md", "AGENTS.md", "GEMINI.md", ".cursorrules")
+
+
+def _squash(text):
+    """Collapse whitespace so a rule wrapped across lines still matches."""
+    return " ".join(text.split())
+
+
+def check_branch_rules_in_entry_points():
+    """Decision 0008 — every agent reads the same branching rules.
+
+    This asserts the rules are STATED. It cannot stop a merge; that restriction is on
+    discipline until GitHub branch protection exists (ARCHITECTURE 6.5).
+    """
+    for rel in AGENT_ENTRY_POINTS:
+        text = _squash(read(rel))
+        for rule in BRANCH_RULES:
+            if _squash(rule) not in text:
+                fail("branch-rules", f"{rel} does not state: {rule}")
+
+
 def check_state_card_rows_unique():
     """A card is in exactly one row of the board: in flight, done, next up, or blocked.
 
