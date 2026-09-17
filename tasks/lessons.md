@@ -97,3 +97,16 @@ was a number typed once and never re-derived.
 **Rule:** In a document, prefer the predicate and the command that yields it — "every tracked `CLAUDE.md`
 except the root, verifiable with `git ls-files | xargs grep -l claude-mem-context`" — over a number. If a
 number must appear, it belongs in a test that derives it from disk.
+
+---
+
+## Slice on a heading, never on `---`
+
+**What happened:** An edit replaced a section of `docs/STATE.md` by slicing from its heading to the next `---`.
+The first `---` it found was inside a table separator (`|---|---|---|`), so it cut mid-table and left an orphan
+separator plus seven stale rows under "Blocked on owner". The fragment contradicted the live rows above it for
+twelve days, and the suite stayed green because no check looked for a card listed twice.
+
+**Rule:** When replacing a markdown section programmatically, bound it by the next heading (`\n## `), and match
+a horizontal rule only as a whole line (`\n---\n`). Then re-read the file. `check_state_card_rows_unique` now
+catches the duplicate-row symptom.

@@ -97,11 +97,14 @@ Three files exist twice, and the copies must stay **byte-identical**:
 Two further files exist twice but **intentionally differ**: `README.md` and `GETTING_STARTED.md`. The root pair
 describes the *repository*; the `skills/` pair describes the *installed package*. Do not sync these.
 
-### 2.3 Directories that look like skills but are not
+### 2.3 Nested `CLAUDE.md` files
 
-`skills/documentation/` and `skills/skills/` contain nothing but a claude-mem stub. They have no `SKILL.md`, so
-every enumerator (`ARCHITECTURE 3.1`) correctly ignores them. Do not treat them as skills; do not add a
-`SKILL.md` to them.
+The root `CLAUDE.md` is the only rulebook. `.gitignore` ignores `CLAUDE.md` in every subdirectory and
+re-includes the root, because the claude-mem plugin writes a stub into each directory it visits. Sixty-four such
+stubs, and five directories that existed only to hold them, were removed (decision 0007).
+
+Claude Code does honour nested `CLAUDE.md` files. If you deliberately want one, it needs `git add -f` — and a
+decision record, since it adds a rules surface no other agent reads.
 
 ---
 
@@ -237,7 +240,6 @@ Six files in `.claude/commands/`. Claude Code only — they are not shipped (`AR
 | `/pm-strategy` | `pm-product-strategy` | `features/{name}/pm/strategy.md` |
 | `/pm-discovery` | `pm-product-discovery` | `features/{name}/pm/discovery.md` |
 
-`.claude/commands/CLAUDE.md` is a claude-mem stub, not a command. The count is six.
 
 ### 5.2 Stage folder layout
 

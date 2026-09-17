@@ -41,3 +41,8 @@ logs/
 # OS
 Thumbs.db
 Desktop.ini
+
+# claude-mem writes a CLAUDE.md stub into directories it visits (decision 0007).
+# Only the root CLAUDE.md is a real rulebook. A deliberate nested one needs `git add -f`.
+**/CLAUDE.md
+!/CLAUDE.md

@@ -35,7 +35,7 @@ def skill_set():
 
 
 def command_set():
-    """The real slash commands. CLAUDE.md there is a claude-mem stub, not a command."""
+    """The real slash commands. A CLAUDE.md here would be claude-mem output, not a command (decision 0007)."""
     d = os.path.join(ROOT, ".claude", "commands")
     return {n[:-3] for n in os.listdir(d) if n.endswith(".md") and n != "CLAUDE.md"}
 
@@ -317,6 +317,23 @@ def check_claimable_cards_are_unblocked():
         row = re.search(rf"^\| {re.escape(cid)} \| [^|]* \| (\S+) \|", backlog, re.M)
         if row and row.group(1) == "blocked":
             fail("state", f"docs/STATE.md lists {cid} as claimable, but BACKLOG says blocked")
+
+
+def check_state_card_rows_unique():
+    """A card is in exactly one row of the board: in flight, done, next up, or blocked.
+
+    A duplicate means a move was half-done or an edit left an orphan table behind —
+    a stale fragment once sat under 'Blocked on owner' for twelve days, contradicting
+    the live rows above it.
+    """
+    seen = {}
+    for n, line in enumerate(read("docs/STATE.md").splitlines(), 1):
+        m = re.match(r"^\| (M\d+-\d+) \|", line)
+        if m:
+            seen.setdefault(m.group(1), []).append(n)
+    for cid, lines in sorted(seen.items()):
+        if len(lines) > 1:
+            fail("state", f"docs/STATE.md has {cid} in {len(lines)} rows (lines {lines}); a card belongs in one")
 
 
 def check_state_freshness():

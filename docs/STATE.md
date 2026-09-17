@@ -3,7 +3,7 @@
 **Board, not history.** History lives in git, in `tasks/cards/*` logs, and in `docs/history/`.
 Read this first, every session. Cap: ~70 lines.
 
-**Last updated:** 2026-09-16
+**Last updated:** 2026-09-17
 
 ---
 
@@ -14,7 +14,7 @@ Your card's file set must be disjoint from every other row.
 
 | Card | Claimed by | Since | File set |
 |---|---|---|---|
-| M9-03 | session: merge-to-main + branch model | 2026-09-17 | `**/CLAUDE.md` except root, `.claude/settings.json`, `.gitignore`, `ARCHITECTURE.md` (2.3, 5.1), `tests/test_docs.py`, `docs/STATE.md`, `tasks/BACKLOG.md`, `docs/decisions/`, `tasks/cards/M9-03-*` |
+| — | — | — | — |
 
 ---
 
@@ -28,6 +28,7 @@ Your card's file set must be disjoint from every other row.
 | M9-12 | Fresh-context audit corrections: enforcement claims made true, 4 vacuous detectors fixed, CI added |
 | M9-14 | As-is Archify diagrams in `docs/diagrams/`, snapshot of `d04f47d` (decision 0006). Its card Log lists six on-disk findings not yet on this board |
 | M9-15 | `docs/diagrams/index.html` hub: every diagram by group, theme pass-through, deep links |
+| M9-03 | claude-mem disabled; 64 stub `CLAUDE.md` files and 5 stub-only directories removed; nested `CLAUDE.md` gitignored (decision 0007) |
 
 ---
 
@@ -46,7 +47,6 @@ Not claimable until the linked question is answered.
 
 | Card | Title | Blocked by |
 |---|---|---|
-| M9-03 | Delete the claude-mem stub `CLAUDE.md` files and gitignore them | Q5 |
 | M9-04 | Fix the references to `design-framework-uiux-promax-integration-plan.md`, a plan file that never existed — 6 files | Q8 |
 | M9-06 | Resolve the `WF-XXX` placeholders in the USD Design Reference tables | Q4 |
 | M9-07 | Publish `0.2.0` — bump `package-lock.json`, tag `v0.2.0` | Q2 |
@@ -55,14 +55,6 @@ Not claimable until the linked question is answered.
 | M9-10 | Apply the sync fields, or drop them from the spec | Q7 |
 | M9-13 | Rewrite the shipped agent indexes to be path-agnostic | Q1 |
 
----|---|---|
-| M9-02 | Sweep `landing-page/index.html` — 16→17 skills, 5→6 commands (8 occurrences) | owner decision Q3 |
-| M9-03 | Delete the 65 claude-mem stub `CLAUDE.md` files and gitignore them | owner decision Q5 |
-| M9-04 | Fix 4 dead links to `documentation/design-framework-uiux-promax-integration-plan.md` | owner decision Q8 |
-| M9-05 | Write `po-framework/stage2-usm/template.md` | — |
-| M9-11 | Clear the 38 rotted links allowlisted in `tests/known_dead_links.txt` | — |
-| M9-06 | Resolve the `WF-XXX` placeholders in all 12 USD Design Reference tables | owner decision Q4 |
-| M9-07 | Publish `0.2.0` — bump `package-lock.json`, sweep sites, tag | owner decision Q2 |
 
 ---
 
@@ -78,7 +70,6 @@ Not claimable until the linked question is answered.
 | **`po-framework/stage2-usm/template.md` missing** | Every other PO stage has one |
 | **42 dead links** | Allowlisted in `tests/known_dead_links.txt` with a reason each: 38 rotted targets (card M9-11) and 4 illustrative template paths. The link checker guards against **new** ones |
 | **Empty dirs** | `codebase-framework/templates/`, `codebase-framework/testing-patterns/` — `.gitkeep` only |
-| **claude-mem stubs** | Every tracked `CLAUDE.md` except the root one is claude-mem output — 64 of 65, verifiable with `git ls-files \| grep 'CLAUDE.md$' \| xargs grep -l claude-mem-context`. Not gitignored |
 
 ---
 
@@ -92,7 +83,6 @@ Every open input needed from the human, what it blocks, when asked.
 | Q2 | Publish `0.2.0` now? Requires bumping `package-lock.json` and pushing a `v0.2.0` tag. | M9-07 | 2026-09-05 |
 | Q3 | The landing page figures are **already corrected on this branch**. Merging to `main` republishes the site immediately (`ARCHITECTURE 6.2`) — merge now, or hold? | publishing the fix | 2026-09-05 |
 | Q4 | Resolve the `WF-XXX` placeholders in the 12 USD files, or leave the reference feature as-is? | M9-06 | 2026-09-05 |
-| Q5 | Delete every tracked `CLAUDE.md` that is claude-mem output — 64 of 65, all but the root — and gitignore them? This changes how claude-mem behaves here, which is your tool. | M9-03 | 2026-09-05 |
 | Q6 | Build a `design-interactions` skill, or document stage 3 as permanently manual? | Design stage 3 | 2026-09-05 |
 | Q7 | Apply the five `artifact-sync` sync fields to artifacts, or drop them from the spec? (`PRD 5.4`) | `artifact-sync` usefulness | 2026-09-05 |
 | Q8 | Six files reference `design-framework-uiux-promax-integration-plan.md`, which never existed. Delete the references, or write the document? | M9-04 | 2026-09-05 |

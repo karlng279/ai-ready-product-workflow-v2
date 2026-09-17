@@ -38,7 +38,7 @@ Phases 0–7 are complete; their detail is in [`docs/history/phases-0-7.md`](../
 |---|---|---|---|---|
 | M9-01 | Adopt the playbook layout: `PRD`/`ARCHITECTURE` split, `docs/`, `tasks/`, `tests/` | done | — | `CLAUDE.md`, `PRD.md`, `ARCHITECTURE.md`, `docs/**`, `tasks/**`, `tests/**` |
 | M9-02 | Landing page figures corrected (counts, TanStack Table, artifact-sync card) — unpublished until merged to `main` | done | — | `landing-page/index.html` |
-| M9-03 | Delete every tracked `CLAUDE.md` containing `<claude-mem-context>` (64 of 65 — all but the root) and gitignore them | blocked | owner Q5 | `**/CLAUDE.md` except the root, `.gitignore` |
+| M9-03 | Remove the claude-mem stubs: disable the plugin, delete every nested `CLAUDE.md`, gitignore them | done | — | `**/CLAUDE.md` except the root, `.claude/settings.json`, `.gitignore`, `ARCHITECTURE.md`, `tests/test_docs.py`, `docs/STATE.md`, `tasks/BACKLOG.md`, `tasks/lessons.md`, `docs/decisions/0007-*`, `docs/decisions/README.md`, `tasks/cards/M9-03-*` |
 | M9-04 | Fix the 6 references to `design-framework-uiux-promax-integration-plan.md`, which never existed | blocked | owner Q8 | `design-framework/design-rules/README.md`, `design-framework/themes/README.md`, `design-framework/themes/{corporate,ecommerce,erp,mds}.md` |
 | M9-05 | Write `po-framework/stage2-usm/template.md` | todo | — | `po-framework/stage2-usm/template.md` |
 | M9-06 | Resolve `WF-XXX` placeholders in 12 USD Design Reference tables | blocked | owner Q4 | `features/Export Customs Clearances/po/usd/*.md` |
