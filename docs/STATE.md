@@ -14,7 +14,7 @@ Your card's file set must be disjoint from every other row.
 
 | Card | Claimed by | Since | File set |
 |---|---|---|---|
-| — | — | — | — |
+| M9-03 | session: merge-to-main + branch model | 2026-09-17 | `**/CLAUDE.md` except root, `.claude/settings.json`, `.gitignore`, `ARCHITECTURE.md` (2.3, 5.1), `tests/test_docs.py`, `docs/STATE.md`, `tasks/BACKLOG.md`, `docs/decisions/`, `tasks/cards/M9-03-*` |
 
 ---
 
